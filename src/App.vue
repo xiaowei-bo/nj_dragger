@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <img class="img" alt="Vue logo" src="./assets/logo.png" />
+        <router-view />
     </div>
 </template>
 
@@ -12,7 +12,8 @@ export default {
 
 <style lang="scss">
 #app {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
 }
 </style>
