@@ -222,7 +222,8 @@ module.exports = {
                 "normal": "never",
                 "component": "always"
             }
-        }]
+        }],
+        "vetur.validation.template": 0
     },
     globals: {
         ENV: true
