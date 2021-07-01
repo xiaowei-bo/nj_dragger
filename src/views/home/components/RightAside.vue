@@ -1,9 +1,9 @@
 <template>
     <el-aside class="app-right-aside clearfix" width="300px">
-        <div v-show="!editingComponent.item">
+        <div v-show="noEditComponent">
             暂无操作信息
         </div>
-        <div v-show="editingComponent.item">
+        <div v-show="!noEditComponent">
             <p>当前操作组件为{{ editingComponent.item && editingComponent.item.name }}</p>
             {{ JSON.stringify(editingComponent) }}
         </div>
@@ -16,6 +16,11 @@ export default {
         editingComponent: {
             type: Object,
             default: () => ({})
+        }
+    },
+    computed: {
+        noEditComponent() {
+            return !this.editingComponent.item || !Object.keys(this.editingComponent.item).length;
         }
     },
     data() {

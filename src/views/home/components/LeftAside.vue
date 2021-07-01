@@ -10,11 +10,13 @@
         </el-menu>
         <div class="app-left-aside-content fl">
             <div v-show="+wrapperIndex === 1" class="component-wrapper">
-                <ul class="wrapper">
+                <ul class="wrapper" @dragstart="handleDragStart">
                     <li
                         v-for="(item, index) in componentList"
                         :key="index"
                         class="wrapper-item"
+                        draggable
+                        :data-index="index"
                     >
                         <i :class="item.icon"></i>
                     </li>
@@ -32,20 +34,80 @@ export default {
             wrapperIndex: 1,
             componentList: [{
                 name: "Image",
-                icon: "el-icon-picture"
+                icon: "el-icon-picture",
+                configInfo: {
+                    isDraggable: true,
+                    lockAspectRatio: true
+                },
+                styleInfo: {
+                    position: "relative",
+                    zIndex: "7"
+                },
+                dragInfo: {
+                    x: 0,
+                    y: 0,
+                    w: 100,
+                    h: 100
+                }
             }, {
                 name: "Link",
-                icon: "el-icon-link"
+                icon: "el-icon-link",
+                configInfo: {
+                    isDraggable: true,
+                    lockAspectRatio: false
+                },
+                styleInfo: {
+                    position: "relative",
+                    zIndex: "0"
+                },
+                dragInfo: {
+                    x: 0,
+                    y: 100,
+                    w: 375,
+                    h: 100
+                }
             }, {
                 name: "Copy",
-                icon: "el-icon-connection"
+                icon: "el-icon-connection",
+                configInfo: {
+                    isDraggable: true,
+                    lockAspectRatio: false
+                },
+                styleInfo: {
+                    position: "absolute",
+                    zIndex: "0"
+                },
+                dragInfo: {
+                    x: 0,
+                    y: 200,
+                    w: 100,
+                    h: 100
+                }
             }, {
                 name: "Product",
-                icon: "el-icon-shopping-cart-full"
+                icon: "el-icon-shopping-cart-full",
+                configInfo: {
+                    isDraggable: true,
+                    lockAspectRatio: false
+                },
+                styleInfo: {
+                    position: "relative",
+                    zIndex: "0"
+                },
+                dragInfo: {
+                    x: 0,
+                    y: 300,
+                    w: 100,
+                    h: 100
+                }
             }]
         };
     },
     methods: {
+        handleDragStart(e) {
+            console.log("dragData", e.target.dataset.index);
+            e.dataTransfer.setData("index", e.target.dataset.index);
+        },
         menuSelect(i) {
             this.wrapperIndex = i;
         }
@@ -54,6 +116,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+    .content{
+        width: 100px;
+        height: 200px;
+        background-color: #eee;
+    }
 .app-left-aside{
     width: 300px;
     height: 100%;

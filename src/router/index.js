@@ -7,7 +7,7 @@ const constantRoutes = [
     {
         path: "/",
         name: "home",
-        component: () => import(/* webpackChunkName: 'index' */"@/views/home/index")
+        component: () => import(/* webpackChunkName: 'home' */"@/views/home/index")
     }
 ];
 // const asyncRoutes = [];

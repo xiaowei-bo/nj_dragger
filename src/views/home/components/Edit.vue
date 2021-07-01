@@ -1,15 +1,15 @@
 <template>
-    <el-main class="app-main">
-        <div class="mobile-view">
+    <el-main class="app-edit">
+        <div class="mobile-view" @drop="handleDrop" @dragover="handleDragOver">
             <VueDraggableResize
                 v-for="(item, index) in componentList"
                 :key="index"
                 class="vdr"
                 class-name-handle="my-handle-class"
                 class-name-dragging="my-dragging-class"
+                parent=".mobile-view"
                 :snap="true"
                 :snap-tolerance="5"
-                :parent="true"
                 :z-index="item.styleInfo.zIndex"
                 :is-conflict-check="item.styleInfo.position === 'relative'"
                 :draggable="item.isDraggable"
@@ -18,7 +18,8 @@
                 :y="item.dragInfo.y"
                 :w="item.dragInfo.w"
                 :h="item.dragInfo.h"
-                :on-drag-start="() => { setEditingComponent(item, index) }"
+                @activated="onActivated(item, index)"
+                @deactivated="onDeactivated"
                 @resizing="(left, top, width, height) => { onResize(left, top, width, height, item, index) }"
                 @dragging="(left, top) => { onDrag(left, top, item, index) }"
             >
@@ -38,84 +39,37 @@ export default {
     },
     data() {
         return {
-            componentList: [{
-                name: "Image",
-                icon: "el-icon-picture",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: true
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 0,
-                    w: 100,
-                    h: 100
-                }
-            }, {
-                name: "Link",
-                icon: "el-icon-link",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 100,
-                    w: 375,
-                    h: 100
-                }
-            }, {
-                name: "Copy",
-                icon: "el-icon-connection",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "absolute",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 200,
-                    w: 100,
-                    h: 100
-                }
-            }, {
-                name: "Product",
-                icon: "el-icon-shopping-cart-full",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 300,
-                    w: 100,
-                    h: 100
-                }
-            }]
+            componentList: []
         };
     },
     methods: {
+        // start 页面接收组件拖拽进页面方法
+        handleDragOver(e) {
+            e.preventDefault();
+        },
+        handleDrop(e) {
+            console.log("dropData", e.dataTransfer.getData("index"));
+            const index = e.dataTransfer.getData("index");
+            const item = this.componentList[index];
+            this.componentList.push(item);
+            console.log(this.componentList);
+        },
+        // end
+        // start 设置当前操作组件数据
         setEditingComponent(item, index) {
             const editingComponent = {
                 item,
                 index
             };
             this.$emit("update:editingComponent", editingComponent);
+        },
+        // end
+        // start 页面内拖拽组件方法
+        onActivated(item, index) {
+            this.setEditingComponent(item, index);
+        },
+        onDeactivated() {
+            this.setEditingComponent({}, 0);
         },
         onResize(left, top, width, height, item, index) {
             item.dragInfo = {
@@ -131,6 +85,7 @@ export default {
             item.dragInfo.y = top;
             this.setEditingComponent(item, index);
         }
+        // end
     },
     created() {
 
@@ -139,7 +94,7 @@ export default {
 </script>
 
 <style lang="scss">
-.app-main{
+.app-edit{
     width: calc(100% - 600px);
     height: 100%;
     .mobile-view{

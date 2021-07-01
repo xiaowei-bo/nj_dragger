@@ -5,7 +5,7 @@
         </el-header>
         <el-container class="app-container">
             <LeftAside />
-            <AppMain
+            <Edit
                 :editing-component.sync="editingComponent"
             />
             <RightAside
@@ -17,12 +17,12 @@
 <script>
 import LeftAside from "./components/LeftAside.vue";
 import RightAside from "./components/RightAside.vue";
-import AppMain from "./components/AppMain.vue";
+import Edit from "./components/Edit.vue";
 export default {
     components: {
         LeftAside,
         RightAside,
-        AppMain
+        Edit
     },
     data() {
         return {
