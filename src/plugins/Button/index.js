@@ -1,5 +1,5 @@
-import Component from './index'
+import Component from "./index";
 Component.install = Vue => {
-	Vue.component(Component.name, Component)
-}
+    Vue.component(Component.name, Component);
+};
 export default Component;

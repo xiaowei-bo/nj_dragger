@@ -15,4 +15,4 @@ export default {
         w: 375,
         h: 100
     }
-}
+};

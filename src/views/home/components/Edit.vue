@@ -2,8 +2,8 @@
     <el-main class="app-edit">
         <div class="mobile-view" @drop="handleDrop" @dragover="handleDragOver">
             <VueDraggableResize
-                v-for="(item, index) in componentList"
-                :key="index"
+                v-for="(item, index) in curPageData.elements"
+                :key="item.uuid"
                 class="vdr"
                 class-name-handle="my-handle-class"
                 class-name-dragging="my-dragging-class"
@@ -12,34 +12,40 @@
                 :snap-tolerance="5"
                 :z-index="item.styleInfo.zIndex"
                 :is-conflict-check="item.styleInfo.position === 'relative'"
-                :draggable="item.isDraggable"
-                :lock-aspect-ratio="item.lockAspectRatio"
+                :draggable="item.dragInfo.isDraggable"
+                :lock-aspect-ratio="item.dragInfo.lockAspectRatio"
                 :x="item.dragInfo.x"
                 :y="item.dragInfo.y"
                 :w="item.dragInfo.w"
                 :h="item.dragInfo.h"
                 @activated="onActivated(item, index)"
-                @deactivated="onDeactivated"
                 @resizing="(left, top, width, height) => { onResize(left, top, width, height, item, index) }"
                 @dragging="(left, top) => { onDrag(left, top, item, index) }"
             >
-                {{ item.name }}
+                <component :is="item.name" :item="item" />
             </VueDraggableResize>
         </div>
     </el-main>
 </template>
 
 <script>
+import { v4 as uuidv4 } from "uuid";
+import { deepClone } from "@/utils/index.js";
+import configList from "@/plugins/config.js";
 export default {
     props: {
         editingComponent: {
+            type: Object,
+            default: () => ({})
+        },
+        curPageData: {
             type: Object,
             default: () => ({})
         }
     },
     data() {
         return {
-            componentList: []
+            configList
         };
     },
     methods: {
@@ -48,47 +54,63 @@ export default {
             e.preventDefault();
         },
         handleDrop(e) {
-            console.log("dropData", e.dataTransfer.getData("index"));
-            const index = e.dataTransfer.getData("index");
-            const item = this.componentList[index];
-            this.componentList.push(item);
-            console.log(this.componentList);
+            console.log("dropData 接收：", e.dataTransfer.getData("index"));
+            const key = e.dataTransfer.getData("index");
+            const item = deepClone(this.configList[key]);
+            console.log("a1", this.configList[key]);
+            console.log("a2", item);
+            item.uuid = uuidv4();
+            item.dragInfo.y = Math.floor(Math.random() * 667);
+            const curPageData = this.curPageData;
+            this.setEditingComponent(item);
+            curPageData.elements.push(item);
+            this.$emit("update:curPageData", curPageData);
+            console.log(this.curPageData);
         },
         // end
         // start 设置当前操作组件数据
-        setEditingComponent(item, index) {
-            const editingComponent = {
-                item,
-                index
-            };
-            this.$emit("update:editingComponent", editingComponent);
+        setEditingComponent(item) {
+            console.log("当前操作项：", item);
+            this.$emit("update:editingComponent", item);
         },
         // end
         // start 页面内拖拽组件方法
-        onActivated(item, index) {
-            this.setEditingComponent(item, index);
+        onActivated(item) {
+            this.setEditingComponent(item);
         },
         onDeactivated() {
-            this.setEditingComponent({}, 0);
+            // this.setEditingComponent({});
         },
-        onResize(left, top, width, height, item, index) {
+        onResize(left, top, width, height, item) {
             item.dragInfo = {
                 x: left,
                 y: top,
                 w: width,
                 h: height
             };
-            this.setEditingComponent(item, index);
+            this.setEditingComponent(item);
         },
-        onDrag(left, top, item, index) {
+        onDrag(left, top, item) {
             item.dragInfo.x = left;
             item.dragInfo.y = top;
-            this.setEditingComponent(item, index);
+            this.setEditingComponent(item);
         }
         // end
     },
     created() {
-
+        const a = {
+            name: "666",
+            fun: () => {
+                return "fff";
+            },
+            obj: {
+                vv: ""
+            },
+            arr: ["ff", "gg", { dd: "fswww" }],
+            bool: true
+        };
+        console.log("a", a);
+        console.log("deepClone a", deepClone(a));
     }
 };
 </script>
@@ -100,7 +122,7 @@ export default {
     .mobile-view{
         width: 375px;
         height: 667px;
-        margin: 70px auto;
+        margin: 5px auto;
         border: 1px solid #dcdfe6;
         .vdr{
             cursor: move;

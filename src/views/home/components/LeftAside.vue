@@ -2,23 +2,23 @@
     <el-aside class="app-left-aside clearfix" width="300px">
         <el-menu default-active="1" class="app-left-aside-menu fl" @select="menuSelect">
             <el-menu-item index="1">
-                <i class="el-icon-setting"></i>
+                <i class="iconfont icon-zujian"></i>
             </el-menu-item>
             <el-menu-item index="2">
-                <i class="el-icon-document"></i>
+                <i class="iconfont icon-page"></i>
             </el-menu-item>
         </el-menu>
         <div class="app-left-aside-content fl">
             <div v-show="+wrapperIndex === 1" class="component-wrapper">
                 <ul class="wrapper" @dragstart="handleDragStart">
                     <li
-                        v-for="(item, index) in componentList"
-                        :key="index"
+                        v-for="(value, key) in configList"
+                        :key="key"
                         class="wrapper-item"
                         draggable
-                        :data-index="index"
+                        :data-index="key"
                     >
-                        <i :class="item.icon"></i>
+                        <i class="iconfont" :class="value.icon"></i>
                     </li>
                 </ul>
             </div>
@@ -28,84 +28,20 @@
 </template>
 
 <script>
+import configList from "@/plugins/config.js";
 export default {
     data() {
         return {
             wrapperIndex: 1,
-            componentList: [{
-                name: "Image",
-                icon: "el-icon-picture",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: true
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "7"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 0,
-                    w: 100,
-                    h: 100
-                }
-            }, {
-                name: "Link",
-                icon: "el-icon-link",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 100,
-                    w: 375,
-                    h: 100
-                }
-            }, {
-                name: "Copy",
-                icon: "el-icon-connection",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "absolute",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 200,
-                    w: 100,
-                    h: 100
-                }
-            }, {
-                name: "Product",
-                icon: "el-icon-shopping-cart-full",
-                configInfo: {
-                    isDraggable: true,
-                    lockAspectRatio: false
-                },
-                styleInfo: {
-                    position: "relative",
-                    zIndex: "0"
-                },
-                dragInfo: {
-                    x: 0,
-                    y: 300,
-                    w: 100,
-                    h: 100
-                }
-            }]
+            configList
         };
+    },
+    created() {
+        console.log("configList", configList);
     },
     methods: {
         handleDragStart(e) {
-            console.log("dragData", e.target.dataset.index);
+            console.log("dragData 接收", e.target.dataset.index);
             e.dataTransfer.setData("index", e.target.dataset.index);
         },
         menuSelect(i) {

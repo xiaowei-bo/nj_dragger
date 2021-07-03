@@ -6,9 +6,11 @@
         <el-container class="app-container">
             <LeftAside />
             <Edit
+                :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
             />
             <RightAside
+                :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
             />
         </el-container>
@@ -26,6 +28,18 @@ export default {
     },
     data() {
         return {
+            activityData: {
+                pages: []
+            },
+            curPageData: {
+                name: "",
+	            elements: [],// 页面元素
+	            commonStyle: {
+	            	backgroundColor: "",
+	            	backgroundImage: "",
+	            	backgroundSize: "cover"
+	            }
+            },
             editingComponent: {}
         };
     },

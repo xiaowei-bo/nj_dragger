@@ -1,11 +1,46 @@
 <template>
-    <el-aside class="app-right-aside clearfix" width="300px">
+    <el-aside class="app-right-aside clearfix" width="400px">
         <div v-show="noEditComponent">
             暂无操作信息
         </div>
         <div v-show="!noEditComponent">
-            <p>当前操作组件为{{ editingComponent.item && editingComponent.item.name }}</p>
-            {{ JSON.stringify(editingComponent) }}
+            <p>组件名：{{ editingComponent && editingComponent.desc }}</p>
+            <p>组件code：{{ editingComponent && editingComponent.name }}</p>
+            <p>组件唯一Id：{{ editingComponent && editingComponent.uuid }}</p>
+            <el-form
+                :model="editingComponent.configMap"
+                label-suffix="："
+            >
+                <div
+                    v-for="(item, key) in editingComponent.configMap"
+                    :key="key"
+                >
+                    <el-form-item
+                        v-if="!item.when || item.when(editingComponent.configMap)"
+                        :label="item.label"
+                    >
+                        <div
+                            v-if="!item.when || item.when(editingComponent.configMap)"
+                        >
+                            <el-input
+                                v-if="item.formType === 'input'"
+                                v-model="item.value"
+                            />
+                            <el-select
+                                v-if="item.formType === 'select'"
+                                v-model="item.value"
+                            >
+                                <el-option
+                                    v-for="i in item.valueMap"
+                                    :key="i.value"
+                                    :label="i.desc"
+                                    :value="i.value"
+                                />
+                            </el-select>
+                        </div>
+                    </el-form-item>
+                </div>
+            </el-form>
         </div>
     </el-aside>
 </template>
@@ -20,7 +55,7 @@ export default {
     },
     computed: {
         noEditComponent() {
-            return !this.editingComponent.item || !Object.keys(this.editingComponent.item).length;
+            return !Object.keys(this.editingComponent).length;
         }
     },
     data() {
