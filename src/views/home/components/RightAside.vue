@@ -7,6 +7,8 @@
             <p>组件名：{{ editingComponent && editingComponent.desc }}</p>
             <p>组件code：{{ editingComponent && editingComponent.name }}</p>
             <p>组件唯一Id：{{ editingComponent && editingComponent.uuid }}</p>
+            <p>x：{{ editingComponent && editingComponent.dragInfo && editingComponent.dragInfo.x }}</p>
+            <p>y：{{ editingComponent && editingComponent.dragInfo && editingComponent.dragInfo.y }}</p>
             <el-form
                 :model="editingComponent.configMap"
                 label-suffix="："

@@ -1,6 +1,6 @@
 <template>
     <div class="nj-image">
-        <img :src="src" alt="nj-image" />
+        <img :src="src" draggable="false" alt="nj-image" />
     </div>
 </template>
 

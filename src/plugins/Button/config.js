@@ -16,14 +16,20 @@ export default {
         }
     },
     styleInfo: { // 样式
-        position: "relative",
-        zIndex: "0"
+        "position": "relative",
+        "z-index": "0",
+        "text-align": "center",
+        "line-height": "40px",
+        "background-color": "#409eff",
+        "border-radius": "40px",
+        "color": "#ffffff",
+        "font-size": "16px"
     },
     dragInfo: { // 拖拽信息
-        x: 0,
+        x: 87,
         y: 0,
-        w: 375,
-        h: 100,
+        w: 200,
+        h: 40,
         isDraggable: true,
         lockAspectRatio: true
     }

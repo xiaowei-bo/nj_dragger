@@ -33,7 +33,7 @@ export default {
             },
             curPageData: {
                 name: "",
-	            elements: [],// 页面元素
+	            elements: [], // 页面元素
 	            commonStyle: {
 	            	backgroundColor: "",
 	            	backgroundImage: "",
