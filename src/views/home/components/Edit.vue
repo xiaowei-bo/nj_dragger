@@ -1,15 +1,22 @@
 <template>
     <el-main class="app-edit">
-        <div class="mobile-view" @drop="handleDrop" @dragover="handleDragOver">
-            <NjElementBox
-                v-for="(item, index) in curPageData.elements"
-                :key="item.uuid"
-                :style="item.styleInfo"
-                :class="{'active': item.uuid === editingComponent.uuid}"
-                @clickElement="() => { setEditingComponent(item) }"
-            >
-                <component :is="item.name" class="nj-element" :item="item" />
-            </NjElementBox>
+        <div
+            class="mobile-view"
+            draggable
+            @drop="handleDrop"
+            @dragover="handleDragOver"
+        >
+            <Draggable v-model="curPageData.elements">
+                <NjElementBox
+                    v-for="item in curPageData.elements"
+                    :key="item.uuid"
+                    :style="item.styleInfo"
+                    :class="{'active': item.uuid === editingComponent.uuid}"
+                    @clickElement="() => { setEditingComponent(item) }"
+                >
+                    <component :is="item.name" class="nj-element" :item="item" />
+                </NjElementBox>
+            </Draggable>
         </div>
     </el-main>
 </template>
@@ -19,8 +26,9 @@ import { v4 as uuidv4 } from "uuid";
 import { deepClone } from "@/utils/index.js";
 import configList from "@/plugins/config.js";
 import NjElementBox from "./NjElementBox.vue";
+import Draggable from "vuedraggable";
 export default {
-    components: { NjElementBox },
+    components: { NjElementBox, Draggable },
     props: {
         editingComponent: {
             type: Object,
@@ -33,7 +41,9 @@ export default {
     },
     data() {
         return {
-            configList
+            configList,
+            dragIndex: 0,
+            enterIndex: 0
         };
     },
     methods: {
@@ -42,8 +52,9 @@ export default {
             e.preventDefault();
         },
         handleDrop(e) {
-            console.log("dropData 接收：", e.dataTransfer.getData("index"));
             const key = e.dataTransfer.getData("index");
+            if (!key) return;
+            console.log("dropData 接收：", key);
             const item = deepClone(this.configList[key]);
             const curPageData = this.curPageData;
             item.uuid = uuidv4();

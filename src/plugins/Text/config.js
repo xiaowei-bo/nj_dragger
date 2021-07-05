@@ -16,15 +16,8 @@ export default {
         }
     },
     styleInfo: { // 样式
-        position: "relative",
-        zIndex: "0"
-    },
-    dragInfo: { // 拖拽信息
-        x: 0,
-        y: 0,
-        w: 375,
-        h: 100,
-        isDraggable: true,
-        lockAspectRatio: true
+        "position": "relative",
+        "z-index": "0",
+        "width": "100%"
     }
 };

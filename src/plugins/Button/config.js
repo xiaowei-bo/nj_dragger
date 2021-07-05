@@ -23,14 +23,8 @@ export default {
         "background-color": "#409eff",
         "border-radius": "40px",
         "color": "#ffffff",
-        "font-size": "16px"
-    },
-    dragInfo: { // 拖拽信息
-        x: 87,
-        y: 0,
-        w: 200,
-        h: 40,
-        isDraggable: true,
-        lockAspectRatio: true
+        "font-size": "16px",
+        "width": "300px",
+        "height": "40px"
     }
 };

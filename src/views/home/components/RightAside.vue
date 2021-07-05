@@ -7,8 +7,6 @@
             <p>组件名：{{ editingComponent && editingComponent.desc }}</p>
             <p>组件code：{{ editingComponent && editingComponent.name }}</p>
             <p>组件唯一Id：{{ editingComponent && editingComponent.uuid }}</p>
-            <p>x：{{ editingComponent && editingComponent.dragInfo && editingComponent.dragInfo.x }}</p>
-            <p>y：{{ editingComponent && editingComponent.dragInfo && editingComponent.dragInfo.y }}</p>
             <el-form
                 :model="editingComponent.configMap"
                 label-suffix="："
@@ -23,6 +21,7 @@
                     >
                         <div
                             v-if="!item.when || item.when(editingComponent.configMap)"
+                            class="right-form-item"
                         >
                             <el-input
                                 v-if="item.formType === 'input'"
@@ -71,10 +70,14 @@ export default {
 
 <style lang="scss" scoped>
 .app-right-aside{
-    width: 300px;
+    width: 400px;
     height: 100%;
     border-left: 1px solid #dcdfe6;
     padding: 20px;
     box-sizing: border-box;
+    .right-form-item{
+        display: inline-block;
+        width: 60%;
+    }
 }
 </style>

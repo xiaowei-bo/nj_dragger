@@ -31,6 +31,7 @@ export default {
 <style lang="scss" scoped>
 .nj-element-box{
     position: relative;
+    cursor: move;
     &:hover{
         border: 1px dotted rgb(116, 111, 111);
     }
@@ -49,24 +50,28 @@ export default {
             top: -1px;
             border-right-color: transparent;
             border-bottom-color: transparent;
+            cursor: nwse-resize;
         }
         .lb{
             left: -1px;
             bottom: -1px;
             border-right-color: transparent;
             border-top-color: transparent;
+            cursor: nesw-resize;
         }
         .rt{
             right: -1px;
             top: -1px;
             border-left-color: transparent;
             border-bottom-color: transparent;
+            cursor: nesw-resize;
         }
         .rb{
             right: -1px;
             bottom: -1px;
             border-left-color: transparent;
             border-top-color: transparent;
+            cursor: nwse-resize;
         }
     }
 }
