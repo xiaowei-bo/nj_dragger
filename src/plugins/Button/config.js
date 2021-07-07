@@ -25,6 +25,10 @@ export default {
         "color": "#ffffff",
         "font-size": "16px",
         "width": "300px",
-        "height": "40px"
+        "height": "40px",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "margin-top": "0",
+        "margin-bottom": "0"
     }
 };

@@ -4,9 +4,8 @@
             暂无操作信息
         </div>
         <div v-show="!noEditComponent">
-            <p>组件名：{{ editingComponent && editingComponent.desc }}</p>
-            <p>组件code：{{ editingComponent && editingComponent.name }}</p>
-            <p>组件唯一Id：{{ editingComponent && editingComponent.uuid }}</p>
+            <p>组件名：{{ editingComponent && editingComponent.desc }}{{ editingComponent && editingComponent.name }}</p>
+            <p>id：{{ editingComponent && editingComponent.uuid }}</p>
             <el-form
                 :model="editingComponent.configMap"
                 label-suffix="："

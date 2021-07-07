@@ -18,6 +18,10 @@ export default {
     styleInfo: { // 样式
         "position": "relative",
         "z-index": "0",
-        "width": "100%"
+        "width": "100%",
+        "padding-left": "12px",
+        "padding-right": "12px",
+        "padding-top": "12px",
+        "padding-bottom": "12px"
     }
 };
