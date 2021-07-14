@@ -22,7 +22,7 @@ const page = {
     config: {}
 };
 
-const component = {
+const element = {
     elName: "", // 组件名
     animations: [], // 图层的动画,可以支持多个动画
     events: [], // 事件配置数据，每个图层可以添加多个事件
@@ -45,8 +45,8 @@ const component = {
     }
 };
 
-export default {
+export {
     activity,
     page,
-    component
+    element
 };

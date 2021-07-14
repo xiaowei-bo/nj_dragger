@@ -1,5 +1,9 @@
 <template>
-    <div class="nj-element-box" @click="$emit('clickElement')">
+    <div
+        class="nj-element-box"
+        @click="$emit('clickElement')"
+        @keyup.delete="$emit('deleteElement')"
+    >
         <slot></slot>
         <i class="lt"></i>
         <!-- <i class="lm iconfont"></i> -->

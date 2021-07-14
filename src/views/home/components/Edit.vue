@@ -8,11 +8,12 @@
         >
             <Draggable v-model="curPageData.elements">
                 <NjElementBox
-                    v-for="item in curPageData.elements"
+                    v-for="(item, index) in curPageData.elements"
                     :key="item.uuid"
                     :style="item.styleInfo"
                     :class="{'active': item.uuid === editingComponent.uuid}"
-                    @clickElement="() => { setEditingComponent(item) }"
+                    @clickElement="setEditingComponent(item)"
+                    @deleteElement="deleteElement(index)"
                 >
                     <component :is="item.name" class="nj-element" :item="item" />
                 </NjElementBox>
@@ -31,6 +32,10 @@ export default {
     components: { NjElementBox, Draggable },
     props: {
         editingComponent: {
+            type: Object,
+            default: () => ({})
+        },
+        elementClipBoard: {
             type: Object,
             default: () => ({})
         },
@@ -54,29 +59,68 @@ export default {
         handleDrop(e) {
             const key = e.dataTransfer.getData("index");
             if (!key) return;
-            console.log("dropData 接收：", key);
             const item = deepClone(this.configList[key]);
-            const curPageData = this.curPageData;
             item.uuid = uuidv4();
-            this.setEditingComponent(item);
+            const curPageData = this.curPageData;
             curPageData.elements.push(item);
+            this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);
         },
         // end
-        // start 设置当前操作组件数据
         setEditingComponent(item) {
             this.$emit("update:editingComponent", item);
+        },
+        deleteElement() {
+            const uuid = this.editingComponent.uuid;
+            const curPageData = this.curPageData;
+            const index = curPageData.elements.findIndex(i => i.uuid === uuid);
+            curPageData.elements.splice(index, 1);
+            this.$emit("update:curPageData", curPageData);
+        },
+        copyElement() {
+            const item = deepClone(this.editingComponent);
+            this.$emit("update:elementClipBoard", item);
+        },
+        pasteElement() {
+            const uuid = this.editingComponent.uuid;
+            const item = deepClone(this.elementClipBoard);
+            item.uuid = uuidv4();
+            const curPageData = this.curPageData;
+            if (!uuid) {
+                curPageData.elements.push(item);
+            } else {
+                const index = curPageData.elements.findIndex(i => i.uuid === uuid);
+                curPageData.elements.splice(index + 1, 0, item);
+            }
+            this.setEditingComponent(item);
+            this.$emit("update:curPageData", curPageData);
         }
-        // end
     },
     created() {
+    },
+    mounted() {
+        document.onkeydown = e => {
+            const hasCtrl = e.metaKey || e.ctrlKey;
+            console.log(e);
+            switch (e.code) {
+                case "Backspace":
+                    this.deleteElement();
+                    break;
+                case "KeyC":
+                    hasCtrl && this.copyElement();
+                    break;
+                case "KeyV":
+                    hasCtrl && this.pasteElement();
+                    break;
+            }
+        };
     }
 };
 </script>
 
 <style lang="scss">
 .app-edit{
-    width: calc(100% - 600px);
+    width: calc(100% - 700px);
     height: 100%;
     .mobile-view{
         width: 375px;

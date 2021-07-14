@@ -1,13 +1,19 @@
 <template>
     <div class="app">
-        <el-header class="app-header" height="80px">
-            Header
+        <el-header height="60px">
+            <Header
+                :activity-data="activityData"
+            />
         </el-header>
         <el-container class="app-container">
-            <LeftAside />
+            <LeftAside
+                :activity-data.sync="activityData"
+                :cur-page-data.sync="curPageData"
+            />
             <Edit
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
+                :element-clip-board.sync="elementClipBoard"
             />
             <RightAside
                 :cur-page-data.sync="curPageData"
@@ -19,31 +25,32 @@
 <script>
 import LeftAside from "./components/LeftAside.vue";
 import RightAside from "./components/RightAside.vue";
+import Header from "./components/Header.vue";
 import Edit from "./components/Edit.vue";
+import { activity as activityConfig } from "@/config/json_scheme.js";
+import { deepClone } from "@/utils/index.js";
 export default {
     components: {
         LeftAside,
         RightAside,
-        Edit
+        Edit,
+        Header
     },
     data() {
         return {
-            activityData: {
-                pages: []
-            },
-            curPageData: {
-                name: "",
-	            elements: [], // 页面元素
-	            commonStyle: {
-	            	backgroundColor: "",
-	            	backgroundImage: "",
-	            	backgroundSize: "cover"
-	            }
-            },
-            editingComponent: {}
+            activityData: {},
+            curPageData: {},
+            editingComponent: {}, // 当前操作中组件
+            elementClipBoard: {} // 粘贴板
         };
     },
     methods: {
+        initData() {
+            this.activityData = deepClone(activityConfig);
+        }
+    },
+    created() {
+        this.initData();
     }
 };
 </script>
@@ -52,14 +59,8 @@ export default {
 .app{
     height: 100%;
 }
-.app-header{
-    width: 100%;
-    padding: 20px;
-    border-bottom: 1px solid #dcdfe6;
-    // box-shadow: 0 2px 4px rgb(0 0 0 / 10%);
-}
 .app-container{
     width: 100%;
-    height: calc(100% - 80px);
+    height: calc(100% - 60px);
 }
 </style>
