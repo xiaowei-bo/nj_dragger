@@ -33,7 +33,7 @@ export default {
     position: relative;
     cursor: move;
     &:hover{
-        border: 1px dotted rgb(116, 111, 111);
+        border: 1px dashed rgb(116, 111, 111);
     }
     &.active{
         border: 1px dashed #000;
