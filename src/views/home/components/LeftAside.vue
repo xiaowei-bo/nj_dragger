@@ -37,7 +37,9 @@
                     </div>
                 </Draggable>
                 <div class="page-item add-page" @click="addPage">
-                    <p class="add-page">+</p>
+                    <p class="add-page">
+                        <i class="iconfont icon-hao"></i>
+                    </p>
                 </div>
             </div>
         </div>
@@ -122,6 +124,8 @@ export default {
     }
     .app-left-aside-content{
         width: calc(100% - 70px);
+        height: 100%;
+        overflow: auto;
         box-sizing: border-box;
         .element-list{
             width: 100%;
@@ -150,11 +154,23 @@ export default {
             border: 1px solid #dcdfe6;
             border-radius: 5px;
             cursor: move;
+            &:hover{
+                border: 1px dashed #409EFF;
+            }
             &.editing{
-                border: 1px solid #000;
+                border: 1px solid #409EFF;
+                color: #409EFF;
+                > p{
+                    color: #409EFF;
+                }
             }
             &.add-page{
-                cursor: default;
+                cursor: pointer;
+                &:hover{
+                    > p{
+                        color: #409EFF;
+                    }
+                }
             }
         }
         .add-page{

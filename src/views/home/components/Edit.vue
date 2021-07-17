@@ -1,8 +1,10 @@
 <template>
     <el-main class="app-edit">
         <div
+            id="mobileView"
             class="mobile-view"
             draggable
+            @click.stop="$emit('update:focusEditPage', true)"
             @drop="handleDrop"
             @dragover="handleDragOver"
         >
@@ -42,6 +44,10 @@ export default {
         curPageData: {
             type: Object,
             default: () => ({})
+        },
+        focusEditPage: {
+            type: Boolean,
+            default: false
         }
     },
     data() {
@@ -71,6 +77,7 @@ export default {
             this.$emit("update:editingComponent", item);
         },
         deleteElement() {
+            if (!Object.keys(this.editingComponent).length) return;
             const uuid = this.editingComponent.uuid;
             const curPageData = this.curPageData;
             const index = curPageData.elements.findIndex(i => i.uuid === uuid);
@@ -78,10 +85,12 @@ export default {
             this.$emit("update:curPageData", curPageData);
         },
         copyElement() {
+            if (!Object.keys(this.editingComponent).length) return;
             const item = deepClone(this.editingComponent);
             this.$emit("update:elementClipBoard", item);
         },
         pasteElement() {
+            if (!Object.keys(this.elementClipBoard).length) return;
             const uuid = this.editingComponent.uuid;
             const item = deepClone(this.elementClipBoard);
             item.uuid = uuidv4();
@@ -98,13 +107,14 @@ export default {
     },
     created() {
     },
-    mounted() {
+    async mounted() {
+        await this.$nextTick();
         document.onkeydown = e => {
             const hasCtrl = e.metaKey || e.ctrlKey;
             console.log(e);
             switch (e.code) {
                 case "Backspace":
-                    this.deleteElement();
+                    hasCtrl && this.deleteElement();
                     break;
                 case "KeyC":
                     hasCtrl && this.copyElement();

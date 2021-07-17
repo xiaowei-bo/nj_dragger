@@ -14,6 +14,7 @@
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
                 :element-clip-board.sync="elementClipBoard"
+                :focus-edit-page.sync="focusEditPage"
             />
             <RightAside
                 :cur-page-data.sync="curPageData"
@@ -41,7 +42,8 @@ export default {
             activityData: {},
             curPageData: {},
             editingComponent: {}, // 当前操作中组件
-            elementClipBoard: {} // 粘贴板
+            elementClipBoard: {}, // 粘贴板
+            focusEditPage: false
         };
     },
     methods: {

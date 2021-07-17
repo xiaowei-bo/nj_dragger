@@ -56,6 +56,9 @@ export default {
         importJson() {
             this.content = this.activityData;
             this.dialogVisible = true;
+        },
+        handleClose() {
+            this.dialogVisible = false;
         }
     },
     created() {

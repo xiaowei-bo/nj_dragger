@@ -25,6 +25,7 @@
                             <el-input
                                 v-if="item.formType === 'input'"
                                 v-model="item.value"
+                                @keydown="onKeyDown"
                             />
                             <el-select
                                 v-if="item.formType === 'select'"
@@ -63,6 +64,10 @@ export default {
         };
     },
     methods: {
+        onKeyDown(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
     }
 };
 </script>
