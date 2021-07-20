@@ -1,3 +1,4 @@
+import { Message } from "element-ui";
 const deepClone = (target) => {
     const type = typeof target;
     let result;
@@ -19,6 +20,20 @@ const deepClone = (target) => {
     return result;
 };
 
+const copyText = (text) => {
+    const cacheInput = document.getElementById("hideInput");
+    const hideInput = cacheInput || document.createElement("input");
+    hideInput.value = text;
+    !cacheInput && document.body.appendChild(hideInput);
+    hideInput.select();
+    document.execCommand("Copy");
+    hideInput.className = "hide-input";
+    hideInput.id = "hideInput";
+    hideInput.style.display = "none";
+    Message.success("复制成功");
+};
+
 export {
-    deepClone
+    deepClone,
+    copyText
 };
