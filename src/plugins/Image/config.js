@@ -49,6 +49,10 @@ export default {
     styleInfo: { // 样式
         "position": "relative",
         "z-index": "0",
-        "width": "100%"
+        "width": "100%",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "margin-top": "0",
+        "margin-bottom": "0"
     }
 };

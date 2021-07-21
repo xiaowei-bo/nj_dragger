@@ -28,7 +28,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { deepClone } from "@/utils/index.js";
 import configList from "@/plugins/config.js";
-import NjElementBox from "./NjElementBox.vue";
+import NjElementBox from "./components/NjElementBox.vue";
 import Draggable from "vuedraggable";
 export default {
     components: { NjElementBox, Draggable },
@@ -138,6 +138,7 @@ export default {
         margin: 5px auto;
         border: 1px solid #dcdfe6;
         overflow: auto;
+        box-sizing: content-box;
         .nj-element{
             user-select: none;
         }

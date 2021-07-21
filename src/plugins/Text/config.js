@@ -19,6 +19,7 @@ export default {
         "position": "relative",
         "z-index": "0",
         "width": "100%",
+        "line-height": "2",
         "padding-left": "12px",
         "padding-right": "12px",
         "padding-top": "12px",

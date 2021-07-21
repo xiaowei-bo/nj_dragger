@@ -1,6 +1,6 @@
 <template>
     <div class="app">
-        <el-header height="60px">
+        <el-header height="60px" :style="{'padding':0}">
             <Header
                 :activity-data="activityData"
                 @importJsonData="importJsonData"
@@ -27,12 +27,12 @@
     </div>
 </template>
 <script>
-import LeftAside from "./components/LeftAside.vue";
-import RightAside from "./components/RightAside.vue";
-import Header from "./components/Header.vue";
-import Edit from "./components/Edit.vue";
-import { activity as activityConfig } from "@/config/json_scheme.js";
-import { deepClone } from "@/utils/index.js";
+import LeftAside from "./wrapper/LeftAside";
+import RightAside from "./wrapper/RightAside";
+import Header from "./wrapper/Header";
+import Edit from "./wrapper/Edit";
+import { activity as activityConfig } from "@/config/json_scheme";
+import { deepClone } from "@/utils";
 export default {
     components: {
         LeftAside,
