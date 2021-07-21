@@ -4,14 +4,14 @@
             暂无操作信息
         </div>
         <div v-show="!noEditComponent">
-            <el-collapse 
-                v-model="curEditType" 
+            <el-collapse
+                v-model="curEditType"
                 @change="chengeCurEditType"
             >
                 <el-collapse-item
                     v-for="({ title, name, component }, index) in editTypeMap"
-                    class="el-collapse-item"
                     :key="index"
+                    class="el-collapse-item"
                     :title="title"
                     :name="name"
                 >

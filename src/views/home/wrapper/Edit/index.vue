@@ -111,7 +111,6 @@ export default {
         await this.$nextTick();
         document.onkeydown = e => {
             const hasCtrl = e.metaKey || e.ctrlKey;
-            console.log(e);
             switch (e.code) {
                 case "Backspace":
                     hasCtrl && this.deleteElement();

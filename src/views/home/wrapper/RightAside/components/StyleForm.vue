@@ -54,12 +54,10 @@ export default {
         "editingComponent.uuid": {
             handler: function(val) {
                 if (!val) return;
-                console.log(this.commonStyleConfig['text-align'].value)
+                // 数据初始化
                 for (const key in this.editingComponent.styleInfo) {
-                    console.log(this.commonStyleConfig[key].value + '>>' + this.editingComponent.styleInfo[key])
-                    this.commonStyleConfig[key].value = this.editingComponent.styleInfo[key]
+                    this.commonStyleConfig[key].value = this.editingComponent.styleInfo[key];
                 }
-                console.log(this.commonStyleConfig['text-align'].value)
             }
         }
     },
