@@ -30,6 +30,10 @@
             />
             <el-input
                 v-if="dialogStatus === 'import'"
+                v-model="importData"
+                :autosize="{ minRows: 4 }"
+                type="textarea"
+                placeholder="请将已有的json数据粘贴于此"
             />
             <span slot="footer" class="dialog-footer">
                 <el-button v-if="dialogStatus === 'export'" type="primary" @click="handlerClip">复 制</el-button>
@@ -55,7 +59,8 @@ export default {
         return {
             dialogVisible: false,
             dialogStatus: "export",
-            content: ""
+            content: "",
+            importData: ""
         };
     },
     computed: {
@@ -82,6 +87,8 @@ export default {
                 this.dialogVisible = false;
                 return;
             } else if (this.dialogStatus === "import") {
+                const importData = this.importData ? JSON.parse(this.importData) : "";
+                this.$emit("importJsonData", importData);
                 this.dialogVisible = false;
                 return;
             }

@@ -3,14 +3,17 @@
         <el-header height="60px">
             <Header
                 :activity-data="activityData"
+                @importJsonData="importJsonData"
             />
         </el-header>
         <el-container class="app-container">
             <LeftAside
+                ref="leftAside"
                 :activity-data.sync="activityData"
                 :cur-page-data.sync="curPageData"
             />
             <Edit
+                ref="edit"
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
                 :element-clip-board.sync="elementClipBoard"
@@ -49,6 +52,9 @@ export default {
     methods: {
         initData() {
             this.activityData = deepClone(activityConfig);
+        },
+        importJsonData(jsonData) {
+            this.activityData = deepClone(jsonData);
         }
     },
     created() {
