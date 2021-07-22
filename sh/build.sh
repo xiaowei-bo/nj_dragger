@@ -1,3 +1,4 @@
+git pull
 workDir=`pwd`
 diffInfo=`git diff --name-only HEAD^`
 
