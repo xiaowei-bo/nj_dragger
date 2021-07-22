@@ -8,6 +8,7 @@ import "@/style/index.scss";
 
 Vue.use(ElementUI);
 Vue.use(NjElement);
+
 Vue.config.productionTip = false;
 
 new Vue({
