@@ -15,8 +15,8 @@
                 <component :is="component" :editing-component="editingComponent" />
             </el-collapse-item>
         </el-collapse>
-        <div v-show="noEditingComponent">
-            暂无选中组件
+        <div v-show="noEditingComponent" class="empty">
+            暂无可操作项,去编辑区选择吧
         </div>
     </div>
 </template>
@@ -65,5 +65,10 @@ export default {
 <style lang="scss" scoped>
 .el-collapse-item{
     padding: 0 20px;
+}
+.empty{
+    text-align: center;
+    padding-top: 100px;
+    color: #999;
 }
 </style>

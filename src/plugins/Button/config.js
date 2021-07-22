@@ -1,6 +1,6 @@
 export default {
     name: "NjButton", // 组件名
-    desc: "按钮组件",
+    desc: "按钮",
     icon: "icon-anniu",
     animations: [], // 图层的动画,可以支持多个动画
     events: [], // 事件配置数据，每个图层可以添加多个事件

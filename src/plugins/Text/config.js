@@ -1,6 +1,6 @@
 export default {
     name: "NjText", // 组件名
-    desc: "文本组件",
+    desc: "文本",
     icon: "icon-wenben",
     animations: [], // 图层的动画,可以支持多个动画
     events: [], // 事件配置数据，每个图层可以添加多个事件

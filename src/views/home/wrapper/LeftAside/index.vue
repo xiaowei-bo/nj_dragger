@@ -18,7 +18,10 @@
                         draggable
                         :data-index="key"
                     >
-                        <i class="iconfont" :class="value.icon"></i>
+                        <p>
+                            <i class="iconfont" :class="value.icon"></i>
+                        </p>
+                        <p class="mini">{{ value.desc }}</p>
                     </li>
                 </ul>
             </div>
@@ -72,6 +75,7 @@ export default {
         };
     },
     created() {
+        delete this.configList["commonStyleConfig"];
         const activeType = sessionStorage.getItem("activeType");
         this.activeType = activeType || this.activeType;
         this.initData();
@@ -149,11 +153,21 @@ export default {
             flex-wrap: wrap;
             padding-left: 0;
             .element-item{
-                width: 50px;
-                height: 50px;
-                line-height: 50px;
+                width: 40px;
+                height: 40px;
                 text-align: center;
                 cursor: move;
+                font-size: 12px;
+                padding: 5px;
+                border: 1px solid #f1f1f1;
+                border-radius: 5px;
+                margin: 0 0 18px 18px;
+                .mini{
+                    padding-top: 5px;
+                }
+                >p{
+                    font-size: 12px;
+                }
             }
         }
         .page-list{
