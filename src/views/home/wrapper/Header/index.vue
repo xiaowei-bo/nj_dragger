@@ -94,6 +94,7 @@ export default {
             }
         },
         handlerClip() {
+            console.log(JSON.stringify(this.activityData).length);
             copyText(JSON.stringify(this.activityData));
         },
         handleClose() {

@@ -3,8 +3,8 @@
         <div
             id="mobileView"
             class="mobile-view"
+            :style="pageStyle"
             draggable
-            @click.stop="$emit('update:focusEditPage', true)"
             @drop="handleDrop"
             @dragover="handleDragOver"
         >
@@ -57,6 +57,17 @@ export default {
             enterIndex: 0
         };
     },
+    computed: {
+        pageStyle() {
+            const style = this.curPageData.commonStyle;
+            for (const k in this.curPageData.commonStyle) {
+                if (k === "background-image" && this.curPageData.commonStyle[k] && !this.curPageData.commonStyle[k].includes("url(")) {
+                    style[k] = `url(${this.curPageData.commonStyle[k]})`;
+                }
+            }
+            return style;
+        }
+    },
     methods: {
         // start 页面接收组件拖拽进页面方法
         handleDragOver(e) {
@@ -68,6 +79,7 @@ export default {
             const item = deepClone(this.configList[key]);
             item.uuid = uuidv4();
             const curPageData = this.curPageData;
+            item.configCode = key;
             curPageData.elements.push(item);
             this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);

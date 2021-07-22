@@ -23,6 +23,7 @@ export default {
         "padding-left": "12px",
         "padding-right": "12px",
         "padding-top": "12px",
-        "padding-bottom": "12px"
+        "padding-bottom": "12px",
+        "text-indent": "20px"
     }
 };

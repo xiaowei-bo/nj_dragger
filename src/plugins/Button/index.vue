@@ -22,6 +22,7 @@ export default {
         },
         styleInfo() {
             const styleInfo = this.item.styleInfo;
+            // 字体样式需特殊处理覆盖
             return { color: styleInfo["color"], fontSize: styleInfo["font-size"] };
         }
     },

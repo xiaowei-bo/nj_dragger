@@ -194,12 +194,40 @@ const commonStyleConfig = {
     },
     "background-color": {
         key: "background-color",
-        value: "#409eff",
+        value: "",
         valueType: "string",
         formType: "input",
         placeholder: "",
         tip: "请输入背景色",
         label: "背景色"
+    },
+    "background-image": {
+        key: "background-image",
+        value: "",
+        valueType: "string",
+        formType: "input",
+        placeholder: "",
+        tip: "请输入背景图片链接",
+        label: "背景图"
+    },
+    "background-size": {
+        key: "background-size",
+        value: "auto",
+        valueMap: [{
+            value: "auto",
+            desc: "自动"
+        }, {
+            value: "cover",
+            desc: "短边覆盖"
+        }, {
+            value: "contain",
+            desc: "长边覆盖"
+        }],
+        valueType: "enum",
+        formType: "select",
+        placeholder: "",
+        tip: "请选择背景覆盖方式",
+        label: "背景布局"
     },
     "color": {
         key: "background-color",
@@ -209,6 +237,15 @@ const commonStyleConfig = {
         placeholder: "",
         tip: "请输入字体颜色",
         label: "字体颜色"
+    },
+    "text-indent": {
+        key: "text-indent",
+        value: 0,
+        valueType: "string",
+        formType: "input",
+        placeholder: "",
+        tip: "请输入首行缩进值",
+        label: "首行缩进"
     }
 };
 

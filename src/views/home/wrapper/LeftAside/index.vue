@@ -29,11 +29,12 @@
                         :key="index"
                         class="page-item"
                         draggable
+                        :style="handlerStyle(item.commonStyle)"
                         :data-index="index"
                         :class="{'editing': curPageData.uuid === item.uuid}"
-                        @click="$emit('update:curPageData', item)"
+                        @click="setCurPageData(item, index)"
                     >
-                        <p class="page-title">{{ item.uuid }}</p>
+                        <p class="page-title">{{ item.name || `页面${index+1}` }}</p>
                     </div>
                 </Draggable>
                 <div class="page-item add-page" @click="addPage">
@@ -88,7 +89,8 @@ export default {
             const activityData = this.activityData;
             item.uuid = uuidv4();
             activityData.pages.push(item);
-            this.$emit("update:curPageData", item);
+            const index = activityData.pages.length - 1;
+            this.setCurPageData(item, index);
         },
         initData() {
             const activityData = this.activityData;
@@ -96,12 +98,25 @@ export default {
                 const item = deepClone(pageConfig);
                 item.uuid = uuidv4();
                 activityData.pages.push(item);
-                this.$emit("update:curPageData", item);
+                this.setCurPageData(item, 0);
             } else {
-                this.$emit("update:curPageData", activityData.pages[0]);
+                this.setCurPageData(activityData.pages[0], 0);
             }
             this.activityData.pages = activityData.pages;
             this.$emit("update:activityData", activityData);
+        },
+        handlerStyle(commonStyle) {
+            const style = deepClone(commonStyle);
+            for (const k in commonStyle) {
+                if (k === "background-image") {
+                    style[k] = `url(${commonStyle[k]})`;
+                }
+            }
+            return style;
+        },
+        setCurPageData(item, index) {
+            item.index = index;
+            this.$emit("update:curPageData", item);
         }
     }
 };

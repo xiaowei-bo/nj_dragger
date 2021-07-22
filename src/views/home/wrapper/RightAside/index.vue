@@ -8,19 +8,35 @@
             <el-tab-pane label="组件配置" name="editingComponent">
                 <ComponentConfig :editing-component="editingComponent" />
             </el-tab-pane>
-            <el-tab-pane label="页面配置" name="second">页面配置</el-tab-pane>
-            <el-tab-pane label="活动配置" name="third">活动配置</el-tab-pane>
+            <el-tab-pane label="页面配置" name="second">
+                <PageConfig :cur-page-data="curPageData" />
+            </el-tab-pane>
+            <el-tab-pane label="活动配置" name="third">
+                <ActivityConfig :activity-data="activityData" />
+            </el-tab-pane>
         </el-tabs>
     </el-aside>
 </template>
 
 <script>
 import ComponentConfig from "./components/ComponentConfig/index.vue";
+import PageConfig from "./components/PageConfig/index.vue";
+import ActivityConfig from "./components/ActivityConfig/index.vue";
 export default {
     components: {
-        ComponentConfig
+        ComponentConfig,
+        PageConfig,
+        ActivityConfig
     },
     props: {
+        activityData: {
+            type: Object,
+            default: () => ({})
+        },
+        curPageData: {
+            type: Object,
+            default: () => ({})
+        },
         editingComponent: {
             type: Object,
             default: () => ({})
@@ -42,7 +58,7 @@ export default {
     },
     methods: {
         chengeCurEditType(i) {
-            console.log(i);
+            // console.log(i);
         }
     }
 };

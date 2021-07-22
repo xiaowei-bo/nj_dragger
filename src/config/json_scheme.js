@@ -2,22 +2,18 @@ const activity = {
     title: "", // 标题
     description: "", // 描述
     coverImage: "", // 封面
-    auther: "", // 作者
-    script: "", // 页面插入脚本
-    width: 375, // 高
-    height: 644, // 宽
+    author: "", // 作者
     pages: [], // 多页页面
-    shareConfig: {}, // 微信分享配置
-    pageMode: 0 // 渲染模式，用于扩展多种模式渲染，翻页h5/长页/PC页面等等
+    shareConfig: {} // 微信分享配置
 };
 
 const page = {
     name: "",
     elements: [], // 页面元素
     commonStyle: {
-        backgroundColor: "",
-        backgroundImage: "",
-        backgroundSize: "cover"
+        "background-color": "#fff",
+        "background-image": "",
+        "background-size": "cover"
     },
     config: {}
 };

@@ -1,17 +1,22 @@
 <template>
     <el-form
-        :model="editingComponent.styleInfo"
+        :model="curPageData"
+        class="page-config"
         label-suffix="："
         label-width="90px"
         label-position="left"
         size="mini"
     >
+        <el-form-item label="页面标题" class="page-config-item">
+            <el-input v-model="curPageData.name" />
+        </el-form-item>
         <div
-            v-for="(item, key) in editingComponent.styleInfo"
+            v-for="(item, key) in curPageData.commonStyle"
             :key="key"
         >
             <el-form-item
                 :label="commonStyleConfig[key].label"
+                class="page-config-item"
             >
                 <div
                     class="right-form-item"
@@ -19,12 +24,12 @@
                     <el-input
                         v-if="commonStyleConfig[key].formType === 'input'"
                         v-model="commonStyleConfig[key].value"
-                        @change="(v) => { editingComponent.styleInfo[key] = v}"
+                        @change="(v) => { curPageData.commonStyle[key] = v}"
                     />
                     <el-select
                         v-if="commonStyleConfig[key].formType === 'select'"
                         v-model="commonStyleConfig[key].value"
-                        @change="(v) => { editingComponent.styleInfo[key] = v}"
+                        @change="(v) => { curPageData.commonStyle[key] = v}"
                     >
                         <el-option
                             v-for="i in commonStyleConfig[key].valueMap"
@@ -43,26 +48,23 @@
 import configList from "@/plugins/config.js";
 const commonStyleConfig = configList["commonStyleConfig"];
 export default {
-    name: "StyleForm",
     props: {
-        editingComponent: {
+        curPageData: {
             type: Object,
             default: () => ({})
         }
     },
     watch: {
-        "editingComponent.uuid": {
+        "curPageData.uuid": {
             handler: function(val) {
                 if (!val) return;
-                for (const key in configList[this.editingComponent.configCode].styleInfo) {
-                    if (this.editingComponent.styleInfo[key] === undefined) {
-                        this.editingComponent.styleInfo[key] = configList[this.editingComponent.configCode].styleInfo[key];
+                // 数据初始化
+                for (const key in this.curPageData.commonStyle) {
+                    if (!["", null, undefined].includes(this.curPageData.commonStyle[key])) {
+                        this.commonStyleConfig[key].value = this.curPageData.commonStyle[key];
                     }
                 }
-                // 数据初始化
-                for (const key in this.editingComponent.styleInfo) {
-                    this.commonStyleConfig[key].value = this.editingComponent.styleInfo[key];
-                }
+                this.curPageData.name = this.curPageData.name || `页面${this.curPageData.index + 1}`;
             }
         }
     },
@@ -70,12 +72,17 @@ export default {
         return {
             commonStyleConfig
         };
+    },
+    methods: {
     }
 };
 </script>
 
 <style lang="scss" scoped>
-.right-form-item{
+.page-config{
+    padding: 0 20px;
+}
+.page-config-item{
     display: inline-block;
     width: 60%;
 }

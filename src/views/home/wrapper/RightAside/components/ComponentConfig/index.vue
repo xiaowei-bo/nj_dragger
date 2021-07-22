@@ -56,7 +56,7 @@ export default {
     },
     methods: {
         chengeCurEditType(i) {
-            console.log(i);
+            // console.log(i);
         }
     }
 };
