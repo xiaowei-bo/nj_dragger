@@ -1,34 +1,24 @@
 <template>
     <el-aside class="app-right-aside clearfix" width="400px">
-        <div v-show="noEditComponent">
-            暂无操作信息
-        </div>
-        <div v-show="!noEditComponent">
-            <el-collapse
-                v-model="curEditType"
-                @change="chengeCurEditType"
-            >
-                <el-collapse-item
-                    v-for="({ title, name, component }, index) in editTypeMap"
-                    :key="index"
-                    class="el-collapse-item"
-                    :title="title"
-                    :name="name"
-                >
-                    <component :is="component" :editing-component="editingComponent" />
-                </el-collapse-item>
-            </el-collapse>
-        </div>
+        <el-tabs
+            v-model="curEditType"
+            :stretch="true"
+            @tab-click="chengeCurEditType"
+        >
+            <el-tab-pane label="组件配置" name="editingComponent">
+                <ComponentConfig :editing-component="editingComponent" />
+            </el-tab-pane>
+            <el-tab-pane label="页面配置" name="second">页面配置</el-tab-pane>
+            <el-tab-pane label="活动配置" name="third">活动配置</el-tab-pane>
+        </el-tabs>
     </el-aside>
 </template>
 
 <script>
-import ConfigForm from "./components/ConfigForm.vue";
-import StyleForm from "./components/StyleForm.vue";
+import ComponentConfig from "./components/ComponentConfig/index.vue";
 export default {
     components: {
-        ConfigForm,
-        StyleForm
+        ComponentConfig
     },
     props: {
         editingComponent: {
@@ -36,14 +26,9 @@ export default {
             default: () => ({})
         }
     },
-    computed: {
-        noEditComponent() {
-            return !Object.keys(this.editingComponent).length;
-        }
-    },
     data() {
         return {
-            curEditType: ["baseConfig"],
+            curEditType: "editingComponent",
             editTypeMap: [{
                 title: "组件基础配置",
                 name: "baseConfig",
@@ -69,8 +54,5 @@ export default {
     height: 100%;
     border-left: 1px solid #dcdfe6;
     box-sizing: border-box;
-    .el-collapse-item{
-        padding: 0 20px;
-    }
 }
 </style>
