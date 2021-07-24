@@ -22,6 +22,7 @@
     "@vue/cli-plugin-eslint": "5.0.0-beta.2",
     "@vue/cli-plugin-router": "^4.5.13",
     "@vue/cli-service": "5.0.0-beta.2",
+    "axios": "^0.21.1",
     "babel-eslint": "^10.1.0",
     "core-js": "^3.6.5",
     "element-ui": "2.13.2",

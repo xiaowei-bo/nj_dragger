@@ -1,17 +1,17 @@
 <template>
-    <div class="home">
-        home
+    <div class="drag">
+        <router-view />
     </div>
 </template>
 
 <script>
 export default {
-    name: "Home"
+    name: "Drag"
 };
 </script>
 
 <style lang="scss">
-.home{
+.drag{
     width: 100%;
     height: 100%;
 }

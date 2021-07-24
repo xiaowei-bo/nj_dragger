@@ -11,6 +11,7 @@
             <el-tooltip class="item" effect="dark" content="导入JSON" placement="bottom">
                 <i class="iconfont icon-daoru1" @click="importJson"></i>
             </el-tooltip>
+            <el-button class="fr" type="primary" size="mini" @click="$emit('saveActivity')">保存</el-button>
         </div>
         <div class="header-right fl"></div>
         <el-dialog
@@ -118,11 +119,16 @@ export default {
     .header-middle{
         width: calc(100% - 660px);
         height: 60px;
-        padding: 30px 20px 0;
+        padding: 20px 20px 0;
+        box-sizing: border-box;
         .iconfont{
             display: inline-block;
             margin-right: 50px;
             cursor: pointer;
+        }
+        .el-button{
+            position: relative;
+            top: -5px;
         }
     }
     .header-right{

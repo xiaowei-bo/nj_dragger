@@ -1,6 +1,9 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+import dragRouter from "./modules/drag";
+import boardRouter from "./modules/board";
+
 Vue.use(Router);
 
 const constantRoutes = [
@@ -8,7 +11,9 @@ const constantRoutes = [
         path: "/",
         name: "home",
         component: () => import(/* webpackChunkName: 'home' */"@/views/home/index")
-    }
+    },
+    ...dragRouter,
+    ...boardRouter
 ];
 // const asyncRoutes = [];
 

@@ -1,17 +1,17 @@
 <template>
-    <div class="home">
-        home
+    <div class="board">
+        board
     </div>
 </template>
 
 <script>
 export default {
-    name: "Home"
+    name: "Board"
 };
 </script>
 
 <style lang="scss">
-.home{
+.board{
     width: 100%;
     height: 100%;
 }
