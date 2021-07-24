@@ -1,6 +1,6 @@
-const { ENV, BASE_API } = process.env;
+const { ENV, VUE_APP_BASE_URI } = process.env;
 
 module.exports = {
     ENV,
-    BASE_API
+    VUE_APP_BASE_URI
 };

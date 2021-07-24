@@ -1,10 +1,9 @@
 import axios from "axios";
 import { Message } from "element-ui";
-import { BASE_API } from "../config";
+import { VUE_APP_BASE_URI } from "../config";
 
 const service = axios.create({
-    baseURL: BASE_API,
-    withCredentials: true,
+    baseURL: VUE_APP_BASE_URI,
     timeout: 30000
 });
 

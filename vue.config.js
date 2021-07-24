@@ -16,15 +16,6 @@ module.exports = {
         overlay: {
             warnings: false,
             errors: true
-        },
-        proxy: {
-            "/api": {
-                target: BASE_API,
-                changeOrigin: true,
-                pathRewrite: {
-                    "^/api": "/api"
-                }
-            }
         }
     },
     configureWebpack: {
