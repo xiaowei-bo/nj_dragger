@@ -12,28 +12,30 @@
         >
             <el-form-item
                 v-if="!item.when || item.when(editingComponent.configMap)"
+                class="right-form-item"
                 :label="item.label"
             >
-                <div
-                    v-if="!item.when || item.when(editingComponent.configMap)"
-                    class="right-form-item"
+                <el-input
+                    v-if="item.formType === 'input'"
+                    v-model="item.value"
+                />
+                <el-input
+                    v-if="item.formType === 'textarea'"
+                    v-model="item.value"
+                    :autosize="{ minRows: 2, maxRows: 8}"
+                    type="textarea"
+                />
+                <el-select
+                    v-if="item.formType === 'select'"
+                    v-model="item.value"
                 >
-                    <el-input
-                        v-if="item.formType === 'input'"
-                        v-model="item.value"
+                    <el-option
+                        v-for="i in item.valueMap"
+                        :key="i.value"
+                        :label="i.desc"
+                        :value="i.value"
                     />
-                    <el-select
-                        v-if="item.formType === 'select'"
-                        v-model="item.value"
-                    >
-                        <el-option
-                            v-for="i in item.valueMap"
-                            :key="i.value"
-                            :label="i.desc"
-                            :value="i.value"
-                        />
-                    </el-select>
-                </div>
+                </el-select>
             </el-form-item>
         </div>
     </el-form>
@@ -54,6 +56,9 @@ export default {
 <style lang="scss" scoped>
 .right-form-item{
     display: inline-block;
-    width: 60%;
+    width: 85%;
+    .el-select{
+        display: block;
+    }
 }
 </style>

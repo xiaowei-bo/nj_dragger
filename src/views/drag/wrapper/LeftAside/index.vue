@@ -75,7 +75,6 @@ export default {
         };
     },
     created() {
-        delete this.configList["commonStyleConfig"];
         const activeType = sessionStorage.getItem("activeType");
         this.activeType = activeType || this.activeType;
         this.initData();

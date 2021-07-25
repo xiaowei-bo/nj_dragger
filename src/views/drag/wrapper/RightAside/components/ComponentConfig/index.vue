@@ -24,10 +24,12 @@
 <script>
 import ConfigForm from "./ConfigForm.vue";
 import StyleForm from "./StyleForm.vue";
+import EventForm from "./EventForm.vue";
 export default {
     components: {
         ConfigForm,
-        StyleForm
+        StyleForm,
+        EventForm
     },
     props: {
         editingComponent: {
@@ -51,6 +53,10 @@ export default {
                 title: "样式基础配置",
                 name: "styleConfig",
                 component: "StyleForm"
+            }, {
+                title: "事件基础配置",
+                name: "eventForm",
+                component: "EventForm"
             }]
         };
     },

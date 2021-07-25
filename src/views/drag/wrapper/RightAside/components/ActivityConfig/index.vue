@@ -36,6 +36,9 @@ export default {
 }
 .activity-config-item{
     display: inline-block;
-    width: 60%;
+    width: 85%;
+    .el-select{
+        display: block;
+    }
 }
 </style>

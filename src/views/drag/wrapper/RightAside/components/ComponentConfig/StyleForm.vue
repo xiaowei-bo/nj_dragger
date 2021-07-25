@@ -11,29 +11,31 @@
             :key="key"
         >
             <el-form-item
+                class="right-form-item"
                 :label="commonStyleConfig[key].label"
             >
-                <div
-                    class="right-form-item"
+                <el-input
+                    v-if="commonStyleConfig[key].formType === 'input'"
+                    v-model="commonStyleConfig[key].value"
+                    @change="(v) => { editingComponent.styleInfo[key] = v}"
+                />
+                <el-color-picker
+                    v-if="commonStyleConfig[key].formType === 'color'"
+                    v-model="commonStyleConfig[key].value"
+                    @change="(v) => { editingComponent.styleInfo[key] = v}"
+                />
+                <el-select
+                    v-if="commonStyleConfig[key].formType === 'select'"
+                    v-model="commonStyleConfig[key].value"
+                    @change="(v) => { editingComponent.styleInfo[key] = v}"
                 >
-                    <el-input
-                        v-if="commonStyleConfig[key].formType === 'input'"
-                        v-model="commonStyleConfig[key].value"
-                        @change="(v) => { editingComponent.styleInfo[key] = v}"
+                    <el-option
+                        v-for="i in commonStyleConfig[key].valueMap"
+                        :key="i.value"
+                        :label="i.desc"
+                        :value="i.value"
                     />
-                    <el-select
-                        v-if="commonStyleConfig[key].formType === 'select'"
-                        v-model="commonStyleConfig[key].value"
-                        @change="(v) => { editingComponent.styleInfo[key] = v}"
-                    >
-                        <el-option
-                            v-for="i in commonStyleConfig[key].valueMap"
-                            :key="i.value"
-                            :label="i.desc"
-                            :value="i.value"
-                        />
-                    </el-select>
-                </div>
+                </el-select>
             </el-form-item>
         </div>
     </el-form>
@@ -41,7 +43,7 @@
 
 <script>
 import configList from "@/plugins/config.js";
-const commonStyleConfig = configList["commonStyleConfig"];
+import commonStyleConfig from "@/config/style.js";
 export default {
     name: "StyleForm",
     props: {
@@ -77,6 +79,9 @@ export default {
 <style lang="scss" scoped>
 .right-form-item{
     display: inline-block;
-    width: 60%;
+    width: 85%;
+    .el-select{
+        display: block;
+    }
 }
 </style>

@@ -26,6 +26,11 @@
                         v-model="commonStyleConfig[key].value"
                         @change="(v) => { curPageData.commonStyle[key] = v}"
                     />
+                    <el-color-picker
+                        v-if="commonStyleConfig[key].formType === 'color'"
+                        v-model="commonStyleConfig[key].value"
+                        @change="(v) => { curPageData.styleInfo[key] = v}"
+                    />
                     <el-select
                         v-if="commonStyleConfig[key].formType === 'select'"
                         v-model="commonStyleConfig[key].value"
@@ -45,8 +50,7 @@
 </template>
 
 <script>
-import configList from "@/plugins/config.js";
-const commonStyleConfig = configList["commonStyleConfig"];
+import commonStyleConfig from "@/config/style.js";
 export default {
     props: {
         curPageData: {
@@ -84,6 +88,9 @@ export default {
 }
 .page-config-item{
     display: inline-block;
-    width: 60%;
+    width: 85%;
+    .el-select{
+        display: block;
+    }
 }
 </style>

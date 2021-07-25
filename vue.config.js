@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-const { ENV, BASE_API } = require("./src/config/index.js");
+const { ENV } = require("./src/config/index.js");
 const port = 9797;
 
 module.exports = {
