@@ -23,12 +23,12 @@ if (fs.existsSync(h5HtmlFile)) {
 
 app.use(koaStatic({
     maxage: process.env.NODE_ENV === "development" ? 0 : 1000 * 60 * 60 * 24, // 1000 * 60 * 60 * 24 cookie有效时长
-    rootDir: "../dist/static",
+    rootDir: "./dist/static",
     rootPath: "/static"
 }));
 app.use(koaStatic({
     maxage: process.env.NODE_ENV === "development" ? 0 : 1000 * 60 * 60 * 24, // 1000 * 60 * 60 * 24 cookie有效时长
-    rootDir: "../dist/favicon.ico",
+    rootDir: "./dist/favicon.ico",
     rootPath: "/favicon.ico"
 }));
 
