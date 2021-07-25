@@ -51,6 +51,7 @@
                     :key="key"
                 >
                     <el-form-item
+                        v-if="val.actionType === item.action"
                         class="right-form-item"
                         :label="val.label"
                     >
@@ -101,7 +102,7 @@ export default {
             eventData: {
                 trigger: "click",
                 action: "toast",
-                configMap: deepClone(eventConfig["configMap"]["toast"])
+                configMap: deepClone(eventConfig["configMap"])
             }
         };
     },

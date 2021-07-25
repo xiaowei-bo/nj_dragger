@@ -1,4 +1,20 @@
 const commonStyleConfig = {
+    "display": {
+        key: "display",
+        value: "block",
+        valueMap: [{
+            value: "block",
+            desc: "块元素"
+        }, {
+            value: "inline-block",
+            desc: "行内块元素"
+        }],
+        valueType: "enum",
+        formType: "select",
+        placeholder: "",
+        tip: "请选择元素类型",
+        label: "元素类型"
+    },
     "position": {
         key: "position",
         value: "relative",

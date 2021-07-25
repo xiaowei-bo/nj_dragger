@@ -33,7 +33,47 @@ const copyText = (text) => {
     Message.success("复制成功");
 };
 
+const getUrlParams = (item, url) => {
+    function decodeLocationSearch(url = "") {
+        if (!location.search && !url) return {};
+        if (url && !url.includes("?")) return {};
+        const query = {};
+        let _url = "";
+        if (url) {
+            _url = `?${url.split("?")[1]}`;
+        } else {
+            _url = location.search;
+        }
+        _url.slice(1).split("&").forEach(function(kv) {
+            query[kv.split("=")[0]] = decodeURIComponent(kv.split("=")[1]);
+        });
+        return query;
+    }
+    if (item) {
+        var svalue = (url || location.search).match(new RegExp("[\?\&]" + item + "=([^\&]*)(\&?)", "i"));
+        return svalue ? decodeURIComponent(svalue[1]) : "";
+    } else {
+        return decodeLocationSearch(url);
+    }
+};
+
+const urlWithObj = (url = "", obj = {}) => {
+    if (typeof obj !== "object" || !Object.keys(obj).length) return url;
+    const _arr = [];
+    const _hasQuery = url && url.includes("?");
+    if (_hasQuery) {
+        const u_obj = getUrlParams("", url);
+        Object.assign(obj, u_obj);
+    }
+    for (const k in obj) {
+        _arr.push(`${k}=${obj[k]}`);
+    }
+    return `${url.split("?")[0]}?${_arr.join("&")}`;
+};
+
 export {
     deepClone,
-    copyText
+    copyText,
+    getUrlParams,
+    urlWithObj
 };

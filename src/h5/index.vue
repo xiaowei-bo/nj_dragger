@@ -1,0 +1,126 @@
+<template>
+    <div class="h5" :style="pageStyle">
+        <div
+            v-for="item in curPageData.elements"
+            :key="item.uuid"
+            :style="item.styleInfo"
+        >
+            <component
+                :is="item.name"
+                :id="item.uuid"
+                class="nj-element"
+                :item="item"
+            />
+        </div>
+    </div>
+</template>
+
+<script>
+import { getActivityDetail } from "@/api/drag";
+import { getUrlParams, urlWithObj } from "@/utils";
+export default {
+    data() {
+        return {
+            curPageData: {}
+        };
+    },
+    computed: {
+        pageStyle() {
+            const style = this.curPageData.commonStyle;
+            for (const k in this.curPageData.commonStyle) {
+                if (k === "background-image" && this.curPageData.commonStyle[k] && !this.curPageData.commonStyle[k].includes("url(")) {
+                    style[k] = `url(${this.curPageData.commonStyle[k]})`;
+                }
+            }
+            return style;
+        }
+    },
+    methods: {
+        async getPageData() {
+            const { id, pageId } = getUrlParams();
+            if (!id) return;
+            const data = await getActivityDetail(id);
+            const jsonData = data.jsonData && JSON.parse(data.jsonData) || {};
+            const pages = jsonData.pages;
+            if (pageId) {
+                this.curPageData = pages.find(i => i.uuid === pageId);
+            } else {
+                this.curPageData = pages[0];
+            }
+            const name = this.curPageData.name;
+            document.title = name;
+            this.handlerEventData(this.curPageData);
+        },
+        handlerEventData(curPageData) {
+            const elements = curPageData.elements;
+            for (const { events, uuid } of elements) {
+                if (events && events.length) {
+                    for (const { trigger, action, configMap } of events) {
+                        const filterInfo = {
+                            trigger,
+                            action,
+                            uuid
+                        };
+                        for (const k in configMap) {
+                            if (configMap[k].actionType === action) {
+                                filterInfo[configMap[k].key] = configMap[k].value;
+                            }
+                        }
+                        this.handlerEvent(filterInfo);
+                    }
+                }
+            }
+        },
+        async handlerEvent(eventInfo) {
+            await this.$nextTick();
+            const el = document.getElementById(eventInfo.uuid);
+            let actionHandler = () => {};
+            switch (eventInfo.action) {
+                case "toast":
+                    actionHandler = () => {
+                        const text = eventInfo.text;
+                        const time = eventInfo.time;
+                        alert(`toast 提示 ${text} ${time}秒`);
+                    };
+                    break;
+                case "jumpLink":
+                    actionHandler = () => {
+                        const url = eventInfo.url;
+                        location.href = url;
+                    };
+                    break;
+                case "jumpPage":
+                    actionHandler = () => {
+                        const urlParams = getUrlParams();
+                        const pageId = eventInfo.targetUuid;
+                        const resParams = {
+                            ...urlParams,
+                            pageId
+                        };
+                        const url = urlWithObj(`${location.origin}/view`, resParams);
+                        location.href = url;
+                    };
+                    break;
+            }
+            switch (eventInfo.trigger) {
+                case "click":
+                    el.addEventListener("click", actionHandler);
+                    break;
+                case "load":
+                    actionHandler();
+                    break;
+                case "longPress":
+                    // TODO
+                    break;
+            }
+        }
+    },
+    created() {
+        this.getPageData();
+    }
+};
+</script>
+
+<style scoped>
+
+</style>

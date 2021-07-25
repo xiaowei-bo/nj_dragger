@@ -37,25 +37,45 @@ const action = {
     label: "触发行为"
 };
 const configMap = {
-    toast: {
-        text: {
-            key: "text",
-            value: "toast提示",
-            valueType: "string",
-            formType: "input",
-            placeholder: "请输入toast提示文案",
-            tip: "请输入toast提示文案",
-            label: "提示文案"
-        },
-        time: {
-            key: "time",
-            value: 3,
-            valueType: "number",
-            formType: "input",
-            placeholder: "请输入toast提示时间",
-            tip: "请输入toast提示时间",
-            label: "提示时长"
-        }
+    text: {
+        key: "text",
+        value: "toast提示",
+        valueType: "string",
+        formType: "input",
+        placeholder: "请输入toast提示文案",
+        tip: "请输入toast提示文案",
+        label: "提示文案",
+        actionType: "toast"
+    },
+    time: {
+        key: "time",
+        value: 3,
+        valueType: "number",
+        formType: "input",
+        placeholder: "请输入toast提示时间",
+        tip: "请输入toast提示时间",
+        label: "提示时长",
+        actionType: "toast"
+    },
+    url: {
+        key: "url",
+        value: "www.baidu.com",
+        valueType: "string",
+        formType: "input",
+        placeholder: "请输入跳转链接",
+        tip: "请输入跳转链接",
+        label: "跳转链接",
+        actionType: "jumpLink"
+    },
+    targetUuid: {
+        key: "targetUuid",
+        value: "",
+        valueType: "string",
+        formType: "input",
+        placeholder: "请输入页面uuid",
+        tip: "请输入页面uuid",
+        label: "页面uuid",
+        actionType: "jumpPage"
     }
 };
 

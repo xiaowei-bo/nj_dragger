@@ -47,6 +47,7 @@ export default {
         }
     },
     styleInfo: { // 样式
+        "display": "block",
         "position": "relative",
         "z-index": "0",
         "width": "100%",

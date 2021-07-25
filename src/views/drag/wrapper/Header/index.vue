@@ -3,7 +3,7 @@
         <div class="header-left fl"></div>
         <div class="header-middle fl">
             <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
-                <i class="iconfont icon-yulan"></i>
+                <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>
             </el-tooltip>
             <el-tooltip class="item" effect="dark" content="导出JSON" placement="bottom">
                 <i class="iconfont icon-daochu" @click="exportJson"></i>

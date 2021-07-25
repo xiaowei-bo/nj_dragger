@@ -50,11 +50,11 @@ export default {
                 name: "baseConfig",
                 component: "ConfigForm"
             }, {
-                title: "样式基础配置",
+                title: "组件样式配置",
                 name: "styleConfig",
                 component: "StyleForm"
             }, {
-                title: "事件基础配置",
+                title: "组件事件配置",
                 name: "eventForm",
                 component: "EventForm"
             }]

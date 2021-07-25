@@ -5,6 +5,7 @@
                 :activity-data="activityData"
                 @importJsonData="importJsonData"
                 @saveActivity="saveActivity"
+                @toPreview="toPreview"
             />
         </el-header>
         <el-container class="app-container">
@@ -52,6 +53,11 @@ export default {
             elementClipBoard: {} // 粘贴板
         };
     },
+    watch: {
+        "curPageData.uuid": function() {
+            this.editingComponent = {};
+        }
+    },
     methods: {
         async initData() {
             const { query: { id }} = this.$route;
@@ -92,13 +98,20 @@ export default {
                 jsonData: JSON.stringify(this.activityData)
             };
             if (!this.activityId || this.activityId === "-1") {
-                delete data.id;
-                await addActivityDetail(data);
+                data.id && delete data.id;
+                const res = await addActivityDetail(data);
+                this.activityId = res.id;
                 this.$message.success("保存成功");
             } else {
-                await editActivityDetail(data);
+                const res = await editActivityDetail(data);
+                this.activityId = res.id;
                 this.$message.success("修改成功");
             }
+        },
+        async toPreview() {
+            await this.saveActivity();
+            const url = `${location.origin}/view?id=${this.activityId}`;
+            window.open(url, "_blank");
         }
     },
     created() {

@@ -9,6 +9,20 @@ module.exports = {
     assetsDir: "static",
     lintOnSave: ENV === "development",
     productionSourceMap: false,
+    pages: {
+        index: {
+            entry: "src/main.js",
+            template: "public/index.html",
+            filename: "index.html",
+            title: "拖拽平台"
+        },
+        view: {
+            entry: "src/h5/main.js",
+            template: "public/view.html",
+            filename: "view.html",
+            title: ""
+        }
+    },
     devServer: {
         port: port,
         open: ENV === "development",

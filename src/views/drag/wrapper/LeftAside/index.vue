@@ -38,6 +38,9 @@
                         @click="setCurPageData(item, index)"
                     >
                         <p class="page-title">{{ item.name || `页面${index+1}` }}</p>
+                        <p class="el-icon-document-copy" @click="copyText(item.uuid)">
+                            copy uuid
+                        </p>
                     </div>
                 </Draggable>
                 <div class="page-item add-page" @click="addPage">
@@ -55,7 +58,7 @@ import configList from "@/plugins/config.js";
 import Draggable from "vuedraggable";
 import { page as pageConfig } from "@/config/json_scheme.js";
 import { v4 as uuidv4 } from "uuid";
-import { deepClone } from "@/utils/index.js";
+import { deepClone, copyText } from "@/utils/index.js";
 export default {
     components: { Draggable },
     props: {
@@ -71,7 +74,8 @@ export default {
     data() {
         return {
             activeType: "ELEMENTS",
-            configList
+            configList,
+            copyText
         };
     },
     created() {
@@ -205,5 +209,8 @@ export default {
             line-height: 150px;
         }
     }
+}
+.el-icon-document-copy{
+    cursor: pointer;
 }
 </style>
