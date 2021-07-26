@@ -11,10 +11,20 @@ const dragRoutes = [
         children: [
             {
                 path: "edit",
-                component: () => import(/* webpackChunkName: 'edit' */"@/views/drag/edit"),
-                name: "edit",
+                component: () => import(/* webpackChunkName: 'drag-edit' */"@/views/drag/edit"),
+                name: "dragEdit",
                 meta: {
-                    title: "编辑器",
+                    title: "活动编辑器",
+                    icon: "el-icon-tickets",
+                    noCache: true
+                }
+            },
+            {
+                path: "list",
+                component: () => import(/* webpackChunkName: 'drag-list' */"@/views/drag/list"),
+                name: "dragList",
+                meta: {
+                    title: "活动列表",
                     icon: "el-icon-tickets",
                     noCache: true
                 }

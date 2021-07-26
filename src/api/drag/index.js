@@ -4,10 +4,11 @@ import request from "@/utils/request";
  * @description 获取活动列表
  * @returns
  */
-export function getActivityList() {
+export function getActivityList(params) {
     return request({
         url: "/api/drag/list",
-        method: "get"
+        method: "get",
+        params
     });
 }
 
