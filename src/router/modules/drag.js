@@ -3,7 +3,7 @@ const dragRoutes = [
         path: "/drag",
         name: "drag",
         component: () => import(/* webpackChunkName: 'drag' */"@/views/drag/index"),
-        redirect: "/drag/edit",
+        redirect: "/drag/list",
         meta: {
             title: "可视化",
             icon: "el-icon-film"
@@ -25,6 +25,16 @@ const dragRoutes = [
                 name: "dragList",
                 meta: {
                     title: "活动列表",
+                    icon: "el-icon-tickets",
+                    noCache: true
+                }
+            },
+            {
+                path: "doc",
+                component: () => import(/* webpackChunkName: 'drag-doc' */"@/views/drag/doc"),
+                name: "dragDoc",
+                meta: {
+                    title: "文档",
                     icon: "el-icon-tickets",
                     noCache: true
                 }

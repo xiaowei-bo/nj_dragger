@@ -1,19 +1,19 @@
 <template>
     <div class="app-header clearfix">
-        <div class="header-left fl"></div>
-        <div class="header-middle fl">
-            <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
-                <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>
-            </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="导出JSON" placement="bottom">
-                <i class="iconfont icon-daochu" @click="exportJson"></i>
-            </el-tooltip>
-            <el-tooltip class="item" effect="dark" content="导入JSON" placement="bottom">
-                <i class="iconfont icon-daoru1" @click="importJson"></i>
-            </el-tooltip>
-            <el-button class="fr" type="primary" size="mini" @click="$emit('saveActivity')">保存</el-button>
-        </div>
-        <div class="header-right fl"></div>
+        <Header>
+            <template v-slot:middle>
+                <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
+                    <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="导出JSON" placement="bottom">
+                    <i class="iconfont icon-daochu" @click="exportJson"></i>
+                </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="导入JSON" placement="bottom">
+                    <i class="iconfont icon-daoru1" @click="importJson"></i>
+                </el-tooltip>
+                <el-button class="fr" type="primary" size="mini" @click="$emit('saveActivity')">保存</el-button>
+            </template>
+        </Header>
         <el-dialog
             :title="dialogTitle"
             :visible.sync="dialogVisible"
@@ -48,8 +48,9 @@
 import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
 import { copyText } from "@/utils";
+import Header from "../../../components/Header.vue";
 export default {
-    components: { VueJsonPretty },
+    components: { VueJsonPretty, Header },
     props: {
         activityData: {
             type: Object,
@@ -101,9 +102,6 @@ export default {
         handleClose() {
             this.dialogVisible = false;
         }
-    },
-    created() {
-
     }
 };
 </script>
@@ -112,9 +110,20 @@ export default {
 .app-header{
     width: 100%;
     border-bottom: 1px solid #dcdfe6;
+    position: relative;
+    z-index: 1;
     .header-left{
         width: 280px;
         height: 60px;
+        .logo-box{
+            height: 100%;
+            padding: 7px 0 7px 20px;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        .logo{
+            height: 100%;
+        }
     }
     .header-middle{
         width: calc(100% - 660px);

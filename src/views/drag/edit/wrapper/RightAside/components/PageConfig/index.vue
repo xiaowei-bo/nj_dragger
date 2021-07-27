@@ -29,6 +29,7 @@
                     <el-color-picker
                         v-if="commonStyleConfig[key].formType === 'color'"
                         v-model="commonStyleConfig[key].value"
+                        show-alpha
                         @change="(v) => { curPageData.commonStyle[key] = v}"
                     />
                     <el-select

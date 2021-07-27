@@ -1,5 +1,8 @@
 <template>
     <div class="drag-list">
+        <Header>
+            <template v-slot:middle></template>
+        </Header>
         <el-form
             ref="searchForm"
             :model="searchForm"
@@ -22,7 +25,6 @@
                 <!-- <el-button type="primary" @click="reset">重置</el-button> -->
             </el-form-item>
         </el-form>
-        <el-divider />
         <div class="activity-wrapper">
             <div
                 class="activity-item add-btn"
@@ -54,9 +56,11 @@
 </template>
 
 <script>
+import Header from "../components/Header.vue";
 import { getActivityList } from "@/api/drag";
 export default {
     name: "DragList",
+    components: { Header },
     data() {
         return {
             searchForm: {
@@ -115,7 +119,7 @@ export default {
         width: 100%;
         height: 150px;
         overflow: hidden;
-        border-bottom: 1px solid #dcdfe6;
+        border-bottom: 1px solid #dcdfe63b;
         border-radius: 5px;
     }
     .image{
