@@ -23,6 +23,7 @@ export default {
     },
     methods: {
         async build() {
+            this.output = "开始构建>>>>>>>>>";
             const params = {
                 project: "nj_dragger"
             };
@@ -31,6 +32,7 @@ export default {
             this.output = res.stdout + res.stderr;
         },
         async deploy() {
+            this.output = "开始部署>>>>>>>>>";
             const params = {
                 project: "nj_dragger"
             };
