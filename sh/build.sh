@@ -16,3 +16,4 @@ fi
 
 echo "开始构建..."
 npm run build:production
+echo "构建成功>>>>>>>>>>>>>>>>>>"

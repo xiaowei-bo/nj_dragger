@@ -15,3 +15,4 @@ fi
 
 echo "开始部署..."
 npm run server:production
+echo "部署成功>>>>>>>>>>>>>>>>>>"

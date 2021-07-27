@@ -3,6 +3,7 @@ import Router from "vue-router";
 
 import dragRouter from "./modules/drag";
 import boardRouter from "./modules/board";
+import autoRouter from "./modules/auto";
 
 Vue.use(Router);
 
@@ -13,7 +14,8 @@ const constantRoutes = [
         component: () => import(/* webpackChunkName: 'home' */"@/views/home/index")
     },
     ...dragRouter,
-    ...boardRouter
+    ...boardRouter,
+    ...autoRouter
 ];
 // const asyncRoutes = [];
 
