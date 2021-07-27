@@ -1,6 +1,6 @@
 <template>
     <div class="app-header clearfix">
-        <Header>
+        <Header :has-middle-menu="false">
             <template v-slot:middle>
                 <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
                     <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>

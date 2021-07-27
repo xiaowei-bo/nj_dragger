@@ -28,7 +28,6 @@ export default {
                 project: "nj_dragger"
             };
             const res = await build(params);
-            console.log(res);
             this.output = res.stdout + res.stderr;
         },
         async deploy() {
@@ -37,7 +36,6 @@ export default {
                 project: "nj_dragger"
             };
             const res = await deploy(params);
-            console.log(res);
             this.output = res.stdout + res.stderr;
         }
     },
