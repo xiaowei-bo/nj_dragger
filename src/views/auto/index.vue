@@ -112,6 +112,7 @@ export default {
             font-size: 14px;
             padding: 20px;
             white-space: pre-line;
+            overflow: auto;
         }
     }
 }
