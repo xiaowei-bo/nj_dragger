@@ -29,10 +29,10 @@ export default {
             };
             const res = await build(params);
             if (res.code === 0) {
-                this.output = res.stdout;
+                this.output = this.output + res.stdout;
                 return;
             }
-            this.output = res.stdout + res.stderr;
+            this.output = this.output + res.stdout + res.stderr;
         },
         async deploy() {
             this.output = "开始部署>>>>>>>>>";
@@ -41,10 +41,10 @@ export default {
             };
             const res = await deploy(params);
             if (res.code === 0) {
-                this.output = res.stdout;
+                this.output = this.output + res.stdout;
                 return;
             }
-            this.output = res.stdout + res.stderr;
+            this.output = this.output + res.stdout + res.stderr;
         }
     },
     created() {
