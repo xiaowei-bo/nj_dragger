@@ -42,6 +42,16 @@ export default {
             ]
         };
     },
+    computed: {
+        showBuild() {
+            const op = this.projectMap.find(i => i.value === this.currentProject).op;
+            return op.includes('build');
+        },
+        showDeploy() {
+            const op = this.projectMap.find(i => i.value === this.currentProject).op;
+            return op.includes('deploy');
+        }
+    },
     methods: {
         async build() {
             this.output = "开始构建>>>>>>>>>";
