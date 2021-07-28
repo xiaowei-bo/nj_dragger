@@ -13,6 +13,7 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 /log
+package-lock.json
 
 # Editor directories and files
 .idea
