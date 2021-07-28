@@ -11,8 +11,8 @@
                         :value="i.value"
                     />
                 </el-select>
-                <el-button type="primary" :inline="true" class="btn" @click="build">构建</el-button>
-                <el-button type="primary" :inline="true" class="btn" @click="deploy">部署</el-button>
+                <el-button v-show="showBuild" type="primary" :inline="true" class="btn" @click="build">构建</el-button>
+                <el-button v-show="showDeploy" type="primary" :inline="true" class="btn" @click="deploy">部署</el-button>
             </el-form-item>
             <p class="echo-wrapper">{{ output }}</p>
         </el-form>
@@ -45,11 +45,11 @@ export default {
     computed: {
         showBuild() {
             const op = this.projectMap.find(i => i.value === this.currentProject).op;
-            return op.includes('build');
+            return op.includes("build");
         },
         showDeploy() {
             const op = this.projectMap.find(i => i.value === this.currentProject).op;
-            return op.includes('deploy');
+            return op.includes("deploy");
         }
     },
     methods: {
