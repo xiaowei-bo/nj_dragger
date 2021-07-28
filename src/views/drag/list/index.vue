@@ -1,7 +1,11 @@
 <template>
     <div class="drag-list">
-        <Header>
-            <template v-slot:middle></template>
+        <Header active-index="drag">
+            <template v-slot:left>
+                <div class="logo-box">
+                    <img class="logo" src="../assets/logo.png" alt="" />
+                </div>
+            </template>
         </Header>
         <el-form
             ref="searchForm"
@@ -56,7 +60,7 @@
 </template>
 
 <script>
-import Header from "../components/Header.vue";
+import Header from "@/components/Header.vue";
 import { getActivityList } from "@/api/drag";
 export default {
     name: "DragList",

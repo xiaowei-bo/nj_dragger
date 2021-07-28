@@ -1,24 +1,45 @@
 <template>
     <div class="auto">
-        <Header />
-        <div class="cicd-form">
-            <p class="title">当前 CICD 项目为 nj_dragger </p>
-            <el-button type="primary" :inline="true" @click="build">构建</el-button>
-            <el-button type="primary" :inline="true" @click="deploy">部署</el-button>
+        <Header active-index="auto" />
+        <el-form class="cicd-form">
+            <el-form-item label="项目：">
+                <el-select v-model="currentProject" class="select">
+                    <el-option
+                        v-for="i in projectMap"
+                        :key="i.value"
+                        :label="i.desc"
+                        :value="i.value"
+                    />
+                </el-select>
+                <el-button type="primary" :inline="true" class="btn" @click="build">构建</el-button>
+                <el-button type="primary" :inline="true" class="btn" @click="deploy">部署</el-button>
+            </el-form-item>
             <p class="echo-wrapper">{{ output }}</p>
-        </div>
+        </el-form>
     </div>
 </template>
 
 <script>
-import Header from "./components/Header.vue";
+import Header from "@/components/Header.vue";
 import { build, deploy } from "@/api/auto";
 export default {
     name: "Auto",
     components: { Header },
     data() {
         return {
-            output: ""
+            output: "> yibo.wei$",
+            currentProject: "nj_dragger",
+            projectMap: [
+                {
+                    value: "nj_dragger",
+                    desc: "可视化前端项目",
+                    op: ["build", "deploy"]
+                }, {
+                    value: "egg-project",
+                    desc: "可视化后端项目",
+                    op: ["deploy"]
+                }
+            ]
         };
     },
     methods: {
@@ -36,7 +57,6 @@ export default {
         },
         async deploy() {
             this.output = "开始部署>>>>>>>>>";
-            
             const params = {
                 project: "nj_dragger"
             };
@@ -58,12 +78,24 @@ export default {
     width: 100%;
     height: 100%;
     .cicd-form{
+        box-sizing: border-box;
+        height: calc(100% - 60px);
         padding: 20px;
+        .el-form-item{
+            margin-bottom: 0;
+        }
+        .btn{
+            margin-left: 20px;
+        }
+        .select{
+            margin-right: 20px;
+        }
         .title{
             padding-bottom: 30px;
             font-weight: bold;
         }
         .echo-wrapper{
+            height: calc(100% - 100px);
             margin-top: 30px;
             background-color: #000;
             color: #fff;

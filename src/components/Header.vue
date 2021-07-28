@@ -1,9 +1,6 @@
 <template>
     <div class="app-header clearfix">
         <div class="header-left fl">
-            <div class="logo-box" @click="toIndex">
-                <!-- <img class="logo" src="../assets/logo.png" alt="" /> -->
-            </div>
             <slot name="left"></slot>
         </div>
         <div class="header-middle fl" :class="{'no-pd': hasMiddleMenu}">
@@ -45,11 +42,14 @@ export default {
         hasMiddleMenu: {
             type: Boolean,
             default: true
+        },
+        activeIndex: {
+            type: String,
+            default: ""
         }
     },
     data() {
         return {
-            activeIndex: "auto",
             github: "https://github.com/killWeb/nj_dragger"
         };
     },

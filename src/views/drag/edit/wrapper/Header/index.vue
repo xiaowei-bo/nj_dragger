@@ -1,6 +1,11 @@
 <template>
     <div class="app-header clearfix">
         <Header :has-middle-menu="false">
+            <template v-slot:left>
+                <div class="logo-box">
+                    <img class="logo" src="../../../assets/logo.png" alt="" />
+                </div>
+            </template>
             <template v-slot:middle>
                 <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
                     <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>
@@ -48,7 +53,7 @@
 import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
 import { copyText } from "@/utils";
-import Header from "../../../components/Header.vue";
+import Header from "@/components/Header.vue";
 export default {
     components: { VueJsonPretty, Header },
     props: {
