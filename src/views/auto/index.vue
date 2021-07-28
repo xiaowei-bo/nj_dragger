@@ -36,7 +36,6 @@ export default {
         },
         async deploy() {
             this.output = "开始部署>>>>>>>>>";
-            console.log("test");
             const params = {
                 project: "nj_dragger"
             };
