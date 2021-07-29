@@ -27,7 +27,7 @@ export default {
     components: { Header },
     data() {
         return {
-            output: "yiboweidePlat> yibo.wei$",
+            output: `yiboweidePlatform:project yibo.wei$ \n`,
             currentProject: "nj_dragger",
             projectMap: [
                 {
@@ -54,7 +54,7 @@ export default {
     },
     methods: {
         async build() {
-            this.output = "开始构建>>>>>>>>>";
+            this.output = this.output + "开始构建>>>>>>>>> \n";
             const params = {
                 project: "nj_dragger"
             };
@@ -66,7 +66,7 @@ export default {
             this.output = this.output + res.stdout + res.stderr;
         },
         async deploy() {
-            this.output = "开始部署>>>>>>>>>";
+            this.output = this.output + "开始部署>>>>>>>>> \n";
             const params = {
                 project: "nj_dragger"
             };
