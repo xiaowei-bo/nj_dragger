@@ -5,9 +5,7 @@ FROM node:14.4.0
 ENV NODE_ENV production
 
 # 这个是容器中的文件目录
-RUN mkdir -p /usr/src/app 
-RUN mkdir -p /usr/src/app/dist
-RUN mkdir -p /usr/src/app/server
+RUN mkdir -p /usr/src/app
 
 # 设置工作目录
 WORKDIR /usr/src/app
@@ -24,8 +22,7 @@ COPY package.json /usr/src/app/package.json
 RUN npm i
 
 # 拷贝所有源代码到工作目
-COPY dist/* /usr/src/app/dist/
-COPY server/* /usr/src/app/server/
+COPY . /usr/src/app
 
 # 暴露容器端口
 EXPOSE 9797
