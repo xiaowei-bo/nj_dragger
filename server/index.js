@@ -7,7 +7,7 @@ const Koa = require("koa");
 const app = new Koa();
 const KoaRouter = require("koa-router");
 const router = new KoaRouter();
-const port = 9797;
+const port = 9796;
 // const proxy = httpProxy.createProxyServer({});
 
 const pcHtmlFile = path.resolve(__dirname, "../dist/index.html");
