@@ -8,6 +8,7 @@
     "build:dev": "vue-cli-service build --mode development",
     "build:production": "vue-cli-service build --mode production",
     "server:production": "pm2 start processes.json",
+    "start:docker": "node server/index.js",
     "dev": "vue-cli-service serve",
     "start": "vue-cli-service serve"
   },

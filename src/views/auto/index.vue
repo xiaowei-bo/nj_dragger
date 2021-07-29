@@ -27,7 +27,7 @@ export default {
     components: { Header },
     data() {
         return {
-            output: "> yibo.wei$",
+            output: "yiboweidePlat> yibo.wei$",
             currentProject: "nj_dragger",
             projectMap: [
                 {
