@@ -51,7 +51,7 @@
                     :key="key"
                 >
                     <el-form-item
-                        v-if="val.actionType === item.action"
+                        v-if="!val.when || val.when(item.action)"
                         class="right-form-item"
                         :label="val.label"
                     >

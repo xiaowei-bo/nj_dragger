@@ -36,6 +36,7 @@ import Edit from "./wrapper/Edit";
 import { activity as activityConfig } from "@/config/json_scheme";
 import { deepClone } from "@/utils";
 import { getActivityDetail, addActivityDetail, editActivityDetail } from "@/api/drag";
+import { setConfigMap, removeConfigMap } from "../common/handlerData";
 export default {
     components: {
         LeftAside,
@@ -64,6 +65,13 @@ export default {
             this.activityId = id;
             let activityData = null;
             let loading = null;
+            const localData = localStorage.getItem("localData");
+            if (localData) {
+                this.activityData = JSON.parse(localData);
+                this.initSon = true;
+                localStorage.removeItem("localData");
+                return;
+            }
             if (id !== "-1") {
                 loading = this.$loading({
                     lock: true,
@@ -75,7 +83,7 @@ export default {
                 activityData = res && res.jsonData;
             }
             if (activityData) {
-                this.activityData = JSON.parse(activityData);
+                this.activityData = setConfigMap(JSON.parse(activityData));
             } else {
                 this.activityData = deepClone(activityConfig);
                 this.activityData.author = "yibo.wei";
@@ -86,16 +94,21 @@ export default {
         importJsonData(jsonData) {
             this.activityData = deepClone(jsonData);
             this.activityData.author = "yibo.wei";
+            localStorage.setItem("localData", JSON.stringify(this.activityData));
+            location.reload();
         },
         async saveActivity() {
             const { title, author, description, coverImage } = this.activityData;
+            const saveActivityData = removeConfigMap(deepClone(this.activityData));
+            const jsonData = JSON.stringify(saveActivityData);
+            console.log(`当前活动 jsonData 长度为 ${jsonData.length}`);
             const data = {
                 id: this.activityId,
                 title,
                 author,
                 description,
                 coverImage,
-                jsonData: JSON.stringify(this.activityData)
+                jsonData
             };
             if (!this.activityId || this.activityId === "-1") {
                 data.id && delete data.id;

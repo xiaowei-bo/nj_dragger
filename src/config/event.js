@@ -45,7 +45,9 @@ const configMap = {
         placeholder: "请输入toast提示文案",
         tip: "请输入toast提示文案",
         label: "提示文案",
-        actionType: "toast"
+        when: (actionType) => {
+            return actionType === "toast";
+        }
     },
     time: {
         key: "time",
@@ -55,7 +57,9 @@ const configMap = {
         placeholder: "请输入toast提示时间",
         tip: "请输入toast提示时间",
         label: "提示时长",
-        actionType: "toast"
+        when: (actionType) => {
+            return actionType === "toast";
+        }
     },
     url: {
         key: "url",
@@ -65,7 +69,9 @@ const configMap = {
         placeholder: "请输入跳转链接",
         tip: "请输入跳转链接",
         label: "跳转链接",
-        actionType: "jumpLink"
+        when: (actionType) => {
+            return actionType === "jumpLink";
+        }
     },
     targetUuid: {
         key: "targetUuid",
@@ -75,7 +81,9 @@ const configMap = {
         placeholder: "请输入页面uuid",
         tip: "请输入页面uuid",
         label: "页面uuid",
-        actionType: "jumpPage"
+        when: (actionType) => {
+            return actionType === "jumpPage";
+        }
     }
 };
 
