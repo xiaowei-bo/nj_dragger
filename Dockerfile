@@ -25,6 +25,6 @@ RUN npm i
 COPY . /usr/src/app
 
 # 暴露容器端口
-# EXPOSE 9797
+EXPOSE 9796
 
 CMD npm run start:docker
