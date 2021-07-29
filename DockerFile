@@ -20,13 +20,12 @@ COPY package.json /usr/src/app/package.json
 # 安装npm依赖(使用淘宝的镜像源)
 # 如果使用的境外服务器，无需使用淘宝的镜像源，即改为`RUN npm i`。
 RUN npm i
-RUN npm run build:production
 
 # 拷贝所有源代码到工作目
-COPY . /usr/src/app
+COPY /dist /usr/src/app/dist
+COPY /server /usr/src/app/server
 
 # 暴露容器端口
 EXPOSE 9797
-
 
 CMD npm run start:docker
