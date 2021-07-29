@@ -24,8 +24,8 @@ COPY package.json /usr/src/app/package.json
 RUN npm i
 
 # 拷贝所有源代码到工作目
-COPY dist/ /usr/src/app/dist/
-COPY server/ /usr/src/app/server/
+COPY dist /usr/src/app/dist/
+COPY server /usr/src/app/server/
 
 # 暴露容器端口
 EXPOSE 9797
