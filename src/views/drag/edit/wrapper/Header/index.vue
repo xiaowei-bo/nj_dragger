@@ -22,6 +22,7 @@
         <el-dialog
             :title="dialogTitle"
             :visible.sync="dialogVisible"
+            :modal-append-to-body="false"
             width="60%"
             :before-close="handleClose"
         >
