@@ -37,12 +37,16 @@ import { activity as activityConfig } from "@/config/json_scheme";
 import { deepClone } from "@/utils";
 import { getActivityDetail, addActivityDetail, editActivityDetail } from "@/api/drag";
 import { setConfigMap, removeConfigMap } from "../common/handlerData";
+import { mapGetters } from "vuex";
 export default {
     components: {
         LeftAside,
         RightAside,
         Edit,
         Header
+    },
+    computed: {
+        ...mapGetters(["allForm"])
     },
     data() {
         return {
@@ -97,7 +101,32 @@ export default {
             localStorage.setItem("localData", JSON.stringify(this.activityData));
             location.reload();
         },
+        async validAllForm() {
+            const handler = (validate, errMessage) => {
+                return new Promise(resolve => {
+                    validate(valid => {
+                        if (valid) {
+                            resolve("success");
+                        } else {
+                            resolve(errMessage);
+                        }
+                    });
+                });
+            };
+            const validateArr = [];
+            this.allForm.forEach(async ({ validate, errMessage }) => {
+                validateArr.push(handler(validate, errMessage));
+            });
+            const resultArr = await Promise.all(validateArr);
+            const err = resultArr.filter(i => i !== "success") || [];
+            if (err.length) {
+                this.$message.error(`【${err.join("，")}】`);
+                return false;
+            }
+            return true;
+        },
         async saveActivity() {
+            if (!await this.validAllForm()) return;
             const { title, author, description, coverImage } = this.activityData;
             const saveActivityData = removeConfigMap(deepClone(this.activityData));
             const jsonData = JSON.stringify(saveActivityData);

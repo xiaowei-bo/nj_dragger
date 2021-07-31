@@ -35,7 +35,7 @@ export default {
         },
         srcByUpload: {
             key: "srcByUpload",
-            value: "",
+            value: "https://img1.baidu.com/it/u=3826315951,2112473128&fm=26&fmt=auto&gp=0.jpg",
             valueType: "string",
             formType: "upload",
             placeholder: "",

@@ -36,6 +36,17 @@
                         :value="i.value"
                     />
                 </el-select>
+                <el-upload
+                    v-if="item.formType === 'upload'"
+                    action="/"
+                    class="avatar-uploader"
+                    :show-file-list="false"
+                    :on-success="(res, file) => { handleSuccess(res, file, item) }"
+                    :before-upload="(file) => { beforeUpload(file, item) }"
+                >
+                    <img v-if="item.value" :src="item.value" class="avatar" />
+                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-upload>
             </el-form-item>
         </div>
     </el-form>
@@ -49,15 +60,45 @@ export default {
             type: Object,
             default: () => ({})
         }
+    },
+    methods: {
+        beforeUpload(file, item) {},
+        handleSuccess(res, file, item) {
+            item.value = URL.createObjectURL(file.raw);
+            console.log(item.value);
+        }
     }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .right-form-item{
     display: inline-block;
     width: 85%;
     .el-select{
+        display: block;
+    }
+    .avatar-uploader .el-upload {
+        border: 1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .avatar-uploader .el-upload:hover {
+        border-color: #409EFF;
+    }
+    .avatar-uploader-icon {
+        font-size: 28px;
+        color: #8c939d;
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+    }
+    .avatar {
+        width: 120px;
+        height: 120px;
         display: block;
     }
 }

@@ -52,8 +52,18 @@ const configMap = {
     time: {
         key: "time",
         value: 3,
-        valueType: "number",
-        formType: "input",
+        valueMap: [{
+            value: 1,
+            desc: "1秒"
+        }, {
+            value: 2,
+            desc: "2秒"
+        }, {
+            value: 3,
+            desc: "3秒"
+        }],
+        valueType: "enum",
+        formType: "select",
         placeholder: "请输入toast提示时间",
         tip: "请输入toast提示时间",
         label: "提示时长",
