@@ -26,7 +26,6 @@
             </el-form-item>
             <el-form-item class="fr">
                 <el-button type="primary" @click="getActivityList">搜索</el-button>
-                <!-- <el-button type="primary" @click="reset">重置</el-button> -->
             </el-form-item>
         </el-form>
         <div class="activity-wrapper">
@@ -102,10 +101,6 @@ export default {
             this.searchForm.totalPage = res.total;
             console.log(res);
         },
-        reset() {
-            console.log(this.$refs["searchForm"]);
-            this.$refs["searchForm"].resetFields();
-        },
         createActivity() {
             this.$router.push({
                 name: "dragEdit",
@@ -125,6 +120,15 @@ export default {
     },
     created() {
         this.getActivityList();
+    },
+    mounted() {
+        document.onkeydown = e => {
+            switch (e.code) {
+                case "Enter":
+                    this.getActivityList();
+                    break;
+            }
+        };
     }
 };
 </script>
@@ -135,6 +139,7 @@ export default {
     height: 100%;
     .el-pagination{
         padding-left: 40px;
+        padding-bottom: 40px;
     }
     .search-form{
         padding: 40px 40px 0 40px;
@@ -166,6 +171,7 @@ export default {
             font-size: 20px;
             cursor: pointer;
             overflow: hidden;
+            position: relative;
             &:hover{
                 box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)
             }

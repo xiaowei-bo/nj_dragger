@@ -10,13 +10,34 @@
         size="mini"
     >
         <el-form-item label="活动标题" class="activity-config-item" prop="title">
-            <el-input v-model="activityData.title" />
+            <el-input v-model="activityData.title" placeholder="请输入活动标题" />
+            <el-tooltip
+                effect="dark"
+                content="请输入活动标题"
+                placement="top"
+            >
+                <i class="el-icon-info"></i>
+            </el-tooltip>
         </el-form-item>
         <el-form-item label="活动描述" class="activity-config-item" prop="description">
-            <el-input v-model="activityData.description" />
+            <el-input v-model="activityData.description" placeholder="请输入活动描述" />
+            <el-tooltip
+                effect="dark"
+                content="请输入活动描述"
+                placement="top"
+            >
+                <i class="el-icon-info"></i>
+            </el-tooltip>
         </el-form-item>
         <el-form-item label="活动封面" class="activity-config-item" prop="coverImage">
-            <el-input v-model="activityData.coverImage" />
+            <el-input v-model="activityData.coverImage" placeholder="请输入活动封面" />
+            <el-tooltip
+                effect="dark"
+                content="请输入活动封面"
+                placement="top"
+            >
+                <i class="el-icon-info"></i>
+            </el-tooltip>
         </el-form-item>
     </el-form>
 </template>
@@ -55,8 +76,13 @@ export default {
 .activity-config-item{
     display: inline-block;
     width: 85%;
-    .el-select{
-        display: block;
+    .el-input, .el-textarea, .el-select, .el-color-picker{
+        display: inline-block;
+        width: 85%;
+        margin-right: 10px;
+    }
+    .el-select .el-input {
+        width: 100%;
     }
 }
 </style>

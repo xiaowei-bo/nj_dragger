@@ -1,3 +1,8 @@
+/**
+ * @description json_scheme 全局定义
+ * formType: [ "input", "select", "color", "upload", "textarea"]
+ */
+
 const activity = {
     title: "", // 标题
     description: "", // 描述

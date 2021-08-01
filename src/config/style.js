@@ -1,3 +1,6 @@
+/**
+ * @description 公共样式配置
+ */
 const commonStyleConfig = {
     "display": {
         key: "display",
@@ -33,7 +36,7 @@ const commonStyleConfig = {
         value: 300,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件宽度",
         tip: "请输入组件宽度",
         label: "宽度"
     },
@@ -42,7 +45,7 @@ const commonStyleConfig = {
         value: 80,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件高度",
         tip: "请输入组件高度",
         label: "高度"
     },
@@ -51,7 +54,7 @@ const commonStyleConfig = {
         value: 40,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件圆角度",
         tip: "请输入组件圆角度",
         label: "左上圆角"
     },
@@ -60,7 +63,7 @@ const commonStyleConfig = {
         value: 40,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件圆角度",
         tip: "请输入组件圆角度",
         label: "右上圆角"
     },
@@ -69,7 +72,7 @@ const commonStyleConfig = {
         value: 40,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件圆角度",
         tip: "请输入组件圆角度",
         label: "左下圆角"
     },
@@ -78,7 +81,7 @@ const commonStyleConfig = {
         value: 40,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入组件圆角度",
         tip: "请输入组件圆角度",
         label: "右下圆角"
     },
@@ -87,7 +90,7 @@ const commonStyleConfig = {
         value: 18,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入字体大小",
         tip: "请输入字体大小",
         label: "字体大小"
     },
@@ -96,7 +99,7 @@ const commonStyleConfig = {
         value: 18,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入行间距",
         tip: "请输入行间距",
         label: "行间距"
     },
@@ -124,7 +127,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入间距",
         tip: "请输入间距",
         label: "外左间距"
     },
@@ -133,7 +136,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入间距",
         tip: "请输入间距",
         label: "外右间距"
     },
@@ -142,7 +145,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入间距",
         tip: "请输入间距",
         label: "外上间距"
     },
@@ -151,7 +154,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入间距",
         tip: "请输入间距",
         label: "外下间距"
     },
@@ -160,7 +163,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入内间距",
         tip: "请输入内间距",
         label: "内左间距"
     },
@@ -169,7 +172,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入内间距",
         tip: "请输入内间距",
         label: "内右间距"
     },
@@ -178,7 +181,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入内间距",
         tip: "请输入内间距",
         label: "内上间距"
     },
@@ -187,7 +190,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入内间距",
         tip: "请输入内间距",
         label: "内下间距"
     },
@@ -196,7 +199,7 @@ const commonStyleConfig = {
         value: 0,
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入层级",
         tip: "请输入层级",
         label: "层级"
     },
@@ -206,7 +209,7 @@ const commonStyleConfig = {
         valueType: "string",
         formType: "color",
         placeholder: "",
-        tip: "请输入背景色",
+        tip: "请选择背景色",
         label: "背景色"
     },
     "background-image": {
@@ -214,7 +217,7 @@ const commonStyleConfig = {
         value: "",
         valueType: "string",
         formType: "input",
-        placeholder: "",
+        placeholder: "请输入背景图片链接",
         tip: "请输入背景图片链接",
         label: "背景图"
     },
@@ -243,7 +246,7 @@ const commonStyleConfig = {
         valueType: "string",
         formType: "color",
         placeholder: "",
-        tip: "请输入字体颜色",
+        tip: "请选择字体颜色",
         label: "字体颜色"
     },
     "text-indent": {

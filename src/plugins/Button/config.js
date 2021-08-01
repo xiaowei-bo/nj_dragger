@@ -10,7 +10,7 @@ export default {
             value: "按钮",
             valueType: "string",
             formType: "input",
-            placeholder: "",
+            placeholder: "请输入按钮文案",
             tip: "请输入按钮文案",
             label: "按钮文案"
         }

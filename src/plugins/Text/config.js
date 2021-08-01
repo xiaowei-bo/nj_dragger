@@ -10,7 +10,7 @@ export default {
             value: "文本组件的默认文案",
             valueType: "string",
             formType: "textarea",
-            placeholder: "",
+            placeholder: "请输入文本文案",
             tip: "请输入文本文案",
             label: "文本文案"
         }

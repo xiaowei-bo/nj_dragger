@@ -18,6 +18,7 @@
 <script>
 import { getActivityDetail } from "@/api/drag";
 import { getUrlParams, urlWithObj } from "@/utils";
+import { setConfigMap } from "../common/handlerData";
 export default {
     data() {
         return {
@@ -41,7 +42,7 @@ export default {
             if (!id) return;
             const data = await getActivityDetail(id);
             const jsonData = data.jsonData && JSON.parse(data.jsonData) || {};
-            const pages = jsonData.pages;
+            const pages = setConfigMap(jsonData).pages;
             if (pageId) {
                 this.curPageData = pages.find(i => i.uuid === pageId);
             } else {

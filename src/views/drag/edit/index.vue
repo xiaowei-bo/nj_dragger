@@ -126,7 +126,7 @@ export default {
             return true;
         },
         async saveActivity() {
-            if (!await this.validAllForm()) return;
+            if (!await this.validAllForm()) return false;
             const { title, author, description, coverImage } = this.activityData;
             const saveActivityData = removeConfigMap(deepClone(this.activityData));
             const jsonData = JSON.stringify(saveActivityData);
@@ -144,14 +144,29 @@ export default {
                 const res = await addActivityDetail(data);
                 this.activityId = res.id;
                 this.$message.success("保存成功");
+                this.$router.replace({
+                    name: "dragEdit",
+                    query: {
+                        id: this.activityId
+                    }
+                });
+                return true;
             } else {
                 const res = await editActivityDetail(data);
                 this.activityId = res.id;
                 this.$message.success("修改成功");
+                this.$router.replace({
+                    name: "dragEdit",
+                    query: {
+                        id: this.activityId
+                    }
+                });
+                return true;
             }
         },
         async toPreview() {
-            await this.saveActivity();
+            const saveRes = await this.saveActivity();
+            if (!saveRes) return;
             const url = `${location.origin}/view?id=${this.activityId}`;
             window.open(url, "_blank");
         }

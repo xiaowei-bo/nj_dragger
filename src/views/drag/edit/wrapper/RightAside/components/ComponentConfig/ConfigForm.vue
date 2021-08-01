@@ -18,11 +18,13 @@
                 <el-input
                     v-if="item.formType === 'input'"
                     v-model="item.value"
+                    :placeholder="item.placeholder"
                 />
                 <el-input
                     v-if="item.formType === 'textarea'"
                     v-model="item.value"
                     :autosize="{ minRows: 2, maxRows: 8}"
+                    :placeholder="item.placeholder"
                     type="textarea"
                 />
                 <el-select
@@ -47,6 +49,14 @@
                     <img v-if="item.value" :src="item.value" class="avatar" />
                     <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>
+                <el-tooltip
+                    v-if="item.formType !== 'upload' && item.tip"
+                    effect="dark"
+                    :content="item.tip"
+                    placement="top"
+                >
+                    <i class="el-icon-info"></i>
+                </el-tooltip>
             </el-form-item>
         </div>
     </el-form>
@@ -75,8 +85,13 @@ export default {
 .right-form-item{
     display: inline-block;
     width: 85%;
-    .el-select{
-        display: block;
+    .el-input, .el-textarea, .el-select, .el-color-picker{
+        display: inline-block;
+        width: 85%;
+        margin-right: 10px;
+    }
+    .el-select .el-input {
+        width: 100%;
     }
     .avatar-uploader .el-upload {
         border: 1px dashed #d9d9d9;

@@ -21,15 +21,13 @@ const deepClone = (target) => {
 };
 
 const copyText = (text) => {
-    const cacheInput = document.getElementById("hideInput");
-    const hideInput = cacheInput || document.createElement("input");
+    const hideInput = document.createElement("input");
     hideInput.value = text;
-    !cacheInput && document.body.appendChild(hideInput);
+    document.body.appendChild(hideInput);
     hideInput.select();
     document.execCommand("Copy");
-    hideInput.className = "hide-input";
-    hideInput.id = "hideInput";
     hideInput.style.display = "none";
+    hideInput.remove();
     Message.success("复制成功");
 };
 

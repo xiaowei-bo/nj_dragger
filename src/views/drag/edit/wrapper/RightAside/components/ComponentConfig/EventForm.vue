@@ -22,6 +22,13 @@
                             :value="i.value"
                         />
                     </el-select>
+                    <el-tooltip
+                        effect="dark"
+                        content="请选择事件触发方式"
+                        placement="top"
+                    >
+                        <i class="el-icon-info"></i>
+                    </el-tooltip>
                 </el-form-item>
                 <el-form-item
                     label="触发行为"
@@ -37,6 +44,13 @@
                             :value="i.value"
                         />
                     </el-select>
+                    <el-tooltip
+                        effect="dark"
+                        content="请选择事件触发行为"
+                        placement="top"
+                    >
+                        <i class="el-icon-info"></i>
+                    </el-tooltip>
                 </el-form-item>
             </el-form>
             <el-form
@@ -58,6 +72,7 @@
                         <el-input
                             v-if="val.formType === 'input'"
                             v-model="val.value"
+                            :placeholder="val.placeholder"
                         />
                         <el-color-picker
                             v-if="val.formType === 'color'"
@@ -74,6 +89,14 @@
                                 :value="i.value"
                             />
                         </el-select>
+                        <el-tooltip
+                            v-if="val.formType !== 'upload' && val.tip"
+                            effect="dark"
+                            :content="val.tip"
+                            placement="top"
+                        >
+                            <i class="el-icon-info"></i>
+                        </el-tooltip>
                     </el-form-item>
                 </div>
             </el-form>
@@ -119,8 +142,13 @@ export default {
 .right-form-item{
     display: inline-block;
     width: 85%;
-    .el-select{
-        display: block;
+    .el-input, .el-textarea, .el-select, .el-color-picker{
+        display: inline-block;
+        width: 85%;
+        margin-right: 10px;
+    }
+    .el-select .el-input {
+        width: 100%;
     }
 }
 .add-btn{

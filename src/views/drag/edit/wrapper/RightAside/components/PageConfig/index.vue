@@ -7,8 +7,15 @@
         label-position="left"
         size="mini"
     >
-        <el-form-item label="页面标题" class="page-config-item">
-            <el-input v-model="curPageData.name" />
+        <el-form-item label="页面标题" class="page-config-item right-form-item">
+            <el-input v-model="curPageData.name" placeholder="请输入页面标题" />
+            <el-tooltip
+                effect="dark"
+                content="请输入页面标题"
+                placement="top"
+            >
+                <i class="el-icon-info"></i>
+            </el-tooltip>
         </el-form-item>
         <div
             v-for="(item, key) in curPageData.commonStyle"
@@ -16,35 +23,40 @@
         >
             <el-form-item
                 :label="commonStyleConfig[key].label"
-                class="page-config-item"
+                class="page-config-item right-form-item"
             >
-                <div
-                    class="right-form-item"
+                <el-input
+                    v-if="commonStyleConfig[key].formType === 'input'"
+                    v-model="commonStyleConfig[key].value"
+                    :placeholder="commonStyleConfig[key].placeholder"
+                    @change="(v) => { curPageData.commonStyle[key] = v}"
+                />
+                <el-color-picker
+                    v-if="commonStyleConfig[key].formType === 'color'"
+                    v-model="commonStyleConfig[key].value"
+                    show-alpha
+                    @change="(v) => { curPageData.commonStyle[key] = v}"
+                />
+                <el-select
+                    v-if="commonStyleConfig[key].formType === 'select'"
+                    v-model="commonStyleConfig[key].value"
+                    @change="(v) => { curPageData.commonStyle[key] = v}"
                 >
-                    <el-input
-                        v-if="commonStyleConfig[key].formType === 'input'"
-                        v-model="commonStyleConfig[key].value"
-                        @change="(v) => { curPageData.commonStyle[key] = v}"
+                    <el-option
+                        v-for="i in commonStyleConfig[key].valueMap"
+                        :key="i.value"
+                        :label="i.desc"
+                        :value="i.value"
                     />
-                    <el-color-picker
-                        v-if="commonStyleConfig[key].formType === 'color'"
-                        v-model="commonStyleConfig[key].value"
-                        show-alpha
-                        @change="(v) => { curPageData.commonStyle[key] = v}"
-                    />
-                    <el-select
-                        v-if="commonStyleConfig[key].formType === 'select'"
-                        v-model="commonStyleConfig[key].value"
-                        @change="(v) => { curPageData.commonStyle[key] = v}"
-                    >
-                        <el-option
-                            v-for="i in commonStyleConfig[key].valueMap"
-                            :key="i.value"
-                            :label="i.desc"
-                            :value="i.value"
-                        />
-                    </el-select>
-                </div>
+                </el-select>
+                <el-tooltip
+                    v-if="commonStyleConfig[key].formType !== 'upload' && commonStyleConfig[key].tip"
+                    effect="dark"
+                    :content="commonStyleConfig[key].tip"
+                    placement="top"
+                >
+                    <i class="el-icon-info"></i>
+                </el-tooltip>
             </el-form-item>
         </div>
     </el-form>
@@ -90,8 +102,13 @@ export default {
 .page-config-item{
     display: inline-block;
     width: 85%;
-    .el-select{
-        display: block;
-    }
+}
+.el-input, .el-textarea, .el-select, .el-color-picker{
+    display: inline-block;
+    width: 85%;
+    margin-right: 10px;
+}
+.el-select .el-input {
+    width: 100%;
 }
 </style>

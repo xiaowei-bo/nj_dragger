@@ -17,7 +17,7 @@ module.exports = {
             title: "拖拽平台"
         },
         view: {
-            entry: "src/h5/main.js",
+            entry: "src/views/drag/h5/main.js",
             template: "public/view.html",
             filename: "view.html",
             title: ""

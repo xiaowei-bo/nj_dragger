@@ -17,6 +17,7 @@
                 <el-input
                     v-if="commonStyleConfig[key].formType === 'input'"
                     v-model="commonStyleConfig[key].value"
+                    :placeholder="commonStyleConfig[key].placeholder"
                     @change="(v) => { editingComponent.styleInfo[key] = v}"
                 />
                 <el-color-picker
@@ -37,6 +38,14 @@
                         :value="i.value"
                     />
                 </el-select>
+                <el-tooltip
+                    v-if="commonStyleConfig[key].formType !== 'upload' && commonStyleConfig[key].tip"
+                    effect="dark"
+                    :content="commonStyleConfig[key].tip"
+                    placement="top"
+                >
+                    <i class="el-icon-info"></i>
+                </el-tooltip>
             </el-form-item>
         </div>
     </el-form>
@@ -81,8 +90,13 @@ export default {
 .right-form-item{
     display: inline-block;
     width: 85%;
-    .el-select{
-        display: block;
+    .el-input, .el-textarea, .el-select, .el-color-picker{
+        display: inline-block;
+        width: 85%;
+        margin-right: 10px;
+    }
+    .el-select .el-input {
+        width: 100%;
     }
 }
 </style>

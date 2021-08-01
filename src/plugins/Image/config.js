@@ -18,7 +18,7 @@ export default {
             valueType: "enum",
             formType: "select",
             placeholder: "",
-            tip: "",
+            tip: "请选择图片上传方式",
             label: "上传方式"
         },
         srcByInput: {
@@ -43,7 +43,7 @@ export default {
             when: (configMap) => {
                 return configMap["srcType"].value === "srcByUpload";
             },
-            label: "图片链接"
+            label: "图片文件"
         }
     },
     styleInfo: { // 样式
