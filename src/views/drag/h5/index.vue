@@ -19,6 +19,7 @@
 import { getActivityDetail } from "@/api/drag";
 import { getUrlParams, urlWithObj } from "@/utils";
 import { setConfigMap } from "../common/handlerData";
+import { toastTip } from "./components/Toast/index.js";
 export default {
     data() {
         return {
@@ -48,6 +49,7 @@ export default {
             } else {
                 this.curPageData = pages[0];
             }
+            console.log("curPageData", this.curPageData);
             const name = this.curPageData.name;
             document.title = name;
             this.handlerEventData(this.curPageData);
@@ -63,7 +65,7 @@ export default {
                             uuid
                         };
                         for (const k in configMap) {
-                            if (configMap[k].actionType === action) {
+                            if (!configMap[k].when || configMap[k].when(action)) {
                                 filterInfo[configMap[k].key] = configMap[k].value;
                             }
                         }
@@ -81,7 +83,11 @@ export default {
                     actionHandler = () => {
                         const text = eventInfo.text;
                         const time = eventInfo.time;
-                        alert(`toast 提示 ${text} ${time}秒`);
+                        console.log("text", text);
+                        toastTip({
+                            text,
+                            time
+                        });
                     };
                     break;
                 case "jumpLink":

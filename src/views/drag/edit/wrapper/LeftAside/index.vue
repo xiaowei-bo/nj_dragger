@@ -3,9 +3,11 @@
         <el-menu :default-active="activeType" class="app-left-aside-menu fl" @select="menuSelect">
             <el-menu-item index="ELEMENTS">
                 <i class="iconfont icon-zujian"></i>
+                <p class="desc">组件</p>
             </el-menu-item>
             <el-menu-item index="PAGES">
                 <i class="iconfont icon-page"></i>
+                <p class="desc">页面</p>
             </el-menu-item>
         </el-menu>
         <div class="app-left-aside-content fl">
@@ -143,6 +145,18 @@ export default {
         width: 70px;
         height: 100%;
         box-sizing: border-box;
+        .el-menu-item, .el-submenu__title{
+            line-height: 1.5 !important;
+            height: auto !important;
+            text-align: center !important;
+            padding: 10px 0 !important;
+            .desc{
+                font-size: 12px;
+            }
+        }
+        .is-active .desc{
+            color: inherit;
+        }
     }
     .app-left-aside-content{
         width: calc(100% - 70px);

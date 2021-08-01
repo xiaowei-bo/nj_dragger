@@ -16,6 +16,9 @@
                 <el-tooltip class="item" effect="dark" content="导入JSON" placement="bottom">
                     <i class="iconfont icon-daoru1" @click="importJson"></i>
                 </el-tooltip>
+                <el-tooltip class="item" effect="dark" content="快捷键" placement="bottom">
+                    <i class="iconfont icon-kuaijiejian" @click="keyCode"></i>
+                </el-tooltip>
                 <el-button class="fr" type="primary" size="mini" @click="$emit('saveActivity')">保存</el-button>
             </template>
         </Header>
@@ -42,6 +45,12 @@
                 type="textarea"
                 placeholder="请将已有的json数据粘贴于此"
             />
+            <div class="keycode">
+                <p>活动保存：⌘ + S</p>
+                <p>组件复制：⌘ + C</p>
+                <p>组件粘贴：⌘ + V</p>
+                <p>组件删除：⌘ + Del</p>
+            </div>
             <span slot="footer" class="dialog-footer">
                 <el-button v-if="dialogStatus === 'export'" type="primary" @click="handlerClip">复 制</el-button>
                 <el-button type="primary" @click="handlerSure">确 定</el-button>
@@ -75,7 +84,8 @@ export default {
         dialogTitle() {
             const titleMap = {
                 "import": "导入数据",
-                "export": "导出数据"
+                "export": "导出数据",
+                "keycode": "快捷键说明"
             };
             return titleMap[this.dialogStatus];
         }
@@ -90,6 +100,10 @@ export default {
             this.dialogStatus = "import";
             this.dialogVisible = true;
         },
+        keyCode() {
+            this.dialogStatus = "keycode";
+            this.dialogVisible = true;
+        },
         handlerSure() {
             if (this.dialogStatus === "export") {
                 this.dialogVisible = false;
@@ -99,6 +113,8 @@ export default {
                 this.$emit("importJsonData", importData);
                 this.dialogVisible = false;
                 return;
+            } else if (this.dialogStatus === "keycode") {
+                this.dialogVisible = false;
             }
         },
         handlerClip() {

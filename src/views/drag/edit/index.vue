@@ -19,6 +19,7 @@
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
                 :element-clip-board.sync="elementClipBoard"
+                @saveActivity="saveActivity"
             />
             <RightAside
                 :activity-data="activityData"

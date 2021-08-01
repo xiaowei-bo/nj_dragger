@@ -10,7 +10,7 @@
         size="mini"
     >
         <el-form-item label="活动标题" class="activity-config-item" prop="title">
-            <el-input v-model="activityData.title" placeholder="请输入活动标题" />
+            <el-input v-model="activityData.title" placeholder="请输入活动标题" @keydown="test" />
             <el-tooltip
                 effect="dark"
                 content="请输入活动标题"
@@ -58,6 +58,11 @@ export default {
                 coverImage: { required: true, message: "活动封面不能为空", trigger: "blur" }
             }
         };
+    },
+    methods: {
+        test(e) {
+            e.preventDefault();
+        }
     },
     mounted() {
         this.$store.dispatch("setAllForm", {

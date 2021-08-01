@@ -127,12 +127,18 @@ export default {
                 case "Backspace":
                     hasCtrl && this.deleteElement();
                     break;
-                // case "KeyC":
-                //     hasCtrl && this.copyElement();
-                //     break;
-                // case "KeyV":
-                //     hasCtrl && this.pasteElement();
-                //     break;
+                case "KeyS":
+                    e.preventDefault();
+                    hasCtrl && this.$emit("saveActivity");
+                    break;
+                case "KeyC":
+                    e.preventDefault();
+                    hasCtrl && this.copyElement();
+                    break;
+                case "KeyV":
+                    e.preventDefault();
+                    hasCtrl && this.pasteElement();
+                    break;
             }
         };
     }

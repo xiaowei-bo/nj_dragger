@@ -70,5 +70,7 @@ export default {
     height: 100%;
     border-left: 1px solid #dcdfe6;
     box-sizing: border-box;
+    position: relative;
+    z-index: 0;
 }
 </style>
