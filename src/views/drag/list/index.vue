@@ -46,7 +46,11 @@
                         :src="item.cover_image || defaultImg"
                         class="image"
                         fit="cover"
-                    />
+                    >
+                        <template v-slot:error>
+                            <img :src="defaultImg" class="image" alt="" />
+                        </template>
+                    </el-image>
                 </div>
                 <div style="padding: 15px;">
                     <p class="txt">活动id：{{ item.id }}</p>
@@ -157,6 +161,7 @@ export default {
     .image{
         width: 100%;
         height: 100%;
+        object-fit: cover;
     }
     .activity-wrapper{
         padding: 0 20px 20px 20px;
