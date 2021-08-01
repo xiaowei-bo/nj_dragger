@@ -11,9 +11,11 @@
             <Draggable v-model="curPageData.elements">
                 <NjElementBox
                     v-for="(item, index) in curPageData.elements"
+                    :id="item.uuid"
                     :key="item.uuid"
                     :style="item.styleInfo"
-                    :class="{'active': item.uuid === editingComponent.uuid}"
+                    :class="[{'active': item.uuid === editingComponent.uuid}, item.animate]"
+                    class="animated"
                     @clickElement="setEditingComponent(item)"
                     @deleteElement="deleteElement(index)"
                 >

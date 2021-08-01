@@ -226,6 +226,7 @@ module.exports = {
         "vetur.validation.template": 0
     },
     globals: {
-        ENV: true
+        ENV: true,
+        Hammer: true
     }
 };

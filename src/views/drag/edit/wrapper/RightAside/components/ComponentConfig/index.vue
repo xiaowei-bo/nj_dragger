@@ -25,11 +25,13 @@
 import ConfigForm from "./ConfigForm.vue";
 import StyleForm from "./StyleForm.vue";
 import EventForm from "./EventForm.vue";
+import AnimateForm from "./AnimateForm.vue";
 export default {
     components: {
         ConfigForm,
         StyleForm,
-        EventForm
+        EventForm,
+        AnimateForm
     },
     props: {
         editingComponent: {
@@ -57,6 +59,10 @@ export default {
                 title: "组件事件配置",
                 name: "eventForm",
                 component: "EventForm"
+            }, {
+                title: "组件动画配置",
+                name: "animateForm",
+                component: "AnimateForm"
             }]
         };
     },

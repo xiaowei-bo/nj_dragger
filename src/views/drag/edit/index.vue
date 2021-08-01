@@ -156,12 +156,6 @@ export default {
                 const res = await editActivityDetail(data);
                 this.activityId = res.id;
                 this.$message.success("修改成功");
-                this.$router.replace({
-                    name: "dragEdit",
-                    query: {
-                        id: this.activityId
-                    }
-                });
                 return true;
             }
         },

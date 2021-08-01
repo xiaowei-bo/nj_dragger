@@ -4,6 +4,8 @@
             v-for="item in curPageData.elements"
             :key="item.uuid"
             :style="item.styleInfo"
+            class="animated"
+            :class="item.animate"
         >
             <component
                 :is="item.name"
@@ -77,6 +79,7 @@ export default {
         async handlerEvent(eventInfo) {
             await this.$nextTick();
             const el = document.getElementById(eventInfo.uuid);
+            const hammer = new Hammer(el);
             let actionHandler = () => {};
             switch (eventInfo.action) {
                 case "toast":
@@ -117,7 +120,9 @@ export default {
                     actionHandler();
                     break;
                 case "longPress":
-                    // TODO
+                    hammer.on("press", () => {
+                        actionHandler();
+                    });
                     break;
             }
         }
