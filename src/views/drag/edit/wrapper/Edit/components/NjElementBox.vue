@@ -1,7 +1,6 @@
 <template>
     <div
         class="nj-element-box"
-        @click="$emit('clickElement')"
         @keyup.delete="$emit('deleteElement')"
     >
         <slot></slot>
@@ -13,6 +12,7 @@
         <i class="rb"></i>
         <!-- <i class="mt iconfont"></i> -->
         <!-- <i class="mb iconfont"></i> -->
+        <span class="mask"></span>
     </div>
 </template>
 
@@ -36,6 +36,15 @@ export default {
 .nj-element-box{
     position: relative;
     cursor: move;
+    .mask{
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
     &:hover{
         border: 1px dashed rgb(116, 111, 111);
     }

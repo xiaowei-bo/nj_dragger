@@ -5,11 +5,15 @@
 import Text from "./Text/index.vue";
 import Button from "./Button/index.vue";
 import Image from "./Image/index.vue";
+import Video from "./Video/index.vue";
+import Iframe from "./Iframe/index.vue";
 
 const components = [
     Text,
     Button,
-    Image
+    Image,
+    Video,
+    Iframe
 ];
 
 const install = function(Vue) {
@@ -27,5 +31,7 @@ export default {
     install,
     Text,
     Button,
-    Image
+    Image,
+    Video,
+    Iframe
 };

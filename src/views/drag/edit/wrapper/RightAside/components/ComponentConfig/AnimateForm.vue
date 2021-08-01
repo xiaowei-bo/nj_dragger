@@ -36,6 +36,7 @@
                     :key="i.value"
                     class="animate-item"
                     @mouseover="addClass(i.value)"
+                    @click="editingComponent.animate = i.value"
                 >
                     <p
                         :id="`id_${i.value}`"
@@ -107,10 +108,17 @@ export default {
             display: inline-block;
             text-align: center;
             overflow: hidden;
+            cursor: pointer;
+            &:hover{
+                border-color: #409eff;
+                color: #409eff;
+            }
             .target{
+                color: inherit;
                 line-height: 60px;
             }
             .desc{
+                color: inherit;
                 font-size: 12px;
             }
         }

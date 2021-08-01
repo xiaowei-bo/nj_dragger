@@ -8,7 +8,7 @@
             @drop="handleDrop"
             @dragover="handleDragOver"
         >
-            <Draggable v-model="curPageData.elements">
+            <Draggable v-model="curPageData.elements" class="dragger-box">
                 <NjElementBox
                     v-for="(item, index) in curPageData.elements"
                     :id="item.uuid"
@@ -16,7 +16,7 @@
                     :style="item.styleInfo"
                     :class="[{'active': item.uuid === editingComponent.uuid}, item.animate]"
                     class="animated"
-                    @clickElement="setEditingComponent(item)"
+                    @click.native="setEditingComponent(item)"
                     @deleteElement="deleteElement(index)"
                 >
                     <component :is="item.name" class="nj-element" :item="item" />
@@ -158,6 +158,9 @@ export default {
         border: 1px solid #dcdfe6;
         overflow: auto;
         box-sizing: content-box;
+        .dragger-box{
+            height: 100%;
+        }
         .nj-element{
             user-select: none;
         }
