@@ -45,7 +45,7 @@
                 type="textarea"
                 placeholder="请将已有的json数据粘贴于此"
             />
-            <div class="keycode">
+            <div v-if="dialogStatus === 'keycode'" class="keycode">
                 <p>活动保存：⌘ + S</p>
                 <p>组件复制：⌘ + C</p>
                 <p>组件粘贴：⌘ + V</p>

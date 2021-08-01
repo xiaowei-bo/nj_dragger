@@ -1,5 +1,5 @@
 <template>
-    <div class="nj-btn" :style="styleInfo">{{ btnText }}</div>
+    <div class="nj-btn">{{ btnText }}</div>
 </template>
 
 <script>
@@ -19,11 +19,6 @@ export default {
     computed: {
         btnText() {
             return this.item.configMap.btnText.value;
-        },
-        styleInfo() {
-            const styleInfo = this.item.styleInfo;
-            // 字体样式需特殊处理覆盖
-            return { color: styleInfo["color"], fontSize: styleInfo["font-size"] };
         }
     },
     methods: {
@@ -35,6 +30,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.nj-btn{
+    color: inherit;
+    font-size: inherit;
+}
 
 </style>

@@ -17,6 +17,7 @@ export default {
     },
     styleInfo: { // 样式
         "display": "block",
+        "text-align": "center",
         "position": "relative",
         "z-index": "0",
         "width": "100%",
