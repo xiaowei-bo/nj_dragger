@@ -1,6 +1,12 @@
 <template>
     <div class="auto">
-        <Header active-index="auto" />
+        <Header active-index="auto">
+            <template v-slot:left>
+                <div class="logo-box">
+                    <img class="logo" src="./assets/logo.png" alt="" />
+                </div>
+            </template>
+        </Header>
         <el-form class="cicd-form">
             <el-form-item label="项目：">
                 <el-select v-model="currentProject" class="select">
@@ -114,6 +120,15 @@ export default {
             white-space: pre-line;
             overflow: auto;
         }
+    }
+    .logo-box{
+        height: 100%;
+        padding: 7px 0 7px 20px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+    .logo{
+        height: 100%;
     }
 }
 </style>
