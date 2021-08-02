@@ -6,9 +6,9 @@
                 <MenuList :menu-list="menuListData" @onMenuSelected="onMenuSelected" />
             </el-col>
             <el-col :span="20">
-                <div v-if="currentMdComponent" class="md-wrapper">
+                <div class="md-wrapper">
                     <keep-alive>
-                        <component :is="currentMdComponent" />
+                        <component :is="MdComponent" />
                     </keep-alive>
                 </div>
             </el-col>
@@ -25,7 +25,7 @@ export default {
     components: { Header, MenuList },
     data() {
         return {
-            currentMdComponent: {}
+            MdComponent: ""
         };
     },
     computed: {
@@ -40,8 +40,7 @@ export default {
     },
     methods: {
         onMenuSelected(item) {
-            this.currentMdComponent = item.component;
-            console.log("item", item);
+            this.MdComponent = item.MdComponent;
         }
     }
 };
