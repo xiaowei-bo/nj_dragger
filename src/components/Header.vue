@@ -80,7 +80,7 @@ export default {
                     break;
                 case "doc":
                     this.$router.push({
-                        name: "dragDoc"
+                        name: "draggerDoc"
                     });
                     break;
                 case "github":

@@ -28,16 +28,6 @@ const dragRoutes = [
                     icon: "el-icon-tickets",
                     noCache: true
                 }
-            },
-            {
-                path: "doc",
-                component: () => import(/* webpackChunkName: 'drag-doc' */"@/views/drag/doc"),
-                name: "dragDoc",
-                meta: {
-                    title: "文档",
-                    icon: "el-icon-tickets",
-                    noCache: true
-                }
             }
         ]
     }

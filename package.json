@@ -35,6 +35,7 @@
     "uuid": "^8.3.2",
     "vue": "^2.6.10",
     "vue-json-pretty": "^1.8.1",
+    "vue-markdown-loader": "^2.4.1",
     "vue-router": "^3.0.6",
     "vue-template-compiler": "^2.6.14",
     "vuedraggable": "^2.24.3",

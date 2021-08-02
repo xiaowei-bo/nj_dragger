@@ -54,6 +54,7 @@ export default {
     overflow: hidden;
     video{
         width: 100%;
+        height: 100%;
     }
 }
 </style>

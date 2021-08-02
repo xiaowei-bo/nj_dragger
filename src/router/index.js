@@ -4,6 +4,7 @@ import Router from "vue-router";
 import dragRouter from "./modules/drag";
 import boardRouter from "./modules/board";
 import autoRouter from "./modules/auto";
+import docRouter from "./modules/doc";
 
 Vue.use(Router);
 
@@ -15,7 +16,8 @@ const constantRoutes = [
     },
     ...dragRouter,
     ...boardRouter,
-    ...autoRouter
+    ...autoRouter,
+    ...docRouter
 ];
 // const asyncRoutes = [];
 
