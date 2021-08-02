@@ -27,7 +27,7 @@
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="home">首页</el-dropdown-item>
                         <el-dropdown-item command="github">项目地址</el-dropdown-item>
-                        <el-dropdown-item command="doc">使用文档</el-dropdown-item>
+                        <el-dropdown-item v-if="curModuleDoc" command="doc">使用文档</el-dropdown-item>
                         <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -53,14 +53,21 @@ export default {
             github: "https://github.com/killWeb/nj_dragger"
         };
     },
+    computed: {
+        curModuleDoc() {
+            const { path } = this.$route;
+            if (path.includes("drag")) return "draggerDoc";
+            if (["auto", "deploy"].some(i => path.includes(i))) return "deployerDoc";
+            return null;
+        }
+    },
     methods: {
         handleSelect(key) {
-            const { name } = this.$route;
-            if (key === "drag" && name !== "dragList") {
+            if (key === "drag") {
                 this.$router.push({
                     name: "dragList"
                 });
-            } else if (key === "auto" && name !== "autoCICD") {
+            } else if (key === "auto") {
                 this.$router.push({
                     name: "autoCICD"
                 });
@@ -80,7 +87,7 @@ export default {
                     break;
                 case "doc":
                     this.$router.push({
-                        name: "draggerDoc"
+                        name: this.curModuleDoc
                     });
                     break;
                 case "github":

@@ -103,7 +103,6 @@ export default {
             const res = await getActivityList(this.searchForm);
             this.activityList = res.list;
             this.searchForm.totalPage = res.total;
-            console.log(res);
         },
         createActivity() {
             this.$router.push({

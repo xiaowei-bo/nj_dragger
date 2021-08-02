@@ -1,6 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(() => window.location.reload());
+};
+
 import dragRouter from "./modules/drag";
 import boardRouter from "./modules/board";
 import autoRouter from "./modules/auto";
@@ -27,6 +32,5 @@ const createRouter = () => new Router({
 });
 
 const router = createRouter();
-
 export default router;
 
