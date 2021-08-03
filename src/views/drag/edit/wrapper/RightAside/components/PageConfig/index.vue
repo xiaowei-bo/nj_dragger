@@ -111,4 +111,7 @@ export default {
 .el-select .el-input {
     width: 100%;
 }
+.el-color-picker{
+    vertical-align: middle;
+}
 </style>
