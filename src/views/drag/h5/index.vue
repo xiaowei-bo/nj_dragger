@@ -19,9 +19,9 @@
 
 <script>
 import { getActivityDetail } from "@/api/drag";
-import { getUrlParams, urlWithObj } from "@/utils";
+import { getUrlParams } from "@/utils";
 import { setConfigMap } from "../common/handlerData";
-import { toastTip } from "./components/Toast/index.js";
+import handlerEventData from "./handlerEvent";
 export default {
     data() {
         return {
@@ -54,77 +54,8 @@ export default {
             console.log("curPageData", this.curPageData);
             const name = this.curPageData.name;
             document.title = name;
-            this.handlerEventData(this.curPageData);
-        },
-        handlerEventData(curPageData) {
-            const elements = curPageData.elements;
-            for (const { events, uuid } of elements) {
-                if (events && events.length) {
-                    for (const { trigger, action, configMap } of events) {
-                        const filterInfo = {
-                            trigger,
-                            action,
-                            uuid
-                        };
-                        for (const k in configMap) {
-                            if (!configMap[k].when || configMap[k].when(action)) {
-                                filterInfo[configMap[k].key] = configMap[k].value;
-                            }
-                        }
-                        this.handlerEvent(filterInfo);
-                    }
-                }
-            }
-        },
-        async handlerEvent(eventInfo) {
             await this.$nextTick();
-            const el = document.getElementById(eventInfo.uuid);
-            const hammer = new Hammer(el);
-            let actionHandler = () => {};
-            switch (eventInfo.action) {
-                case "toast":
-                    actionHandler = () => {
-                        const text = eventInfo.text;
-                        const time = eventInfo.time;
-                        console.log("text", text);
-                        toastTip({
-                            text,
-                            time
-                        });
-                    };
-                    break;
-                case "jumpLink":
-                    actionHandler = () => {
-                        const url = eventInfo.url;
-                        location.href = url;
-                    };
-                    break;
-                case "jumpPage":
-                    actionHandler = () => {
-                        const urlParams = getUrlParams();
-                        const pageId = eventInfo.targetUuid;
-                        const resParams = {
-                            ...urlParams,
-                            pageId
-                        };
-                        const url = urlWithObj(`${location.origin}/view`, resParams);
-                        location.href = url;
-                    };
-                    break;
-            }
-            switch (eventInfo.trigger) {
-                case "click":
-                    el.addEventListener("click", actionHandler);
-                    break;
-                case "load":
-                    actionHandler();
-                    break;
-                case "longPress":
-                    hammer.on("press", () => {
-                        actionHandler();
-                    });
-                    break;
-            }
+            handlerEventData(this.curPageData);
         }
     },
     created() {

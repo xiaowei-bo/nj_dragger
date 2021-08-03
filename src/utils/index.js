@@ -1,4 +1,9 @@
 import { Message } from "element-ui";
+/**
+ * @description 深拷贝
+ * @param {*} target 
+ * @returns 
+ */
 const deepClone = (target) => {
     const type = typeof target;
     let result;
@@ -19,7 +24,10 @@ const deepClone = (target) => {
     }
     return result;
 };
-
+/**
+ * @description 复制文本
+ * @param {*} text 
+ */
 const copyText = (text) => {
     const hideInput = document.createElement("input");
     hideInput.value = text;
@@ -30,7 +38,12 @@ const copyText = (text) => {
     hideInput.remove();
     Message.success("复制成功");
 };
-
+/**
+ * @description 获取链接参数
+ * @param {*} item 
+ * @param {*} url 
+ * @returns 
+ */
 const getUrlParams = (item, url) => {
     function decodeLocationSearch(url = "") {
         if (!location.search && !url) return {};
@@ -54,7 +67,12 @@ const getUrlParams = (item, url) => {
         return decodeLocationSearch(url);
     }
 };
-
+/**
+ * @description 链接对象参数拼接
+ * @param {*} url 
+ * @param {*} obj 
+ * @returns 
+ */
 const urlWithObj = (url = "", obj = {}) => {
     if (typeof obj !== "object" || !Object.keys(obj).length) return url;
     const _arr = [];
@@ -68,10 +86,21 @@ const urlWithObj = (url = "", obj = {}) => {
     }
     return `${url.split("?")[0]}?${_arr.join("&")}`;
 };
+/**
+ * @description 检验图片链接有效性
+ * @param {*} src 
+ * @returns 
+ */
+const checkImg = (src) => {
+    if (!src) return "";
+    const status = ["http", "//"].some(i => src.startsWith(i));
+    return status ? src : "";
+}
 
 export {
     deepClone,
     copyText,
     getUrlParams,
-    urlWithObj
+    urlWithObj,
+    checkImg
 };

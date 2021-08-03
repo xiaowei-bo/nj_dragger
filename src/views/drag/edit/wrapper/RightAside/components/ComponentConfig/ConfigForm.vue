@@ -75,7 +75,6 @@ export default {
         beforeUpload(file, item) {},
         handleSuccess(res, file, item) {
             item.value = URL.createObjectURL(file.raw);
-            console.log(item.value);
         }
     }
 };

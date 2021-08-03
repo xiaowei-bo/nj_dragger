@@ -133,7 +133,7 @@ export default {
     width: 100%;
     border-bottom: 1px solid #dcdfe6;
     position: relative;
-    z-index: 1;
+    z-index: 0;
     .header-left{
         width: 280px;
         height: 60px;

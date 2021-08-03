@@ -3,7 +3,15 @@ import Vue from "vue";
 let instance = null;
 let timer = null;
 
-export const toastTip = ({ text, time = 3 }) => {
+export const toastTip = (arg) => {
+    let text = "";
+    let time = 3;
+    if (typeof arg === "string") {
+        text = arg
+    } else {
+        text = arg.text;
+        time = arg.time;
+    }
     const constructor = Vue.extend(Toast);
     const parent = document.body;
     if (timer) {
@@ -19,7 +27,6 @@ export const toastTip = ({ text, time = 3 }) => {
         }, time * 1000);
     } else {
         instance = new constructor({ text, time });
-        console.log(instance.$mount());
         instance.$mount().text = text;
         instance.$mount().show = true;
         parent && parent.appendChild(instance.$mount().$el);
@@ -29,3 +36,5 @@ export const toastTip = ({ text, time = 3 }) => {
         }, time * 1000);
     }
 };
+
+window.toastTip = toastTip;

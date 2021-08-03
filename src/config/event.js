@@ -29,6 +29,9 @@ const action = {
     }, {
         value: "jumpPage",
         desc: "跳转页面"
+    }, {
+        value: "runCode",
+        desc: "执行js代码"
     }],
     valueType: "enum",
     formType: "select",
@@ -93,6 +96,18 @@ const configMap = {
         label: "页面uuid",
         when: (actionType) => {
             return actionType === "jumpPage";
+        }
+    },
+    jsCode: {
+        key: "jsCode",
+        value: "",
+        valueType: "string",
+        formType: "code",
+        placeholder: "请输入js代码",
+        tip: "请输入js代码",
+        label: "js代码",
+        when: (actionType) => {
+            return actionType === "runCode";
         }
     }
 };

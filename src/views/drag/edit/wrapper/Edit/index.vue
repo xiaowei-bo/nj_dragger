@@ -125,20 +125,21 @@ export default {
         await this.$nextTick();
         document.onkeydown = e => {
             const hasCtrl = e.metaKey || e.ctrlKey;
+            const customKey = ["Backspace", "KeyS", "KeyC", "KeyV"];
+            if (hasCtrl && customKey.includes(e.code)) {
+                e.preventDefault();
+            }
             switch (e.code) {
                 case "Backspace":
                     hasCtrl && this.deleteElement();
                     break;
                 case "KeyS":
-                    e.preventDefault();
                     hasCtrl && this.$emit("saveActivity");
                     break;
                 case "KeyC":
-                    e.preventDefault();
                     hasCtrl && this.copyElement();
                     break;
                 case "KeyV":
-                    e.preventDefault();
                     hasCtrl && this.pasteElement();
                     break;
             }

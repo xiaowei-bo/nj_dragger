@@ -89,6 +89,9 @@
                                 :value="i.value"
                             />
                         </el-select>
+                        <div class="el-input" v-if="val.formType === 'code'">
+                            <el-button @click="handlerCode(val)" type="primary">{{val.value ? "编辑代码" : "添加代码"}}</el-button>
+                        </div>
                         <el-tooltip
                             v-if="val.formType !== 'upload' && val.tip"
                             effect="dark"
@@ -102,6 +105,27 @@
             </el-form>
             <el-divider content-position="right">事件分割处</el-divider>
         </div>
+        <el-dialog
+            :title="'添加 js 代码'"
+            :visible.sync="dialogVisible"
+            :modal-append-to-body="false"
+            width="60%"
+        >
+            <p class="tip">可用变量：</p>
+            <p class="tip txt">平台方法：toastTip(toast提示)</p>
+            <p class="tip txt">全局变量：例如：document, history, navigator, print, alert 等</p>
+            <PrismEditor
+                v-model="currentCode"
+                class="my-editor"
+                :highlight="highlight" 
+                :line-numbers="true"
+                :tabSize="4"
+                @click.native="focusCode"
+            />
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click="handlerSure">确 定</el-button>
+            </span>
+        </el-dialog>
         <div class="add-btn">
             <el-button icon="el-icon-plus" circle @click="addEvent" />
         </div>
@@ -111,7 +135,15 @@
 <script>
 import eventConfig from "@/config/event.js";
 import { deepClone } from "@/utils";
+import { PrismEditor } from 'vue-prism-editor';
+import { highlight, languages } from 'prismjs/components/prism-core';
+import 'vue-prism-editor/dist/prismeditor.min.css';
+import 'prismjs/components/prism-clike';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/themes/prism-tomorrow.css';
+
 export default {
+    components: { PrismEditor },
     name: "ConfigForm",
     props: {
         editingComponent: {
@@ -126,29 +158,80 @@ export default {
                 trigger: "click",
                 action: "toast",
                 configMap: deepClone(eventConfig["configMap"])
-            }
+            },
+            dialogVisible: false,
+            currentCode: ""
         };
     },
     methods: {
         addEvent() {
             const event = deepClone(this.eventData);
             this.editingComponent.events.push(event);
+        },
+        highlight(code) {
+            return highlight(code, languages.js);
+        },
+        handlerCode(val) {
+            this.currentCode = val.value;
+            this.dialogVisible = true;
+            this.editingEvent = val;
+        },
+        handlerSure() {
+            this.editingEvent.value = this.currentCode;
+            this.dialogVisible = false;
+            this.currentCode = "";
+        },
+        focusCode() {
+            try {
+                const textarea = document.getElementsByClassName("my-editor")[0].getElementsByTagName("textarea")[0];
+                textarea.focus();
+            } catch (error) {
+                console.log(error);
+            }
         }
     }
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .right-form-item{
     display: inline-block;
     width: 85%;
-    .el-input, .el-textarea, .el-select, .el-color-picker{
+    .el-input, .el-textarea, .el-select, .el-color-picker, .prism-editor-wrapper{
         display: inline-block;
         width: 85%;
         margin-right: 10px;
     }
     .el-select .el-input {
         width: 100%;
+    }
+}
+.events{
+    .el-dialog{
+        .el-dialog__body{
+            height: 300px;
+            padding-top: 0;
+        }
+        .tip{
+            color: #999;
+            &.txt{
+                text-indent: 25px;
+            }
+        }
+    }
+}
+.my-editor {
+    background: #2d2d2d;
+    color: #ccc;
+    font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 5px;
+    height: 75%;
+    .prism-editor__container{
+        textarea {
+            outline: none !important;
+        }
     }
 }
 .add-btn{
