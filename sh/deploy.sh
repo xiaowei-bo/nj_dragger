@@ -13,6 +13,7 @@ then
 else
     echo "md5_old=$md5_old,md5_new=$md5_new"
     echo "package.json文件有更新，开始执行 npm i"
+    echo "$md5_new" > package.md5
     npm i
 fi
 
