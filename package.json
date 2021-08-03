@@ -73,7 +73,7 @@
   },
   "lint-staged": {
     "*.{js,vue,jsx,tsx}": [
-      "eslint --cache --fix",
+      "eslint --fix",
       "git add"
     ]
   }
