@@ -4,7 +4,7 @@
             id="mobileView"
             class="mobile-view"
             :style="pageStyle"
-            draggable
+            :draggable="false"
             @drop="handleDrop"
             @dragover="handleDragOver"
         >

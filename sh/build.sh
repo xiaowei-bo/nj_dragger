@@ -7,6 +7,7 @@ md5_new=`md5sum package.json | awk '{print $1}'`
 if [ ! -d "$workDir/node_modules" ];
 then
     echo "node_modules目录缺失，开始执行 npm i"
+    echo "$md5_new" > package.md5
     npm i
 elif [ "$md5_old" = "$md5_new" ];
 then

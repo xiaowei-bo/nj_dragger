@@ -1,7 +1,7 @@
 <template>
     <div class="nj-image">
-        <img v-show="src" :src="src" draggable="false" alt="nj-image" />
-        <img v-show="!src" src="https://img1.baidu.com/it/u=3826315951,2112473128&fm=26&fmt=auto&gp=0.jpg" draggable="false" alt="nj-image" />
+        <img v-show="src" :src="src" :draggable="false" alt="nj-image" />
+        <img v-show="!src" src="https://img1.baidu.com/it/u=3826315951,2112473128&fm=26&fmt=auto&gp=0.jpg" :draggable="false" alt="nj-image" />
     </div>
 </template>
 

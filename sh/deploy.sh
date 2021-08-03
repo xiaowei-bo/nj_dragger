@@ -7,6 +7,7 @@ if [ ! -d "$workDir/node_modules" ];
 then
     echo "node_modules目录缺失，开始执行 npm i --production"
     npm i --production
+    echo "$md5_new" > package.md5
 elif [ "$md5_old" = "$md5_new" ];
 then
     echo "package.json文件无更新，无需安装依赖"
