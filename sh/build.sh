@@ -3,6 +3,7 @@ workDir=`pwd`
 
 md5_old=`cat package.md5`
 md5_new=`md5sum package.json |awk '{print $1}'`
+echo "md5_old=$md5_old,md5_new=$md5_new"
 
 if [ ! -d "$workDir/node_modules" ];
 then
