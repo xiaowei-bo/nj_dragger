@@ -89,8 +89,8 @@
                                 :value="i.value"
                             />
                         </el-select>
-                        <div class="el-input" v-if="val.formType === 'code'">
-                            <el-button @click="handlerCode(val)" type="primary">{{val.value ? "编辑代码" : "添加代码"}}</el-button>
+                        <div v-if="val.formType === 'code'" class="el-input">
+                            <el-button type="primary" @click="handlerCode(val)">{{ val.value ? "编辑代码" : "添加代码" }}</el-button>
                         </div>
                         <el-tooltip
                             v-if="val.formType !== 'upload' && val.tip"
@@ -117,9 +117,9 @@
             <PrismEditor
                 v-model="currentCode"
                 class="my-editor"
-                :highlight="highlight" 
+                :highlight="highlight"
                 :line-numbers="true"
-                :tabSize="4"
+                :tab-size="4"
                 @click.native="focusCode"
             />
             <span slot="footer" class="dialog-footer">
@@ -135,12 +135,12 @@
 <script>
 import eventConfig from "@/config/event.js";
 import { deepClone } from "@/utils";
-import { PrismEditor } from 'vue-prism-editor';
-import { highlight, languages } from 'prismjs/components/prism-core';
-import 'vue-prism-editor/dist/prismeditor.min.css';
-import 'prismjs/components/prism-clike';
-import 'prismjs/components/prism-javascript';
-import 'prismjs/themes/prism-tomorrow.css';
+import { PrismEditor } from "vue-prism-editor";
+import { highlight, languages } from "prismjs/components/prism-core";
+import "vue-prism-editor/dist/prismeditor.min.css";
+import "prismjs/components/prism-clike";
+import "prismjs/components/prism-javascript";
+import "prismjs/themes/prism-tomorrow.css";
 
 export default {
     components: { PrismEditor },
@@ -221,6 +221,7 @@ export default {
     }
 }
 .my-editor {
+    cursor: text;
     background: #2d2d2d;
     color: #ccc;
     font-family: Fira code, Fira Mono, Consolas, Menlo, Courier, monospace;

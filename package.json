@@ -10,7 +10,9 @@
     "server:production": "pm2 start processes.json",
     "start:docker": "node server/index.js",
     "dev": "vue-cli-service serve",
-    "start": "vue-cli-service serve"
+    "start": "vue-cli-service serve",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
   },
   "dependencies": {
     "chalk": "^4.1.1",
@@ -29,6 +31,8 @@
     "element-ui": "2.13.2",
     "eslint": "7.28.0",
     "eslint-plugin-vue": "7.11.1",
+    "husky": "^7.0.0",
+    "lint-staged": "^11.1.1",
     "postcss": "^8.3.5",
     "prismjs": "^1.24.1",
     "sass": "^1.35.1",
@@ -60,5 +64,17 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,vue,jsx,tsx}": [
+      "eslint --cache --fix",
+      "git add"
+    ]
+  }
 }
