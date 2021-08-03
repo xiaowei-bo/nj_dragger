@@ -9,7 +9,7 @@ if [ ! -d "$workDir/node_modules" ];
 then
     echo "node_modules目录缺失，开始执行 npm i"
     npm i
-elif [ $md5_old != $md5_new ];
+elif [ $md5_old -ne $md5_new ];
 then
     echo "package.json文件有更新，开始执行 npm i"
     npm i
