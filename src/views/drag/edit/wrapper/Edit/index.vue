@@ -14,8 +14,7 @@
                     :id="item.uuid"
                     :key="item.uuid"
                     :style="item.styleInfo"
-                    :class="[{'active': item.uuid === editingComponent.uuid}, item.animate]"
-                    class="animated"
+                    :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
                     @click.native="setEditingComponent(item)"
                     @deleteElement="deleteElement(index)"
                 >
@@ -85,6 +84,13 @@ export default {
             curPageData.elements.push(item);
             this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);
+            this.$nextTick(() => {
+                const el = document.getElementById(item.uuid);
+                el.scrollIntoView({
+                    block: "start",
+                    behavior: "smooth"
+                });
+            });
         },
         // end
         setEditingComponent(item) {
@@ -158,7 +164,6 @@ export default {
         margin: 5px auto;
         border: 1px solid #dcdfe6;
         overflow: auto;
-        box-sizing: content-box;
         .dragger-box{
             height: 100%;
         }

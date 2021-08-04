@@ -1,5 +1,5 @@
 <template>
-    <el-aside class="app-left-aside clearfix" width="300px">
+    <el-aside class="app-left-aside clearfix" :class="{'close': !asideIsOpen}">
         <el-menu :default-active="activeType" class="app-left-aside-menu fl" @select="menuSelect">
             <el-menu-item index="ELEMENTS">
                 <i class="iconfont icon-zujian"></i>
@@ -52,6 +52,7 @@
                 </div>
             </div>
         </div>
+        <div class="switch-btn el-icon-arrow-left" @click="switchAsideStatus"></div>
     </el-aside>
 </template>
 
@@ -77,7 +78,8 @@ export default {
         return {
             activeType: "ELEMENTS",
             configList,
-            copyText
+            copyText,
+            asideIsOpen: true
         };
     },
     created() {
@@ -92,6 +94,10 @@ export default {
         menuSelect(type) {
             sessionStorage.setItem("activeType", type);
             this.activeType = type;
+        },
+        switchAsideStatus() {
+            this.asideIsOpen = !this.asideIsOpen;
+            this.menuSelect("ELEMENTS");
         },
         addPage() {
             const item = deepClone(pageConfig);
@@ -138,13 +144,45 @@ export default {
     background-color: #eee;
 }
 .app-left-aside{
-    width: 300px;
+    width: 300px !important;
     height: 100%;
     border-right: 1px solid #dcdfe6;
+    position: relative;
+    overflow: inherit;
+    transition: width .3s;
+    &.close{
+        width: 90px !important;
+        .app-left-aside-menu{
+            width: 0;
+            overflow: hidden;
+            border: none;
+        }
+        .app-left-aside-content{
+            width: 88px;
+        }
+        .switch-btn{
+            transform: rotate(180deg);
+        }
+    }
+    .switch-btn{
+        width: 16px;
+        height: 24px;
+        border-radius: 3px;
+        border: 1px solid #dcdfe6;
+        color: #d8deea;
+        position: absolute;
+        top: calc(50% - 12px);
+        right: -8px;
+        line-height: 24px;
+        text-align: center;
+        background-color: #fff;
+        cursor: pointer;
+    }
     .app-left-aside-menu{
-        width: 70px;
+        width: 69px;
         height: 100%;
         box-sizing: border-box;
+        transition: width .3s;
         .el-menu-item, .el-submenu__title{
             line-height: 1.5 !important;
             height: auto !important;
@@ -159,7 +197,7 @@ export default {
         }
     }
     .app-left-aside-content{
-        width: calc(100% - 70px);
+        width: 230px;
         height: 100%;
         overflow: auto;
         box-sizing: border-box;
