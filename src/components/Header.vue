@@ -3,17 +3,7 @@
         <div class="header-left fl">
             <slot name="left"></slot>
         </div>
-        <div class="header-middle fl" :class="{'no-pd': hasMiddleMenu}">
-            <el-menu
-                v-if="hasMiddleMenu"
-                :default-active="activeIndex"
-                class="el-menu-demo"
-                mode="horizontal"
-                @select="handleSelect"
-            >
-                <el-menu-item index="drag">可视化编辑</el-menu-item>
-                <el-menu-item index="auto">可视化CICD</el-menu-item>
-            </el-menu>
+        <div class="header-middle fl">
             <slot name="middle"></slot>
         </div>
         <div class="header-right fl clearfix">
@@ -38,16 +28,6 @@
 
 <script>
 export default {
-    props: {
-        hasMiddleMenu: {
-            type: Boolean,
-            default: true
-        },
-        activeIndex: {
-            type: String,
-            default: ""
-        }
-    },
     data() {
         return {
             github: "https://github.com/killWeb/nj_dragger"
@@ -62,17 +42,6 @@ export default {
         }
     },
     methods: {
-        handleSelect(key) {
-            if (key === "drag") {
-                this.$router.push({
-                    name: "dragList"
-                });
-            } else if (key === "auto") {
-                this.$router.push({
-                    name: "autoCICD"
-                });
-            }
-        },
         toIndex() {
             this.$router.push({
                 name: "dragList"
@@ -127,9 +96,6 @@ export default {
         height: 60px;
         padding: 20px 20px 0;
         box-sizing: border-box;
-        &.no-pd{
-            padding: 0;
-        }
     }
     .header-right{
         width: 380px;

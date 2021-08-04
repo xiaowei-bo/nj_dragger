@@ -1,6 +1,6 @@
 <template>
     <div class="auto">
-        <Header active-index="auto">
+        <Header>
             <template v-slot:left>
                 <div class="logo-box">
                     <img class="logo" src="./assets/logo.png" alt="" />

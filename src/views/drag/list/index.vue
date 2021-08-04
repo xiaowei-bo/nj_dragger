@@ -1,6 +1,6 @@
 <template>
     <div class="drag-list">
-        <Header active-index="drag">
+        <Header>
             <template v-slot:left>
                 <div class="logo-box">
                     <img class="logo" src="../assets/logo.png" alt="" />

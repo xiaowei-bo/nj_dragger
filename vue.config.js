@@ -34,6 +34,7 @@ module.exports = {
     },
     configureWebpack: {
         name: "vue3 + webpack5 + vue-cli",
+        devtool: ENV === "development" ? "eval-cheap-module-source-map" : false,
         resolve: {
             alias: {
                 "@": path.join(__dirname, "src/")

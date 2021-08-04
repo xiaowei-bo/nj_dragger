@@ -7,7 +7,7 @@ export default {
     configMap: { // 组件配置信息
         videoUrl: {
             key: "videoUrl",
-            value: "",
+            value: "https://media.w3.org/2010/05/sintel/trailer.mp4",
             valueType: "string",
             formType: "input",
             placeholder: "请输入视频链接",
@@ -20,7 +20,7 @@ export default {
         "position": "relative",
         "z-index": "0",
         "width": "100%",
-        "height": "100%",
+        "height": "auto",
         "margin-left": "auto",
         "margin-right": "auto",
         "margin-top": "0",

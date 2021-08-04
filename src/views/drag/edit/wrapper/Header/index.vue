@@ -1,6 +1,6 @@
 <template>
     <div id="appHeader" class="app-header clearfix">
-        <Header :has-middle-menu="false">
+        <Header>
             <template v-slot:left>
                 <div class="logo-box">
                     <img class="logo" src="../../../assets/logo.png" alt="" />
