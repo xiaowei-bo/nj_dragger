@@ -108,7 +108,7 @@
         <el-dialog
             :title="'添加 js 代码'"
             :visible.sync="dialogVisible"
-            :modal-append-to-body="false"
+            :append-to-body="true"
             width="60%"
         >
             <p class="tip">可用变量：</p>
@@ -172,6 +172,8 @@ export default {
             return highlight(code, languages.js);
         },
         handlerCode(val) {
+            // const headerEl = document.getElementById("appHeader");
+            // headerEl.style.zIndex = 0;
             this.currentCode = val.value;
             this.dialogVisible = true;
             this.editingEvent = val;

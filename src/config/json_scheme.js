@@ -15,7 +15,7 @@ const page = {
     name: "", // 页面标题
     elements: [], // 页面元素
     commonStyle: { // 页面样式配置
-        "background-color": "#fff",
+        "background-color": "",
         "background-image": "",
         "background-size": "cover"
     },

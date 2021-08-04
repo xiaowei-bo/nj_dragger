@@ -1,8 +1,8 @@
 import { Message } from "element-ui";
 /**
  * @description 深拷贝
- * @param {*} target 
- * @returns 
+ * @param {*} target
+ * @returns
  */
 const deepClone = (target) => {
     const type = typeof target;
@@ -26,7 +26,7 @@ const deepClone = (target) => {
 };
 /**
  * @description 复制文本
- * @param {*} text 
+ * @param {*} text
  */
 const copyText = (text) => {
     const hideInput = document.createElement("input");
@@ -40,9 +40,9 @@ const copyText = (text) => {
 };
 /**
  * @description 获取链接参数
- * @param {*} item 
- * @param {*} url 
- * @returns 
+ * @param {*} item
+ * @param {*} url
+ * @returns
  */
 const getUrlParams = (item, url) => {
     function decodeLocationSearch(url = "") {
@@ -69,9 +69,9 @@ const getUrlParams = (item, url) => {
 };
 /**
  * @description 链接对象参数拼接
- * @param {*} url 
- * @param {*} obj 
- * @returns 
+ * @param {*} url
+ * @param {*} obj
+ * @returns
  */
 const urlWithObj = (url = "", obj = {}) => {
     if (typeof obj !== "object" || !Object.keys(obj).length) return url;
@@ -88,14 +88,14 @@ const urlWithObj = (url = "", obj = {}) => {
 };
 /**
  * @description 检验图片链接有效性
- * @param {*} src 
- * @returns 
+ * @param {*} src
+ * @returns
  */
 const checkImg = (src) => {
     if (!src) return "";
     const status = ["http", "//"].some(i => src.startsWith(i));
     return status ? src : "";
-}
+};
 
 export {
     deepClone,

@@ -1,5 +1,5 @@
 <template>
-    <div class="app-header clearfix">
+    <div id="appHeader" class="app-header clearfix">
         <Header :has-middle-menu="false">
             <template v-slot:left>
                 <div class="logo-box">
@@ -25,7 +25,7 @@
         <el-dialog
             :title="dialogTitle"
             :visible.sync="dialogVisible"
-            :modal-append-to-body="false"
+            :append-to-body="true"
             width="60%"
             :before-close="handleClose"
         >
@@ -133,7 +133,7 @@ export default {
     width: 100%;
     border-bottom: 1px solid #dcdfe6;
     position: relative;
-    z-index: 0;
+    z-index: 1;
     .header-left{
         width: 280px;
         height: 60px;

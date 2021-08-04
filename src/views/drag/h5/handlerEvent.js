@@ -54,7 +54,7 @@ const handlerEvent = async (eventInfo) => {
             });
             break;
     }
-}
+};
 
 const handlerEventData = (curPageData) => {
     const elements = curPageData.elements;
@@ -75,6 +75,6 @@ const handlerEventData = (curPageData) => {
             }
         }
     }
-}
+};
 
 export default handlerEventData;

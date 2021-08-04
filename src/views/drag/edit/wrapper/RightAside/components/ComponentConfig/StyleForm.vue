@@ -24,7 +24,7 @@
                     v-if="commonStyleConfig[key].formType === 'color'"
                     v-model="commonStyleConfig[key].value"
                     show-alpha
-                    @change="(v) => { editingComponent.styleInfo[key] = v}"
+                    @change="(v) => { editingComponent.styleInfo[key] = v || ''}"
                 />
                 <el-select
                     v-if="commonStyleConfig[key].formType === 'select'"

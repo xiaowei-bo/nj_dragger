@@ -7,7 +7,7 @@ export const toastTip = (arg) => {
     let text = "";
     let time = 3;
     if (typeof arg === "string") {
-        text = arg
+        text = arg;
     } else {
         text = arg.text;
         time = arg.time;

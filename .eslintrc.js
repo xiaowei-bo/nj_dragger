@@ -227,6 +227,7 @@ module.exports = {
     },
     globals: {
         ENV: true,
-        Hammer: true
+        Hammer: true,
+        videojs: true
     }
 };
