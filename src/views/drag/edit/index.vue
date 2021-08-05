@@ -13,6 +13,8 @@
                 ref="leftAside"
                 :activity-data.sync="activityData"
                 :cur-page-data.sync="curPageData"
+                :aside-is-open.sync="editInfo.asideIsOpen"
+                @setEditInfoToLocal="setEditInfoToLocal"
             />
             <Edit
                 ref="edit"
@@ -63,7 +65,8 @@ export default {
             elementClipBoard: {}, // 粘贴板
             editInfo: {
                 viewType: "IPHONE6/7/8",
-                mobileViewScale: 1
+                mobileViewScale: 1,
+                asideIsOpen: true
             }
         };
     },

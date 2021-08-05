@@ -17,9 +17,27 @@
                 </el-dropdown-menu>
             </el-dropdown>
             <p class="cont cont2 fl">{{ viewTypeMap[curViewType].width }} x {{ viewTypeMap[curViewType].height }}</p>
-            <p class="cont cont3 fr">{{ mobileViewScale * 100 + "%" }}</p>
+            <el-dropdown class="cont cont3 fr" @command="handlerCommandScale">
+                <p>
+                    {{ mobileViewScale * 100 + "%" }}
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                </p>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                        v-for="(item, index) in scaleArr"
+                        :key="index"
+                        :command="item"
+                    >
+                        {{ item * 100 + "%" }}
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
         </div>
-        <div v-if="curViewType === 'IPHONEX_ZJ'" class="mobile-view-box iphone-x-zj" :style="{ transform: `scale(${mobileViewScale})`}">
+        <div
+            v-if="curViewType === 'IPHONEX_ZJ'"
+            class="mobile-view-box iphone-x-zj"
+            :style="{ transform: `scale(${mobileViewScale})`}"
+        >
             <img src="../../../assets/iphone-x.png" class="iphone-x-img" alt="" />
             <div
                 id="mobileView"
@@ -44,7 +62,15 @@
                 </Draggable>
             </div>
         </div>
-        <div v-else class="mobile-view-box" :class="{'iphone-x': curViewType === 'IPHONEX'}" :style="{ transform: `scale(${mobileViewScale})`}">
+        <div
+            v-else
+            class="mobile-view-box"
+            :style="{
+                transform: `scale(${mobileViewScale})`,
+                width: `${viewTypeMap[curViewType].width}px`,
+                height: `${viewTypeMap[curViewType].height}px`
+            }"
+        >
             <div
                 id="mobileView"
                 class="mobile-view"
@@ -68,6 +94,7 @@
                 </Draggable>
             </div>
         </div>
+        <div class="rubbish-box">垃圾桶</div>
     </el-main>
 </template>
 
@@ -123,13 +150,20 @@ export default {
                     width: 375,
                     height: 812
                 },
+                "IPAD": {
+                    code: "IPAD",
+                    desc: "iPad",
+                    width: 768,
+                    height: 1024
+                },
                 "IPHONEX_ZJ": {
                     code: "IPHONEX_ZJ",
                     desc: "iphoneX 真机",
                     width: 375,
                     height: 812
                 }
-            }
+            },
+            scaleArr: [0.5, 0.7, 0.8, 0.9, 1, 1.2]
         };
     },
     computed: {
@@ -202,6 +236,11 @@ export default {
             if (this.curViewType === viewType) return;
             this.$emit("update:curViewType", viewType);
             this.$emit("setEditInfoToLocal");
+        },
+        handlerCommandScale(i) {
+            if (this.mobileViewScale === i) return;
+            this.$emit("update:mobileViewScale", i);
+            this.$emit("setEditInfoToLocal");
         }
     },
     async mounted() {
@@ -249,16 +288,16 @@ export default {
         top: 10px;
         .cont{
             font-size: 12px;
+            .el-icon-arrow-down{
+                margin-left: 0;
+            }
+            p{
+                font-size: 12px;
+            }
             &.cont1{
                 width: 43%;
                 padding-left: 8px;
                 cursor: pointer;
-                .el-icon-arrow-down{
-                    margin-left: 0;
-                }
-                p{
-                    font-size: 12px;
-                }
             }
             &.cont2{
                 width: 30%;
@@ -268,17 +307,27 @@ export default {
                 width: 27%;
                 padding-right: 8px;
                 text-align: right;
+                cursor: pointer;
             }
         }
+    }
+    .rubbish-box{
+        width: 120px;
+        height: 120px;
+        line-height: 120px;
+        text-align: center;
+        color: inherit;
+        border: 1px solid #dcdfe6;
+        border-radius: 5px;
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
     }
     .mobile-view-box{
         position: relative;
         z-index: 1;
-    }
-    .iphone-x{
-        .mobile-view{
-            height: 812px;
-        }
+        pointer-events: none;
+        margin: 80px auto;
     }
     .iphone-x-zj{
         width: 430px;
@@ -303,12 +352,12 @@ export default {
         }
     }
     .mobile-view{
-        width: 375px;
-        height: 667px;
+        width: 100%;
+        height: 100%;
         border: 1px solid #dcdfe6;
         overflow: auto;
         border-radius: 5px;
-        margin: 50px auto;
+        pointer-events: auto;
         .dragger-box{
             height: 100%;
         }

@@ -72,14 +72,17 @@ export default {
         curPageData: {
             type: Object,
             default: () => ({})
+        },
+        asideIsOpen: {
+            type: Boolean,
+            default: true
         }
     },
     data() {
         return {
             activeType: "ELEMENTS",
             configList,
-            copyText,
-            asideIsOpen: true
+            copyText
         };
     },
     created() {
@@ -96,7 +99,8 @@ export default {
             this.activeType = type;
         },
         switchAsideStatus() {
-            this.asideIsOpen = !this.asideIsOpen;
+            this.$emit("update:asideIsOpen", !this.asideIsOpen);
+            this.$emit("setEditInfoToLocal");
             this.menuSelect("ELEMENTS");
         },
         addPage() {
@@ -148,7 +152,7 @@ export default {
     height: 100%;
     border-right: 1px solid #dcdfe6;
     position: relative;
-    overflow: inherit;
+    overflow: initial;
     transition: width .3s;
     &.close{
         width: 90px !important;
@@ -177,6 +181,7 @@ export default {
         text-align: center;
         background-color: #fff;
         cursor: pointer;
+        z-index: 1;
     }
     .app-left-aside-menu{
         width: 69px;
