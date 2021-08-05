@@ -3,15 +3,15 @@
         <el-tabs
             v-model="curEditType"
             :stretch="true"
-            @tab-click="chengeCurEditType"
+            @tab-click="changeCurEditType"
         >
-            <el-tab-pane label="组件配置" name="editingComponent">
+            <el-tab-pane label="组件配置" name="COMPONENTCONFIG">
                 <ComponentConfig :editing-component="editingComponent" />
             </el-tab-pane>
-            <el-tab-pane label="页面配置" name="second">
+            <el-tab-pane label="页面配置" name="PAGECONFIG">
                 <PageConfig :cur-page-data="curPageData" />
             </el-tab-pane>
-            <el-tab-pane label="活动配置" name="third">
+            <el-tab-pane label="活动配置" name="ACTIVITYCONFIG">
                 <ActivityConfig :activity-data="activityData" />
             </el-tab-pane>
         </el-tabs>
@@ -44,7 +44,7 @@ export default {
     },
     data() {
         return {
-            curEditType: "editingComponent",
+            curEditType: "COMPONENTCONFIG",
             editTypeMap: [{
                 title: "组件基础配置",
                 name: "baseConfig",
@@ -57,7 +57,7 @@ export default {
         };
     },
     methods: {
-        chengeCurEditType(i) {
+        changeCurEditType(i) {
             // console.log(i);
         }
     }

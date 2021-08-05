@@ -66,7 +66,7 @@ export default {
     },
     mounted() {
         this.$store.dispatch("setAllForm", {
-            key: "activityForm",
+            key: "ACTIVITYCONFIG",
             errMessage: "活动配置信息未填写完整",
             validate: this.$refs.activityForm.validate
         });

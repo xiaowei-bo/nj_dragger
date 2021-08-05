@@ -1,26 +1,72 @@
 <template>
     <el-main class="app-edit">
-        <div
-            id="mobileView"
-            class="mobile-view"
-            :style="pageStyle"
-            :draggable="false"
-            @drop="handleDrop"
-            @dragover="handleDragOver"
-        >
-            <Draggable v-model="curPageData.elements" class="dragger-box">
-                <NjElementBox
-                    v-for="(item, index) in curPageData.elements"
-                    :id="item.uuid"
-                    :key="item.uuid"
-                    :style="item.styleInfo"
-                    :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
-                    @click.native="setEditingComponent(item)"
-                    @deleteElement="deleteElement(index)"
-                >
-                    <component :is="item.name" class="nj-element" :item="item" />
-                </NjElementBox>
-            </Draggable>
+        <div class="tool-box clearfix">
+            <el-dropdown class="cont cont1 fl" @command="handlerCommand">
+                <p>
+                    {{ viewTypeMap[curViewType].desc }}
+                    <i class="el-icon-arrow-down el-icon--right"></i>
+                </p>
+                <el-dropdown-menu slot="dropdown">
+                    <el-dropdown-item
+                        v-for="(value, key) in viewTypeMap"
+                        :key="key"
+                        :command="value.code"
+                    >
+                        {{ value.desc }}
+                    </el-dropdown-item>
+                </el-dropdown-menu>
+            </el-dropdown>
+            <p class="cont cont2 fl">{{ viewTypeMap[curViewType].width }} x {{ viewTypeMap[curViewType].height }}</p>
+            <p class="cont cont3 fr">{{ mobileViewScale * 100 + "%" }}</p>
+        </div>
+        <div v-if="curViewType === 'IPHONEX_ZJ'" class="mobile-view-box iphone-x-zj" :style="{ transform: `scale(${mobileViewScale})`}">
+            <img src="../../../assets/iphone-x.png" class="iphone-x-img" alt="" />
+            <div
+                id="mobileView"
+                class="mobile-view"
+                :style="pageStyle"
+                :draggable="false"
+                @drop="handleDrop"
+                @dragover="handleDragOver"
+            >
+                <Draggable v-model="curPageData.elements" class="dragger-box">
+                    <NjElementBox
+                        v-for="(item, index) in curPageData.elements"
+                        :id="item.uuid"
+                        :key="item.uuid"
+                        :style="item.styleInfo"
+                        :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
+                        @click.native="setEditingComponent(item)"
+                        @deleteElement="deleteElement(index)"
+                    >
+                        <component :is="item.name" class="nj-element" :item="item" />
+                    </NjElementBox>
+                </Draggable>
+            </div>
+        </div>
+        <div v-else class="mobile-view-box" :class="{'iphone-x': curViewType === 'IPHONEX'}" :style="{ transform: `scale(${mobileViewScale})`}">
+            <div
+                id="mobileView"
+                class="mobile-view"
+                :style="pageStyle"
+                :draggable="false"
+                @drop="handleDrop"
+                @dragover="handleDragOver"
+            >
+                <Draggable v-model="curPageData.elements" class="dragger-box">
+                    <NjElementBox
+                        v-for="(item, index) in curPageData.elements"
+                        :id="item.uuid"
+                        :key="item.uuid"
+                        :style="item.styleInfo"
+                        :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
+                        @click.native="setEditingComponent(item)"
+                        @deleteElement="deleteElement(index)"
+                    >
+                        <component :is="item.name" class="nj-element" :item="item" />
+                    </NjElementBox>
+                </Draggable>
+            </div>
         </div>
     </el-main>
 </template>
@@ -49,13 +95,41 @@ export default {
         focusEditPage: {
             type: Boolean,
             default: false
+        },
+        curViewType: {
+            type: String,
+            default: ""
+        },
+        mobileViewScale: {
+            type: Number,
+            default: 1
         }
     },
     data() {
         return {
             configList,
             dragIndex: 0,
-            enterIndex: 0
+            enterIndex: 0,
+            viewTypeMap: {
+                "IPHONE6/7/8": {
+                    code: "IPHONE6/7/8",
+                    desc: "iphone6/7/8",
+                    width: 375,
+                    height: 667
+                },
+                "IPHONEX": {
+                    code: "IPHONEX",
+                    desc: "iphoneX",
+                    width: 375,
+                    height: 812
+                },
+                "IPHONEX_ZJ": {
+                    code: "IPHONEX_ZJ",
+                    desc: "iphoneX 真机",
+                    width: 375,
+                    height: 812
+                }
+            }
         };
     },
     computed: {
@@ -123,9 +197,12 @@ export default {
             }
             this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);
+        },
+        handlerCommand(viewType) {
+            if (this.curViewType === viewType) return;
+            this.$emit("update:curViewType", viewType);
+            this.$emit("setEditInfoToLocal");
         }
-    },
-    created() {
     },
     async mounted() {
         await this.$nextTick();
@@ -158,12 +235,80 @@ export default {
 .app-edit{
     width: calc(100% - 700px);
     height: 100%;
+    background-color: #f7f7f7;
+    padding: 0;
+    position: relative;
+    .tool-box{
+        width: 230px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 5px;
+        border: 1px solid #dcdfe6;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        .cont{
+            font-size: 12px;
+            &.cont1{
+                width: 43%;
+                padding-left: 8px;
+                cursor: pointer;
+                .el-icon-arrow-down{
+                    margin-left: 0;
+                }
+                p{
+                    font-size: 12px;
+                }
+            }
+            &.cont2{
+                width: 30%;
+                text-align: center;
+            }
+            &.cont3{
+                width: 27%;
+                padding-right: 8px;
+                text-align: right;
+            }
+        }
+    }
+    .mobile-view-box{
+        position: relative;
+        z-index: 1;
+    }
+    .iphone-x{
+        .mobile-view{
+            height: 812px;
+        }
+    }
+    .iphone-x-zj{
+        width: 430px;
+        height: 867px;
+        margin: 30px auto 0;
+        padding: 20px 26px 0;
+        border-radius: 70px;
+        position: relative;
+        overflow: hidden;
+        .mobile-view{
+            height: 812px;
+            margin: 0;
+            border-radius: 35px;
+        }
+        .iphone-x-img{
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            pointer-events: none;
+        }
+    }
     .mobile-view{
         width: 375px;
         height: 667px;
-        margin: 5px auto;
         border: 1px solid #dcdfe6;
         overflow: auto;
+        border-radius: 5px;
+        margin: 50px auto;
         .dragger-box{
             height: 100%;
         }

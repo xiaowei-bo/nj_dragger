@@ -2,7 +2,7 @@
     <div id="appHeader" class="app-header clearfix">
         <Header>
             <template v-slot:left>
-                <div class="logo-box">
+                <div class="logo-box" @click="toIndex">
                     <img class="logo" src="../../../assets/logo.png" alt="" />
                 </div>
             </template>
@@ -91,6 +91,11 @@ export default {
         }
     },
     methods: {
+        toIndex() {
+            this.$router.push({
+                name: "dragList"
+            });
+        },
         exportJson() {
             this.dialogStatus = "export";
             this.content = this.activityData;

@@ -19,9 +19,13 @@
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
                 :element-clip-board.sync="elementClipBoard"
+                :cur-view-type.sync="editInfo.viewType"
+                :mobile-view-scale.sync="editInfo.mobileViewScale"
+                @setEditInfoToLocal="setEditInfoToLocal"
                 @saveActivity="saveActivity"
             />
             <RightAside
+                ref="rightAside"
                 :activity-data="activityData"
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
@@ -56,7 +60,11 @@ export default {
             activityData: {},
             curPageData: {},
             editingComponent: {}, // 当前操作中组件
-            elementClipBoard: {} // 粘贴板
+            elementClipBoard: {}, // 粘贴板
+            editInfo: {
+                viewType: "IPHONE6/7/8",
+                mobileViewScale: 1
+            }
         };
     },
     watch: {
@@ -103,25 +111,32 @@ export default {
             location.reload();
         },
         async validAllForm() {
-            const handler = (validate, errMessage) => {
+            const handler = (validate, errMessage, key) => {
                 return new Promise(resolve => {
                     validate(valid => {
                         if (valid) {
-                            resolve("success");
+                            resolve({
+                                success: true
+                            });
                         } else {
-                            resolve(errMessage);
+                            resolve({
+                                success: false,
+                                errMessage,
+                                key
+                            });
                         }
                     });
                 });
             };
             const validateArr = [];
-            this.allForm.forEach(async ({ validate, errMessage }) => {
-                validateArr.push(handler(validate, errMessage));
+            this.allForm.forEach(async ({ validate, errMessage, key }) => {
+                validateArr.push(handler(validate, errMessage, key));
             });
             const resultArr = await Promise.all(validateArr);
-            const err = resultArr.filter(i => i !== "success") || [];
+            const err = resultArr.filter(i => !i.success) || [];
             if (err.length) {
-                this.$message.error(`【${err.join("，")}】`);
+                this.$message.error(err[0].errMessage);
+                this.$refs.rightAside.curEditType = err[0].key;
                 return false;
             }
             return true;
@@ -164,10 +179,30 @@ export default {
             if (!saveRes) return;
             const url = `${location.origin}/view?id=${this.activityId}`;
             window.open(url, "_blank");
+        },
+        setEditInfoToLocal() {
+            const key = "NJ_EDIT_INFO";
+            const editInfo = {
+                ...this.getEditInfoFromLocal(),
+                ...this.editInfo
+            };
+            localStorage.setItem(key, JSON.stringify(editInfo));
+        },
+        getEditInfoFromLocal(setEdit) {
+            const key = "NJ_EDIT_INFO";
+            const editInfoStr = localStorage.getItem(key);
+            if (!editInfoStr) return {};
+            const editInfo = JSON.parse(editInfoStr);
+            if (!setEdit) return editInfo;
+            this.editInfo = {
+                ...this.editInfo,
+                ...editInfo
+            };
         }
     },
     created() {
         this.initData();
+        this.getEditInfoFromLocal(true);
     }
 };
 </script>
