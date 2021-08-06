@@ -24,6 +24,17 @@ const deepClone = (target) => {
     }
     return result;
 };
+const throttle = (delay) => {
+    let run = false;
+    return function(callback = () => {}) {
+        if (run) return false;
+        run = true;
+        callback();
+        setTimeout(() => {
+            run = false;
+        }, delay);
+    };
+};
 /**
  * @description 复制文本
  * @param {*} text
@@ -102,5 +113,6 @@ export {
     copyText,
     getUrlParams,
     urlWithObj,
-    checkImg
+    checkImg,
+    throttle
 };

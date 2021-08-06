@@ -10,7 +10,7 @@
         size="mini"
     >
         <el-form-item label="活动标题" class="activity-config-item" prop="title">
-            <el-input v-model="activityData.title" placeholder="请输入活动标题" @keydown="test" />
+            <el-input v-model="activityData.title" placeholder="请输入活动标题" />
             <el-tooltip
                 effect="dark"
                 content="请输入活动标题"
@@ -59,12 +59,8 @@ export default {
             }
         };
     },
-    methods: {
-        test(e) {
-            e.preventDefault();
-        }
-    },
-    mounted() {
+    async mounted() {
+        await this.$nextTick();
         this.$store.dispatch("setAllForm", {
             key: "ACTIVITYCONFIG",
             errMessage: "活动配置信息未填写完整",

@@ -4,12 +4,12 @@
         @keyup.delete="$emit('deleteElement')"
     >
         <slot></slot>
-        <i class="lt"></i>
+        <i class="lt" @mousedown="(e) => { handlerMousedown(e, 'lt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <!-- <i class="lm iconfont"></i> -->
-        <i class="lb"></i>
-        <i class="rt"></i>
+        <i class="lb" @mousedown="(e) => { handlerMousedown(e, 'lb')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
+        <i class="rt" @mousedown="(e) => { handlerMousedown(e, 'rt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <!-- <i class="rm iconfont"></i> -->
-        <i class="rb"></i>
+        <i class="rb" @mousedown="(e) => { handlerMousedown(e, 'rb')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <!-- <i class="mt iconfont"></i> -->
         <!-- <i class="mb iconfont"></i> -->
         <span class="mask"></span>
@@ -17,14 +17,77 @@
 </template>
 
 <script>
+import { throttle } from "@/utils";
+const refreshRate = 60; // 刷新率为 60Hz 比较流畅
+const _throttleHandler = throttle(1000 / refreshRate);
 export default {
-    data() {
-        return {
-
-        };
+    props: {
+        styleInfo: {
+            type: Object,
+            default: () => ({})
+        },
+        componentResizing: {
+            type: Boolean,
+            default: false
+        },
+        targetId: {
+            type: String,
+            default: ""
+        }
     },
     methods: {
-
+        setFlag() {
+            this.$emit("update:componentResizing", true);
+        },
+        resetFlag() {
+            this.$emit("update:componentResizing", false);
+        },
+        handlerMousedown(ev, type) {
+            const startX = ev.x;
+            const startY = ev.y;
+            const targetEl = document.getElementById(this.targetId);
+            const originW = targetEl.offsetWidth;
+            const originH = targetEl.offsetHeight;
+            const leftToPar = this.styleInfo["margin-left"] === "auto" ? 0 : (this.styleInfo["margin-left"] || 0);
+            document.onmousemove = (e) => {
+                e.preventDefault();
+                _throttleHandler(() => {
+                    this.resizeFun({ e, type, startX, startY, originW, originH, leftToPar });
+                });
+            };
+            document.onmouseup = () => {
+                document.onmousemove = null;
+                document.onmouseup = null;
+            };
+        },
+        resizeFun({ e, type, startX, startY, originW, originH, leftToPar }) {
+            let targetW, targetH;
+            const moveX = e.x - startX;
+            const moveY = e.y - startY;
+            switch (type) {
+                case "lt":
+                    targetW = originW - moveX;
+                    targetH = originH - moveY;
+                    break;
+                case "lb":
+                    targetW = originW - moveX;
+                    targetH = originH + moveY;
+                    break;
+                case "rt":
+                    targetW = originW + moveX;
+                    targetH = originH - moveY;
+                    break;
+                case "rb":
+                    targetW = originW + moveX;
+                    targetH = originH + moveY;
+                    break;
+            }
+            if (leftToPar + targetW > 375) return;
+            const styleInfo = this.styleInfo;
+            styleInfo.width = targetW + "px";
+            styleInfo.height = targetH + "px";
+            this.$emit("update:styleInfo", styleInfo);
+        }
     },
     created() {
 

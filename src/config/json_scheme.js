@@ -26,7 +26,7 @@ const element = {
     name: "", // 组件名
     desc: "", // 组件描述
     icon: "", // 组件icon
-    animate: [], // 图层的动画,可以支持多个动画
+    animate: "", // 组件入场动画
     events: [], // 事件配置数据，每个图层可以添加多个事件
     configMap: {}, // 组件配置信息
     styleInfo: {} // 样式信息

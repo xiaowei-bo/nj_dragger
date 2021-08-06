@@ -47,15 +47,30 @@
                 @drop="handleDrop"
                 @dragover="handleDragOver"
             >
-                <Draggable v-model="curPageData.elements" class="dragger-box">
+                <Draggable
+                    v-model="curPageData.elements"
+                    class="dragger-box"
+                    handle=".move"
+                    filter=".unmove"
+                    :animation="400"
+                >
                     <NjElementBox
                         v-for="(item, index) in curPageData.elements"
                         :id="item.uuid"
                         :key="item.uuid"
                         :style="item.styleInfo"
-                        :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
+                        :style-info.sync="item.styleInfo"
+                        :component-resizing.sync="componentResizing"
+                        :target-id="item.uuid"
+                        :class="[
+                            {'active': item.uuid === editingComponent.uuid},
+                            item.animate,
+                            'animated',
+                            {'move': !componentResizing}
+                        ]"
                         @click.native="setEditingComponent(item)"
                         @deleteElement="deleteElement(index)"
+                        @updateEditingStyleInfo="updateEditingStyleInfo"
                     >
                         <component :is="item.name" class="nj-element" :item="item" />
                     </NjElementBox>
@@ -79,13 +94,27 @@
                 @drop="handleDrop"
                 @dragover="handleDragOver"
             >
-                <Draggable v-model="curPageData.elements" class="dragger-box">
+                <Draggable
+                    v-model="curPageData.elements"
+                    class="dragger-box"
+                    handle=".move"
+                    filter=".unmove"
+                    :animation="400"
+                >
                     <NjElementBox
                         v-for="(item, index) in curPageData.elements"
                         :id="item.uuid"
                         :key="item.uuid"
                         :style="item.styleInfo"
-                        :class="[{'active': item.uuid === editingComponent.uuid}, item.animate, item.uuid, 'animated']"
+                        :style-info.sync="item.styleInfo"
+                        :target-id="item.uuid"
+                        :component-resizing.sync="componentResizing"
+                        :class="[
+                            {'active': item.uuid === editingComponent.uuid},
+                            item.animate,
+                            'animated',
+                            {'move': !componentResizing}
+                        ]"
                         @click.native="setEditingComponent(item)"
                         @deleteElement="deleteElement(index)"
                     >
@@ -163,7 +192,8 @@ export default {
                     height: 812
                 }
             },
-            scaleArr: [0.5, 0.7, 0.8, 0.9, 1, 1.2]
+            scaleArr: [0.5, 0.7, 0.8, 0.9, 1, 1.2],
+            componentResizing: false
         };
     },
     computed: {
@@ -358,6 +388,7 @@ export default {
         overflow: auto;
         border-radius: 5px;
         pointer-events: auto;
+        box-sizing: content-box;
         .dragger-box{
             height: 100%;
         }

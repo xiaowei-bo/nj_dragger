@@ -230,7 +230,7 @@ export default {
     font-size: 14px;
     line-height: 1.5;
     padding: 5px;
-    height: 75%;
+    min-height: 300px;
     .prism-editor__container{
         textarea {
             outline: none !important;
