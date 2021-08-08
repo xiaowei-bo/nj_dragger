@@ -163,11 +163,8 @@ export default {
                 const res = await addActivityDetail(data);
                 this.activityId = res.id;
                 this.$message.success("保存成功");
-                this.$router.replace({
-                    name: "dragEdit",
-                    query: {
-                        id: this.activityId
-                    }
+                this.$router.push({
+                    name: "dragList"
                 });
                 return true;
             } else {
