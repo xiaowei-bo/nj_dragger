@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="nj-element-box"
-        @keyup.delete="$emit('deleteElement')"
-    >
+    <div class="nj-element-box">
         <slot></slot>
         <i class="lt" @mousedown="(e) => { handlerMousedown(e, 'lt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <!-- <i class="lm iconfont"></i> -->
@@ -48,7 +45,7 @@ export default {
             const targetEl = document.getElementById(this.targetId);
             const originW = targetEl.offsetWidth;
             const originH = targetEl.offsetHeight;
-            const leftToPar = this.styleInfo["margin-left"] === "auto" ? 0 : (this.styleInfo["margin-left"] || 0);
+            const leftToPar = (!this.styleInfo["margin-left"] || this.styleInfo["margin-left"] === "auto") ? 0 : (+(this.styleInfo["margin-left"].replace("px", "").replace("%", "")) || 0);
             document.onmousemove = (e) => {
                 e.preventDefault();
                 _throttleHandler(() => {
@@ -87,6 +84,7 @@ export default {
             styleInfo.width = targetW + "px";
             styleInfo.height = targetH + "px";
             this.$emit("update:styleInfo", styleInfo);
+            this.$emit("updateEditingComponent", styleInfo);
         }
     },
     created() {
@@ -120,6 +118,7 @@ export default {
             border: 2px solid #000;
             position: absolute;
             font-weight: bold;
+            z-index: 1;
         }
         .lt{
             left: -1px;

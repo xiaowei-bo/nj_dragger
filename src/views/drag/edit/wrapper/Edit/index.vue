@@ -1,7 +1,7 @@
 <template>
     <el-main class="app-edit">
         <div class="tool-box clearfix">
-            <el-dropdown class="cont cont1 fl" @command="handlerCommand">
+            <el-dropdown class="cont cont1 fl" @command="handlerCommandMobileType">
                 <p>
                     {{ viewTypeMap[curViewType].desc }}
                     <i class="el-icon-arrow-down el-icon--right"></i>
@@ -102,7 +102,7 @@
                     :animation="400"
                 >
                     <NjElementBox
-                        v-for="(item, index) in curPageData.elements"
+                        v-for="item in curPageData.elements"
                         :id="item.uuid"
                         :key="item.uuid"
                         :style="item.styleInfo"
@@ -116,7 +116,7 @@
                             {'move': !componentResizing}
                         ]"
                         @click.native="setEditingComponent(item)"
-                        @deleteElement="deleteElement(index)"
+                        @updateEditingComponent="updateEditingComponent"
                     >
                         <component :is="item.name" class="nj-element" :item="item" />
                     </NjElementBox>
@@ -262,7 +262,7 @@ export default {
             this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);
         },
-        handlerCommand(viewType) {
+        handlerCommandMobileType(viewType) {
             if (this.curViewType === viewType) return;
             this.$emit("update:curViewType", viewType);
             this.$emit("setEditInfoToLocal");
@@ -271,6 +271,14 @@ export default {
             if (this.mobileViewScale === i) return;
             this.$emit("update:mobileViewScale", i);
             this.$emit("setEditInfoToLocal");
+        },
+        updateEditingComponent(styleInfo) {
+            const component = this.editingComponent;
+            component.styleInfo.width = styleInfo.width;
+            component.styleInfo.height = styleInfo.height;
+            component.styleMap.width.value = styleInfo.width;
+            component.styleMap.height.value = styleInfo.height;
+            this.setEditingComponent(deepClone(component));
         }
     },
     async mounted() {

@@ -1,47 +1,47 @@
 <template>
     <el-form
-        :model="editingComponent.styleInfo"
+        :model="editingComponent.styleMap"
         label-suffix="："
         label-width="90px"
         label-position="left"
         size="mini"
     >
         <div
-            v-for="(item, key) in editingComponent.styleInfo"
+            v-for="(item, key) in editingComponent.styleMap"
             :key="key"
         >
             <el-form-item
                 class="right-form-item"
-                :label="commonStyleConfig[key].label"
+                :label="item.label"
             >
                 <el-input
-                    v-if="commonStyleConfig[key].formType === 'input'"
-                    v-model="commonStyleConfig[key].value"
-                    :placeholder="commonStyleConfig[key].placeholder"
-                    @change="(v) => { editingComponent.styleInfo[key] = v}"
+                    v-if="item.formType === 'input'"
+                    v-model="item.value"
+                    :placeholder="item.placeholder"
+                    @change="v => { editingComponent.styleInfo[item.key] = v }"
                 />
                 <el-color-picker
-                    v-if="commonStyleConfig[key].formType === 'color'"
-                    v-model="commonStyleConfig[key].value"
+                    v-if="item.formType === 'color'"
+                    v-model="item.value"
                     show-alpha
-                    @change="(v) => { editingComponent.styleInfo[key] = v || ''}"
+                    @change="v => { editingComponent.styleInfo[item.key] = v }"
                 />
                 <el-select
-                    v-if="commonStyleConfig[key].formType === 'select'"
-                    v-model="commonStyleConfig[key].value"
-                    @change="(v) => { editingComponent.styleInfo[key] = v}"
+                    v-if="item.formType === 'select'"
+                    v-model="item.value"
+                    @change="v => { editingComponent.styleInfo[item.key] = v }"
                 >
                     <el-option
-                        v-for="i in commonStyleConfig[key].valueMap"
+                        v-for="i in item.valueMap"
                         :key="i.value"
                         :label="i.desc"
                         :value="i.value"
                     />
                 </el-select>
                 <el-tooltip
-                    v-if="commonStyleConfig[key].formType !== 'upload' && commonStyleConfig[key].tip"
+                    v-if="item.formType !== 'upload' && item.tip"
                     effect="dark"
-                    :content="commonStyleConfig[key].tip"
+                    :content="item.tip"
                     placement="top"
                 >
                     <i class="el-icon-info"></i>
@@ -52,8 +52,6 @@
 </template>
 
 <script>
-import configList from "@/plugins/config.js";
-import commonStyleConfig from "@/config/style.js";
 export default {
     name: "StyleForm",
     props: {
@@ -61,27 +59,6 @@ export default {
             type: Object,
             default: () => ({})
         }
-    },
-    watch: {
-        "editingComponent.uuid": {
-            handler: function(val) {
-                if (!val) return;
-                for (const key in configList[this.editingComponent.configCode].styleInfo) {
-                    if (this.editingComponent.styleInfo[key] === undefined) {
-                        this.editingComponent.styleInfo[key] = configList[this.editingComponent.configCode].styleInfo[key];
-                    }
-                }
-                // 数据初始化
-                for (const key in this.editingComponent.styleInfo) {
-                    this.commonStyleConfig[key].value = this.editingComponent.styleInfo[key];
-                }
-            }
-        }
-    },
-    data() {
-        return {
-            commonStyleConfig
-        };
     }
 };
 </script>

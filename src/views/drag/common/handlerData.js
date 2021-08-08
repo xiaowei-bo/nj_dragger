@@ -5,6 +5,7 @@
 import configList from "@/plugins/config";
 import eventList from "@/config/event";
 const eventMap = eventList["configMap"];
+import commonStyleConfigMap from "@/config/style.js";
 import { deepClone } from "@/utils";
 
 /**
@@ -23,6 +24,16 @@ export function setConfigMap(activityData) {
             }
             j.configMap = midMap;
             j.configInfo && delete j.configInfo;
+
+            // 组件样式配置处理
+            const styleMap = {};
+            for (const k in j.styleInfo) {
+                const curMap = deepClone(commonStyleConfigMap[k]);
+                styleMap[k] = curMap;
+                styleMap[k].value = j.styleInfo[k];
+            }
+            j.styleMap = styleMap;
+            // j.styleInfo && delete j.styleInfo;
 
             // 组件事件配置处理
             j.events && j.events.forEach(x => {
@@ -54,6 +65,14 @@ export function removeConfigMap(activityData) {
             }
             j.configInfo = midInfo;
             j.configMap && delete j.configMap;
+
+            // 组件样式配置处理
+            const styleInfo = {};
+            for (const k in j.styleMap) {
+                styleInfo[k] = j.styleMap[k].value;
+            }
+            j.styleInfo = styleInfo;
+            j.styleMap && delete j.styleMap;
 
             // 组件事件配置处理
             j.events && j.events.forEach(x => {
