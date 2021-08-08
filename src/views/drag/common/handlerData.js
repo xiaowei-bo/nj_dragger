@@ -16,7 +16,7 @@ import { deepClone } from "@/utils";
 export function setConfigMap(activityData) {
     if (!activityData || !activityData.pages || !activityData.pages.length) return activityData;
     activityData.pages.forEach(i => {
-        i.elements.forEach(j => {
+        i.elements && i.elements.length && i.elements.forEach(j => {
             // 组件基础配置处理
             const midMap = deepClone(configList[j.configCode].configMap);
             for (const k in j.configInfo) {
@@ -67,11 +67,11 @@ export function removeConfigMap(activityData) {
             j.configMap && delete j.configMap;
 
             // 组件样式配置处理
-            const styleInfo = {};
-            for (const k in j.styleMap) {
-                styleInfo[k] = j.styleMap[k].value;
-            }
-            j.styleInfo = styleInfo;
+            // const styleInfo = {};
+            // for (const k in j.styleMap) {
+            //     styleInfo[k] = j.styleMap[k].value;
+            // }
+            // j.styleInfo = styleInfo;
             j.styleMap && delete j.styleMap;
 
             // 组件事件配置处理

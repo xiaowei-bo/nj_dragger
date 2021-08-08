@@ -131,6 +131,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { deepClone } from "@/utils/index.js";
 import configList from "@/plugins/config.js";
+import commonStyleConfigMap from "@/config/style.js";
 import NjElementBox from "./components/NjElementBox.vue";
 import Draggable from "vuedraggable";
 export default {
@@ -219,6 +220,16 @@ export default {
             item.uuid = uuidv4();
             const curPageData = this.curPageData;
             item.configCode = key;
+
+            // 组件样式配置处理
+            const styleMap = {};
+            for (const k in item.styleInfo) {
+                const curMap = deepClone(commonStyleConfigMap[k]);
+                styleMap[k] = curMap;
+                styleMap[k].value = item.styleInfo[k];
+            }
+            item.styleMap = styleMap;
+
             curPageData.elements.push(item);
             this.setEditingComponent(item);
             this.$emit("update:curPageData", curPageData);

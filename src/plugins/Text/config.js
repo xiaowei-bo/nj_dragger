@@ -17,16 +17,20 @@ export default {
     },
     styleInfo: { // 样式
         "display": "block",
-        "text-align": "center",
+        "text-align": "left",
         "position": "relative",
         "z-index": "0",
         "width": "100%",
         "height": "auto",
-        "line-height": "2",
+        "line-height": "1.5",
         "padding-left": "12px",
         "padding-right": "12px",
         "padding-top": "12px",
         "padding-bottom": "12px",
-        "text-indent": "20px"
+        "text-indent": "24px",
+        "margin-left": "auto",
+        "margin-right": "auto",
+        "margin-top": "0",
+        "margin-bottom": "0"
     }
 };

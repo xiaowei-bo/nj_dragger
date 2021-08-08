@@ -51,6 +51,7 @@ export default {
         "position": "relative",
         "z-index": "0",
         "width": "100%",
+        "height": "auto",
         "margin-left": "auto",
         "margin-right": "auto",
         "margin-top": "0",
