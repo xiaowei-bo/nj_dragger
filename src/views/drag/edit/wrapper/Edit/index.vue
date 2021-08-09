@@ -407,7 +407,8 @@ export default {
         width: 100%;
         height: 100%;
         border: 1px solid #dcdfe6;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: none;
         border-radius: 5px;
         pointer-events: auto;
         box-sizing: content-box;

@@ -2,13 +2,13 @@
     <div class="nj-element-box">
         <slot></slot>
         <i class="lt" @mousedown="(e) => { handlerMousedown(e, 'lt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
-        <!-- <i class="lm iconfont"></i> -->
+        <i class="lm" @mousedown="(e) => { handlerMousedown(e, 'lm')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <i class="lb" @mousedown="(e) => { handlerMousedown(e, 'lb')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <i class="rt" @mousedown="(e) => { handlerMousedown(e, 'rt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
-        <!-- <i class="rm iconfont"></i> -->
+        <i class="rm" @mousedown="(e) => { handlerMousedown(e, 'rm')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <i class="rb" @mousedown="(e) => { handlerMousedown(e, 'rb')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
-        <!-- <i class="mt iconfont"></i> -->
-        <!-- <i class="mb iconfont"></i> -->
+        <i class="mt" @mousedown="(e) => { handlerMousedown(e, 'mt')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
+        <i class="mb" @mousedown="(e) => { handlerMousedown(e, 'mb')}" @mouseout="resetFlag" @mouseover="setFlag"></i>
         <span class="mask"></span>
     </div>
 </template>
@@ -76,6 +76,22 @@ export default {
                     break;
                 case "rb":
                     targetW = originW + moveX;
+                    targetH = originH + moveY;
+                    break;
+                case "lm":
+                    targetW = originW - moveX;
+                    targetH = originH;
+                    break;
+                case "rm":
+                    targetW = originW + moveX;
+                    targetH = originH;
+                    break;
+                case "mt":
+                    targetW = originW;
+                    targetH = originH - moveY;
+                    break;
+                case "mb":
+                    targetW = originW;
                     targetH = originH + moveY;
                     break;
             }
@@ -149,6 +165,38 @@ export default {
             border-left-color: transparent;
             border-top-color: transparent;
             cursor: nwse-resize;
+        }
+        .lm{
+            left: 0;
+            top: calc(50% - 8px);
+            transform: rotate(135deg);
+            border-left-color: transparent;
+            border-top-color: transparent;
+            cursor: ew-resize;
+        }
+        .rm{
+            right: 0;
+            top: calc(50% - 8px);
+            transform: rotate(-45deg);
+            border-left-color: transparent;
+            border-top-color: transparent;
+            cursor: ew-resize;
+        }
+        .mt{
+            left: calc(50% - 8px);
+            top: 0;
+            transform: rotate(-135deg);
+            border-left-color: transparent;
+            border-top-color: transparent;
+            cursor: ns-resize;
+        }
+        .mb{
+            left: calc(50% - 8px);
+            bottom: 0;
+            transform: rotate(45deg);
+            border-left-color: transparent;
+            border-top-color: transparent;
+            cursor: ns-resize;
         }
     }
 }
