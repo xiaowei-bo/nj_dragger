@@ -17,6 +17,7 @@
                 <el-input
                     v-if="item.formType === 'input'"
                     v-model="item.value"
+                    v-setDisableKeycode
                     :placeholder="item.placeholder"
                     @change="v => { editingComponent.styleInfo[item.key] = v }"
                 />

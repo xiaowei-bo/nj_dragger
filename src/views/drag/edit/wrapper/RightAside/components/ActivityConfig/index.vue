@@ -10,7 +10,7 @@
         size="mini"
     >
         <el-form-item label="活动标题" class="activity-config-item" prop="title">
-            <el-input v-model="activityData.title" placeholder="请输入活动标题" />
+            <el-input v-model="activityData.title" v-setDisableKeycode placeholder="请输入活动标题" />
             <el-tooltip
                 effect="dark"
                 content="请输入活动标题"
@@ -20,7 +20,7 @@
             </el-tooltip>
         </el-form-item>
         <el-form-item label="活动描述" class="activity-config-item" prop="description">
-            <el-input v-model="activityData.description" placeholder="请输入活动描述" />
+            <el-input v-model="activityData.description" v-setDisableKeycode placeholder="请输入活动描述" />
             <el-tooltip
                 effect="dark"
                 content="请输入活动描述"
@@ -30,7 +30,7 @@
             </el-tooltip>
         </el-form-item>
         <el-form-item label="活动封面" class="activity-config-item" prop="coverImage">
-            <el-input v-model="activityData.coverImage" placeholder="请输入活动封面" />
+            <el-input v-model="activityData.coverImage" v-setDisableKeycode placeholder="请输入活动封面" />
             <el-tooltip
                 effect="dark"
                 content="请输入活动封面"

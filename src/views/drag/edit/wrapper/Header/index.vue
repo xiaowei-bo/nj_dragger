@@ -49,7 +49,7 @@
                 <p>活动保存：⌘ + S</p>
                 <p>组件复制：⌘ + C</p>
                 <p>组件粘贴：⌘ + V</p>
-                <p>组件删除：⌘ + Del</p>
+                <p>组件删除：Del</p>
             </div>
             <span slot="footer" class="dialog-footer">
                 <el-button v-if="dialogStatus === 'export'" type="primary" @click="handlerClip">复 制</el-button>

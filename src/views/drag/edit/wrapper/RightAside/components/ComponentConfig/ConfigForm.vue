@@ -18,11 +18,13 @@
                 <el-input
                     v-if="item.formType === 'input'"
                     v-model="item.value"
+                    v-setDisableKeycode
                     :placeholder="item.placeholder"
                 />
                 <el-input
                     v-if="item.formType === 'textarea'"
                     v-model="item.value"
+                    v-setDisableKeycode
                     :autosize="{ minRows: 2, maxRows: 8}"
                     :placeholder="item.placeholder"
                     type="textarea"

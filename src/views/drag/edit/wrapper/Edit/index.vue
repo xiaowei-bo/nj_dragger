@@ -134,6 +134,7 @@ import configList from "@/plugins/config.js";
 import commonStyleConfigMap from "@/config/style.js";
 import NjElementBox from "./components/NjElementBox.vue";
 import Draggable from "vuedraggable";
+import { mapGetters } from "vuex";
 export default {
     components: { NjElementBox, Draggable },
     props: {
@@ -198,6 +199,7 @@ export default {
         };
     },
     computed: {
+        ...mapGetters(["disableKeycode"]),
         pageStyle() {
             const style = this.curPageData.commonStyle;
             for (const k in this.curPageData.commonStyle) {
@@ -295,22 +297,23 @@ export default {
     async mounted() {
         await this.$nextTick();
         document.onkeydown = e => {
+            if (this.disableKeycode) return;
             const hasCtrl = e.metaKey || e.ctrlKey;
-            const customKey = ["Backspace", "KeyS", "KeyC", "KeyV"];
-            if (hasCtrl && customKey.includes(e.code)) {
-                e.preventDefault();
-            }
             switch (e.code) {
                 case "Backspace":
-                    hasCtrl && this.deleteElement();
+                    e.preventDefault();
+                    this.deleteElement();
                     break;
                 case "KeyS":
+                    e.preventDefault();
                     hasCtrl && this.$emit("saveActivity");
                     break;
                 case "KeyC":
+                    e.preventDefault();
                     hasCtrl && this.copyElement();
                     break;
                 case "KeyV":
+                    e.preventDefault();
                     hasCtrl && this.pasteElement();
                     break;
             }

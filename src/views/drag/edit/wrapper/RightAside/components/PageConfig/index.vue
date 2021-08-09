@@ -8,7 +8,7 @@
         size="mini"
     >
         <el-form-item label="页面标题" class="page-config-item right-form-item">
-            <el-input v-model="curPageData.name" placeholder="请输入页面标题" />
+            <el-input v-model="curPageData.name" v-setDisableKeycode placeholder="请输入页面标题" />
             <el-tooltip
                 effect="dark"
                 content="请输入页面标题"
@@ -28,6 +28,7 @@
                 <el-input
                     v-if="commonStyleConfig[key].formType === 'input'"
                     v-model="commonStyleConfig[key].value"
+                    v-setDisableKeycode
                     :placeholder="commonStyleConfig[key].placeholder"
                     @change="(v) => { curPageData.commonStyle[key] = v}"
                 />

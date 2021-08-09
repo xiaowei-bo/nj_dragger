@@ -72,6 +72,7 @@
                         <el-input
                             v-if="val.formType === 'input'"
                             v-model="val.value"
+                            v-setDisableKeycode
                             :placeholder="val.placeholder"
                         />
                         <el-color-picker
@@ -116,6 +117,7 @@
             <p class="tip txt">全局变量：例如：document, history, navigator, print, alert 等</p>
             <PrismEditor
                 v-model="currentCode"
+                v-setDisableKeycode
                 class="my-editor"
                 :highlight="highlight"
                 :line-numbers="true"
