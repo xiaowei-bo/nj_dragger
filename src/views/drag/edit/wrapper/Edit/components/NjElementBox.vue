@@ -79,7 +79,9 @@ export default {
                     targetH = originH + moveY;
                     break;
             }
-            if (leftToPar + targetW > 375) return;
+            if (leftToPar + targetW > 375) {
+                targetW = 375;
+            }
             const styleInfo = this.styleInfo;
             styleInfo.width = targetW + "px";
             styleInfo.height = targetH + "px";
