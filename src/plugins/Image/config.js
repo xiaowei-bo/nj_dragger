@@ -55,6 +55,13 @@ export default {
         "margin-left": "auto",
         "margin-right": "auto",
         "margin-top": "0",
-        "margin-bottom": "0"
+        "margin-bottom": "0",
+        "border-top-left-radius": "5px",
+        "border-top-right-radius": "5px",
+        "border-bottom-left-radius": "5px",
+        "border-bottom-right-radius": "5px",
+        "border-width": "0px",
+        "border-style": "solid",
+        "border-color": "#999"
     }
 };

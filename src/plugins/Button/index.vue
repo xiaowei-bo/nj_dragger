@@ -32,8 +32,9 @@ export default {
 
 <style lang="scss" scoped>
 .nj-btn{
-    color: inherit;
     font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
 }
 
 </style>

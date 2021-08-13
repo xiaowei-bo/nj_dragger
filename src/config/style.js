@@ -49,6 +49,15 @@ const commonStyleConfig = {
         tip: "请输入组件高度",
         label: "高度"
     },
+    "border-radius": {
+        key: "border-radius",
+        value: 40,
+        valueType: "string",
+        formType: "input",
+        placeholder: "请输入组件圆角度",
+        tip: "请输入组件圆角度",
+        label: "圆角"
+    },
     "border-top-left-radius": {
         key: "border-top-left-radius",
         value: 40,
@@ -241,7 +250,7 @@ const commonStyleConfig = {
         label: "背景布局"
     },
     "color": {
-        key: "background-color",
+        key: "color",
         value: "#ffffff",
         valueType: "string",
         formType: "color",
@@ -257,6 +266,62 @@ const commonStyleConfig = {
         placeholder: "",
         tip: "请输入首行缩进值",
         label: "首行缩进"
+    },
+    "font-weight": {
+        key: "font-weight",
+        value: "",
+        valueMap: [{
+            value: "normal",
+            desc: "正常"
+        }, {
+            value: "bold",
+            desc: "加粗"
+        }],
+        valueType: "enum",
+        formType: "select",
+        placeholder: "",
+        tip: "请选择字重",
+        label: "字重"
+    },
+    "border-width": {
+        key: "border-width",
+        value: "0",
+        valueType: "string",
+        formType: "input",
+        placeholder: "请输入边框宽度",
+        tip: "请输入边框宽度",
+        label: "边框宽度"
+    },
+    "border-style": {
+        key: "border-style",
+        value: "solid",
+        valueMap: [{
+            value: "solid",
+            desc: "实线"
+        }, {
+            value: "dashed",
+            desc: "虚线"
+        }, {
+            value: "dotted",
+            desc: "点状线"
+        }, {
+            value: "double",
+            desc: "双线"
+        }],
+        valueType: "enum",
+        formType: "select",
+        placeholder: "",
+        tip: "请选择边框样式",
+        label: "边框样式"
+    },
+    "border-color": {
+        key: "border-color",
+        value: "#999",
+        valueType: "string",
+        formType: "color",
+        placeholder: "",
+        tip: "请选择边框颜色",
+        label: "边框颜色"
     }
 };
 

@@ -38,6 +38,10 @@ export default {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
     img{
         width: 100%;
     }

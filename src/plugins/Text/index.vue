@@ -36,5 +36,8 @@ export default {
     height: 100%;
     overflow: hidden;
     text-align: inherit;
+    font-size: inherit;
+    color: inherit;
+    font-weight: inherit;
 }
 </style>
