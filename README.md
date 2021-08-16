@@ -1,12 +1,13 @@
 #### 1、前言
 ***
-以深度学习为目的，我们来一起实现一个可视化配置平台(nocode)   
-项目技术栈为： VueCli5 + ElementUI + Egg  
-平台地址：[可视化配置平台](http://ixuexi.plus:9797/#/drag/list)  
-代码地址：[git仓库](https://github.com/killWeb/nj_dragger)  
-#### 2、架构图
+以深度学习为目的，我们来一起实现一个可视化配置平台(nocode)      
+项目技术栈为： VueCli5 + ElementUI + Egg     
+平台地址：[可视化配置平台](http://ixuexi.plus:9797/#/drag/list)    
+h5页面：[可视化配置平台产出Demo页面](http://ixuexi.plus:9797/view?id=45)    
+代码地址：[git仓库](https://github.com/killWeb/nj_dragger)     
+#### 2、思路及架构图
 ***
-TODO
+![思路.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bb5baabf1a87480eba8c6cf9a985f082~tplv-k3u1fbpfcp-watermark.image)
 #### 3、效果图
 ***
 ![效果图.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/17a5892b7c32403389cad99c87fd8095~tplv-k3u1fbpfcp-watermark.image)
@@ -62,4 +63,4 @@ TODO
     |----permission.js                          - 路由守卫
 |----vue.config.js                              - vue/cli配置
 ```
-#### 5、
+#### 6、
