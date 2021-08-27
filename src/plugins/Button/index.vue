@@ -11,21 +11,10 @@ export default {
             default: () => ({})
         }
     },
-    data() {
-        return {
-
-        };
-    },
     computed: {
         btnText() {
             return this.item.configMap.btnText.value;
         }
-    },
-    methods: {
-
-    },
-    created() {
-
     }
 };
 </script>
