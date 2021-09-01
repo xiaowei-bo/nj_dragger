@@ -9,6 +9,7 @@ module.exports = {
                 "feat", // 新功能
                 "fix", // bug修复
                 "docs", // 文档改动
+                "ui", // ui样式调整
                 "style", // 代码格式
                 "refactor", // 代码重构
                 "test", // 测试代码
