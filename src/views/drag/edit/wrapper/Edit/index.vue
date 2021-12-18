@@ -123,7 +123,7 @@
                 </Draggable>
             </div>
         </div>
-        <div class="rubbish-box">垃圾桶</div>
+        <!-- <div class="rubbish-box">垃圾桶</div> -->
     </el-main>
 </template>
 
