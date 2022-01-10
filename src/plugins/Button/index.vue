@@ -24,6 +24,7 @@ export default {
     font-size: inherit;
     color: inherit;
     font-weight: inherit;
+    text-align: inherit;
 }
 
 </style>

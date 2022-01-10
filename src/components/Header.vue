@@ -1,7 +1,9 @@
 <template>
     <div class="app-header clearfix">
         <div class="header-left fl">
-            <slot name="left"></slot>
+            <div class="logo-box">
+                <img class="logo" src="../assets/logo.png" alt="" />
+            </div>
         </div>
         <div class="header-middle fl">
             <slot name="middle"></slot>
@@ -10,14 +12,14 @@
             <slot name="right"></slot>
             <div class="avatar-box fr">
                 <el-dropdown @command="handleCommand">
-                    <span class="el-dropdown-link">
-                        <span class="name">yibo.wei</span>
-                        <el-avatar src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" />
-                    </span>
+                    <div class="el-dropdown-link">
+                        <span class="name">博小魏</span>
+                        <el-avatar src="https://p9-passport.byteacctimg.com/img/user-avatar/2b6661024c2319cd39108c3153a0d8f8~300x300.image" />
+                    </div>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="home">首页</el-dropdown-item>
                         <el-dropdown-item command="github">项目地址</el-dropdown-item>
-                        <el-dropdown-item v-if="curModuleDoc" command="doc">使用文档</el-dropdown-item>
+                        <el-dropdown-item command="doc">使用文档</el-dropdown-item>
                         <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
@@ -32,14 +34,6 @@ export default {
         return {
             github: "https://github.com/killWeb/nj_dragger"
         };
-    },
-    computed: {
-        curModuleDoc() {
-            const { path } = this.$route;
-            if (path.includes("drag")) return "draggerDoc";
-            if (["auto", "deploy"].some(i => path.includes(i))) return "deployerDoc";
-            return null;
-        }
     },
     methods: {
         toIndex() {
@@ -56,7 +50,7 @@ export default {
                     break;
                 case "doc":
                     this.$router.push({
-                        name: this.curModuleDoc
+                        name: "draggerDoc"
                     });
                     break;
                 case "github":
@@ -105,9 +99,9 @@ export default {
             padding-right: 60px;
             cursor: pointer;
             .name{
-                position: relative;
-                top: 10px;
-                margin-right: 5px;
+                vertical-align: middle;
+                margin-right: 10px;
+                font-size: 16px;
             }
         }
         .el-avatar{

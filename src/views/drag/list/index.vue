@@ -1,12 +1,6 @@
 <template>
     <div class="drag-list">
-        <Header>
-            <template v-slot:left>
-                <div class="logo-box">
-                    <img class="logo" src="../assets/logo.png" alt="" />
-                </div>
-            </template>
-        </Header>
+        <Header />
         <el-form
             ref="searchForm"
             :model="searchForm"

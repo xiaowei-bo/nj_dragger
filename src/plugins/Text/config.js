@@ -18,16 +18,16 @@ export default {
     styleInfo: { // 样式
         "display": "block",
         "text-align": "left",
-        "text-indent": "24px",
+        "text-indent": "0",
         "position": "relative",
         "z-index": "0",
         "width": "100%",
         "height": "auto",
         "line-height": "1.5",
-        "padding-left": "12px",
-        "padding-right": "12px",
-        "padding-top": "12px",
-        "padding-bottom": "12px",
+        "padding-left": "0",
+        "padding-right": "0",
+        "padding-top": "0",
+        "padding-bottom": "0",
         "margin-left": "auto",
         "margin-right": "auto",
         "margin-top": "0",
@@ -38,7 +38,7 @@ export default {
         "border-radius": "0",
         "border-width": "0px",
         "border-style": "solid",
-        "border-color": "#999"
-
+        "border-color": "#999",
+        "background-color": "#fff"
     }
 };

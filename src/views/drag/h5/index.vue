@@ -70,5 +70,6 @@ html,body{
 }
 .h5{
     height: 100%;
+    overflow: auto;
 }
 </style>

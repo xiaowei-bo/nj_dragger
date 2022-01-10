@@ -1,11 +1,6 @@
 <template>
     <div id="appHeader" class="app-header clearfix">
         <Header>
-            <template v-slot:left>
-                <div class="logo-box" @click="toIndex">
-                    <img class="logo" src="../../../assets/logo.png" alt="" />
-                </div>
-            </template>
             <template v-slot:middle>
                 <el-tooltip class="item" effect="dark" content="预览" placement="bottom">
                     <i class="iconfont icon-yulan" @click="$emit('toPreview')"></i>
