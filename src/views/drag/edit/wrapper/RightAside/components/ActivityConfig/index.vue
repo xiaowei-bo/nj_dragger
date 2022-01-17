@@ -43,13 +43,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 export default {
-    props: {
-        activityData: {
-            type: Object,
-            default: () => ({})
-        }
-    },
     data() {
         return {
             rules: {
@@ -58,6 +53,9 @@ export default {
                 coverImage: { required: true, message: "活动封面不能为空", trigger: "blur" }
             }
         };
+    },
+    computed: {
+        ...mapGetters(["activityData"])
     },
     async mounted() {
         await this.$nextTick();
