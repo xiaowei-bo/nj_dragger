@@ -2,6 +2,7 @@
     <div v-if="initSon" class="app">
         <el-header height="60px" :style="{'padding':0}">
             <Header
+                :activity-data="activityData"
                 @importJsonData="importJsonData"
                 @saveActivity="saveActivity"
                 @toPreview="toPreview"
@@ -10,6 +11,7 @@
         <el-container class="app-container">
             <LeftAside
                 ref="leftAside"
+                :activity-data.sync="activityData"
                 :cur-page-data.sync="curPageData"
                 :aside-is-open.sync="editInfo.asideIsOpen"
                 @setEditInfoToLocal="setEditInfoToLocal"
@@ -26,6 +28,7 @@
             />
             <RightAside
                 ref="rightAside"
+                :activity-data="activityData"
                 :cur-page-data.sync="curPageData"
                 :editing-component.sync="editingComponent"
             />
@@ -50,12 +53,13 @@ export default {
         Header
     },
     computed: {
-        ...mapGetters(["allForm", "activityData"])
+        ...mapGetters(["allForm"])
     },
     data() {
         return {
             activityId: "-1",
             initSon: false,
+            activityData: {},
             curPageData: {},
             editingComponent: {}, // 当前操作中组件
             elementClipBoard: {}, // 粘贴板
@@ -79,7 +83,7 @@ export default {
             let loading = null;
             const localData = localStorage.getItem("localData");
             if (localData) {
-                this.$store.dispatch("setActivityData", JSON.parse(localData));
+                this.activityData = JSON.parse(localData);
                 this.initSon = true;
                 localStorage.removeItem("localData");
                 return;
@@ -95,19 +99,17 @@ export default {
                 activityData = res && res.jsonData;
             }
             if (activityData) {
-                this.$store.dispatch("setActivityData", setConfigMap(JSON.parse(activityData)));
+                this.activityData = setConfigMap(JSON.parse(activityData));
             } else {
-                activityData = deepClone(activityConfig);
-                activityData.author = "yibo.wei";
-                this.$store.dispatch("setActivityData", activityData);
+                this.activityData = deepClone(activityConfig);
+                this.activityData.author = "yibo.wei";
             }
             this.initSon = true;
             loading && loading.close();
         },
         importJsonData(jsonData) {
-            const activityData = deepClone(jsonData);
-            activityData.author = "yibo.wei";
-            this.$store.dispatch("setActivityData", activityData);
+            this.activityData = deepClone(jsonData);
+            this.activityData.author = "yibo.wei";
             localStorage.setItem("localData", JSON.stringify(this.activityData));
             location.reload();
         },

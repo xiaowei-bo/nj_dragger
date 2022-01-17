@@ -12,7 +12,7 @@
                 <PageConfig :cur-page-data="curPageData" />
             </el-tab-pane>
             <el-tab-pane label="活动配置" name="ACTIVITYCONFIG">
-                <ActivityConfig />
+                <ActivityConfig :activity-data="activityData" />
             </el-tab-pane>
         </el-tabs>
     </el-aside>
@@ -22,17 +22,17 @@
 import ComponentConfig from "./components/ComponentConfig/index.vue";
 import PageConfig from "./components/PageConfig/index.vue";
 import ActivityConfig from "./components/ActivityConfig/index.vue";
-import { mapGetters } from "vuex";
 export default {
     components: {
         ComponentConfig,
         PageConfig,
         ActivityConfig
     },
-    computed: {
-        ...mapGetters(["activityData"])
-    },
     props: {
+        activityData: {
+            type: Object,
+            default: () => ({})
+        },
         curPageData: {
             type: Object,
             default: () => ({})

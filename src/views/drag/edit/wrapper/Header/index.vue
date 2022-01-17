@@ -56,12 +56,17 @@
 
 <script>
 import VueJsonPretty from "vue-json-pretty";
-import Header from "@/components/Header.vue";
 import "vue-json-pretty/lib/styles.css";
 import { copyText } from "@/utils";
-import { mapGetters } from "vuex";
+import Header from "@/components/Header.vue";
 export default {
     components: { VueJsonPretty, Header },
+    props: {
+        activityData: {
+            type: Object,
+            default: () => ({})
+        }
+    },
     data() {
         return {
             dialogVisible: false,
@@ -71,7 +76,6 @@ export default {
         };
     },
     computed: {
-        ...mapGetters(["activityData"]),
         dialogTitle() {
             const titleMap = {
                 "import": "导入数据",

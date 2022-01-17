@@ -1,7 +1,6 @@
 const state = {
     allForm: [],
-    disableKeycode: false,
-    activityData: {}
+    disableKeycode: false
 };
 
 const mutations = {
@@ -11,9 +10,6 @@ const mutations = {
     },
     SET_DISABLEKEYCODE: (state, disableKeycode) => {
         state.disableKeycode = disableKeycode;
-    },
-    SET_ACTIVITYDATA: (state, activityData) => {
-        state.activityData = activityData;
     }
 };
 
@@ -23,9 +19,6 @@ const getters = {
     },
     disableKeycode: state => {
         return state.disableKeycode;
-    },
-    activityData: state => {
-        return state.activityData;
     }
 };
 
@@ -35,9 +28,6 @@ const actions = {
     },
     setDisableKeycode: (context, disableKeycode) => {
         context.commit("SET_DISABLEKEYCODE", disableKeycode);
-    },
-    setActivityData: (context, activityData) => {
-        context.commit("SET_ACTIVITYDATA", activityData);
     }
 };
 

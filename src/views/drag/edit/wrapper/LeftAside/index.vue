@@ -62,13 +62,13 @@ import Draggable from "vuedraggable";
 import { page as pageConfig } from "@/config/json_scheme.js";
 import { v4 as uuidv4 } from "uuid";
 import { deepClone, copyText } from "@/utils/index.js";
-import { mapGetters } from "vuex";
 export default {
     components: { Draggable },
-    computed: {
-        ...mapGetters(["activityData"])
-    },
     props: {
+        activityData: {
+            type: Object,
+            default: () => ({})
+        },
         curPageData: {
             type: Object,
             default: () => ({})
@@ -121,7 +121,8 @@ export default {
             } else {
                 this.setCurPageData(activityData.pages[0], 0);
             }
-            this.$store.dispatch("setActivityData", activityData);
+            this.activityData.pages = activityData.pages;
+            this.$emit("update:activityData", activityData);
         },
         handlerStyle(commonStyle) {
             const style = deepClone(commonStyle);
