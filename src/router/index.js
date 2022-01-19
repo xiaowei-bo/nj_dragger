@@ -8,8 +8,8 @@ Router.prototype.push = function push(location) {
 
 import dragRouter from "./modules/drag";
 import boardRouter from "./modules/board";
-import autoRouter from "./modules/auto";
 import docRouter from "./modules/doc";
+import userRoutes from "./modules/user";
 
 Vue.use(Router);
 
@@ -21,8 +21,8 @@ const constantRoutes = [
     },
     ...dragRouter,
     ...boardRouter,
-    ...autoRouter,
-    ...docRouter
+    ...docRouter,
+    ...userRoutes
 ];
 // const asyncRoutes = [];
 

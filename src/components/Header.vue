@@ -1,7 +1,7 @@
 <template>
     <div class="app-header clearfix">
         <div class="header-left fl">
-            <div class="logo-box">
+            <div class="logo-box" @click="toIndex">
                 <img class="logo" src="../assets/logo.png" alt="" />
             </div>
         </div>
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { logout } from "@/api/user";
 export default {
     data() {
         return {
@@ -38,7 +39,7 @@ export default {
     methods: {
         toIndex() {
             this.$router.push({
-                name: "dragList"
+                name: "home"
             });
         },
         handleCommand(commond) {
@@ -57,7 +58,7 @@ export default {
                     window.open(this.github, "_blank");
                     break;
                 case "logout":
-                    // TODO 注销登录态
+                    logout();
                     break;
             }
         }

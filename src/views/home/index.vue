@@ -55,6 +55,7 @@ export default {
         }
         .eg-1{
             width: 100%;
+            min-width: 1000px;
             display: flex;
             justify-content: space-between;
             .edit{

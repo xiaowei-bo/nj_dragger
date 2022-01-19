@@ -3,12 +3,10 @@ const path = require("path");
 const chalk = require("chalk");
 const koaStatic = require("koa-static-server");
 const Koa = require("koa");
-// const httpProxy = require("http-proxy");
 const app = new Koa();
 const KoaRouter = require("koa-router");
 const router = new KoaRouter();
 const port = 9797;
-// const proxy = httpProxy.createProxyServer({});
 
 const pcHtmlFile = path.resolve(__dirname, "../dist/index.html");
 const h5HtmlFile = path.resolve(__dirname, "../dist/view.html");
