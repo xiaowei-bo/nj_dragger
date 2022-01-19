@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-const { ENV } = require("./src/config/index.js");
+const { ENV, VUE_APP_BASE_URI } = require("./src/config/index.js");
 const port = 9797;
 
 module.exports = {
@@ -30,6 +30,15 @@ module.exports = {
         overlay: {
             warnings: false,
             errors: true
+        },
+        proxy: {
+            "/api": {
+                target: VUE_APP_BASE_URI,
+                changeOrigin: true,
+                pathRewrite: {
+                    "^/api": "/api"
+                }
+            }
         }
     },
     configureWebpack: {

@@ -13,14 +13,14 @@
             <div class="avatar-box fr">
                 <el-dropdown @command="handleCommand">
                     <div class="el-dropdown-link">
-                        <span class="name">博小魏</span>
+                        <span class="name">{{ hasLogin ? userInfo.userName : "未登录" }}</span>
                         <el-avatar src="https://p9-passport.byteacctimg.com/img/user-avatar/2b6661024c2319cd39108c3153a0d8f8~300x300.image" />
                     </div>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="home">首页</el-dropdown-item>
                         <el-dropdown-item command="github">项目地址</el-dropdown-item>
                         <el-dropdown-item command="doc">使用文档</el-dropdown-item>
-                        <el-dropdown-item command="logout" divided>退出登录</el-dropdown-item>
+                        <el-dropdown-item command="logout" divided>{{ hasLogin ? "退出登录" : "去登录" }}</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
             </div>
@@ -30,11 +30,18 @@
 
 <script>
 import { logout } from "@/api/user";
+import { mapGetters } from "vuex";
 export default {
     data() {
         return {
             github: "https://github.com/killWeb/nj_dragger"
         };
+    },
+    computed: {
+        ...mapGetters(["userInfo"]),
+        hasLogin() {
+            return this.userInfo.userName;
+        }
     },
     methods: {
         toIndex() {
@@ -58,7 +65,13 @@ export default {
                     window.open(this.github, "_blank");
                     break;
                 case "logout":
-                    logout();
+                    if (this.hasLogin) {
+                        logout();
+                    } else {
+                        this.$router.push({
+                            name: "userLogin"
+                        });
+                    }
                     break;
             }
         }

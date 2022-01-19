@@ -23,3 +23,10 @@ export function region(data) {
         data
     });
 }
+
+export function getUserInfo() {
+    return request({
+        url: "/api/user/info",
+        method: "get"
+    });
+}

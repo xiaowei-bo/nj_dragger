@@ -3,7 +3,10 @@
         <Header />
         <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
             <div class="title-container">
-                <h3 class="title">系统登录</h3>
+                <h3 class="title">
+                    系统登录
+                    <p class="switch" @click="toRegion">注册</p>
+                </h3>
             </div>
             <el-form-item prop="userCode">
                 <span class="svg-container">
@@ -79,12 +82,18 @@ export default {
             this.loading = true;
             if (res.userName) {
                 this.$message.success("登录成功");
+                await this.$store.dispatch("setUserInfo");
                 setTimeout(() => {
                     this.$router.push({
                         name: "home"
                     });
                 }, 1000);
             }
+        },
+        toRegion() {
+            this.$router.push({
+                name: "userRegion"
+            });
         }
     },
     created() {
@@ -114,8 +123,7 @@ $dark_gray:#889aa4;
       }
     }
     .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 5px;
       color: #454545;
     }
@@ -148,6 +156,16 @@ $dark_gray:#889aa4;
       margin: 0px auto 40px auto;
       text-align: center;
       font-weight: bold;
+      position: relative;
+      .switch{
+          font-size: 14px;
+          font-weight: normal;
+          position: absolute;
+          right: 0;
+          bottom: 3px;
+          color: #409EFF;
+          cursor: pointer;
+      }
     }
   }
   .show-pwd {
