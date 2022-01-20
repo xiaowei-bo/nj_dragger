@@ -55,7 +55,7 @@
                     <i :class="passwordType === 'password' ? 'iconfont icon-no_eye' : 'iconfont icon-eye'"></i>
                 </span>
             </el-form-item>
-            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegion">登录</el-button>
+            <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleRegion">注册</el-button>
         </el-form>
         <Footer />
     </div>
@@ -93,7 +93,7 @@ export default {
         },
         async handleRegion() {
             this.loading = true;
-            const res = await region(this.ruleForm);
+            const res = await region(this.regionForm);
             this.loading = false;
             if (res.userName) {
                 this.$message.success("注册成功，快去登录吧");
