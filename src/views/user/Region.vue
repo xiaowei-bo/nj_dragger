@@ -100,6 +100,8 @@ export default {
                 setTimeout(() => {
                     this.toLogin();
                 }, 1000);
+            } else {
+                this.$message.error("注册失败");
             }
         },
         toLogin() {

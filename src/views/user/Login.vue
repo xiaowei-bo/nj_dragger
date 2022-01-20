@@ -79,7 +79,7 @@ export default {
         async handleLogin() {
             this.loading = true;
             const res = await login(this.loginForm);
-            this.loading = true;
+            this.loading = false;
             if (res.userName) {
                 this.$message.success("登录成功");
                 await this.$store.dispatch("setUserInfo");
@@ -88,6 +88,8 @@ export default {
                         name: "home"
                     });
                 }, 1000);
+            } else {
+                this.$message.error("用户不存在或密码错误");
             }
         },
         toRegion() {
