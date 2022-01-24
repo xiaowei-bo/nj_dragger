@@ -15,7 +15,7 @@
                 <el-input
                     ref="userCode"
                     v-model="regionForm.userCode"
-                    placeholder="请输入用户名"
+                    placeholder="请输入登录用户名"
                     name="userCode"
                     type="text"
                     tabindex="1"
@@ -29,7 +29,7 @@
                 <el-input
                     ref="userName"
                     v-model="regionForm.userName"
-                    placeholder="请输入中文名"
+                    placeholder="请输入昵称"
                     name="userName"
                     type="text"
                     tabindex="1"

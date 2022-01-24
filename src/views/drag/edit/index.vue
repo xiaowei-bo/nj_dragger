@@ -53,7 +53,7 @@ export default {
         Header
     },
     computed: {
-        ...mapGetters(["allForm"])
+        ...mapGetters(["allForm", "userInfo"])
     },
     data() {
         return {
@@ -102,14 +102,16 @@ export default {
                 this.activityData = setConfigMap(JSON.parse(activityData));
             } else {
                 this.activityData = deepClone(activityConfig);
-                this.activityData.author = "yibo.wei";
+                this.activityData.author = this.userInfo.userName;
+                this.activityData.authorId = this.userInfo.id;
             }
             this.initSon = true;
             loading && loading.close();
         },
         importJsonData(jsonData) {
             this.activityData = deepClone(jsonData);
-            this.activityData.author = "yibo.wei";
+            this.activityData.author = this.userInfo.userName;
+            this.activityData.authorId = this.userInfo.id;
             localStorage.setItem("localData", JSON.stringify(this.activityData));
             location.reload();
         },
@@ -146,7 +148,8 @@ export default {
         },
         async saveActivity() {
             if (!await this.validAllForm()) return false;
-            const { title, author, description, coverImage } = this.activityData;
+            const { title, author, authorId, description, coverImage } = this.activityData;
+            if (this.userInfo.id !== this.activityData.authorId) return this.$message.warning("暂不支持修改他人的活动，可以尝试导入导出功能");
             const saveActivityData = removeConfigMap(deepClone(this.activityData));
             const jsonData = JSON.stringify(saveActivityData);
             console.log(`当前活动 jsonData 长度为 ${jsonData.length}`);
@@ -154,6 +157,7 @@ export default {
                 id: this.activityId,
                 title,
                 author,
+                authorId,
                 description,
                 coverImage,
                 jsonData

@@ -59,6 +59,7 @@ import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
 import { copyText } from "@/utils";
 import Header from "@/components/Header.vue";
+import { mapGetters } from "vuex";
 export default {
     components: { VueJsonPretty, Header },
     props: {
@@ -76,6 +77,7 @@ export default {
         };
     },
     computed: {
+        ...mapGetters(["userInfo"]),
         dialogTitle() {
             const titleMap = {
                 "import": "导入数据",
@@ -118,7 +120,6 @@ export default {
             }
         },
         handlerClip() {
-            console.log(JSON.stringify(this.activityData).length);
             copyText(JSON.stringify(this.activityData));
         },
         handleClose() {

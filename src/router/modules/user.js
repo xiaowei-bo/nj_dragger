@@ -25,6 +25,14 @@ const userRoutes = [
                     title: "注册",
                     icon: "el-icon-tickets"
                 }
+            }, {
+                path: "list",
+                component: () => import(/* webpackChunkName: 'user-region' */"@/views/user/List"),
+                name: "userList",
+                meta: {
+                    title: "用户列表",
+                    icon: "el-icon-tickets"
+                }
             }
         ]
     }

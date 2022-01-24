@@ -15,7 +15,7 @@
                 <el-input
                     ref="userCode"
                     v-model="loginForm.userCode"
-                    placeholder="请输入用户名"
+                    placeholder="请输入登录用户名"
                     name="userCode"
                     type="text"
                     tabindex="1"

@@ -30,3 +30,11 @@ export function getUserInfo() {
         method: "get"
     });
 }
+
+export function getUserList(params) {
+    return request({
+        url: "/api/user/list",
+        method: "get",
+        params
+    });
+}

@@ -51,7 +51,6 @@ export default {
             } else {
                 this.curPageData = pages[0];
             }
-            console.log("curPageData", this.curPageData);
             const name = this.curPageData.name;
             document.title = name;
             await this.$nextTick();

@@ -35,6 +35,7 @@
                 class="activity-item"
                 @click="editActivity(item.id)"
             >
+                <p class="abs-txt">{{ item.id }}</p>
                 <div class="image-box">
                     <el-image
                         :src="checkImg(item.cover_image) || defaultImg"
@@ -46,8 +47,8 @@
                         </template>
                     </el-image>
                 </div>
-                <div style="padding: 15px;">
-                    <p class="txt">活动id：{{ item.id }}</p>
+                <div style="padding: 10px 15px;">
+                    <p class="txt">作者：{{ item.author }}</p>
                     <p class="txt">标题：{{ item.title || "暂无" }}</p>
                 </div>
             </div>
@@ -164,7 +165,7 @@ export default {
         flex-wrap: wrap;
         .activity-item{
             width: 150px;
-            height: 220px;
+            height: 210px;
             margin: 20px;
             border: 1px solid #dcdfe6;
             border-radius: 5px;
@@ -184,11 +185,23 @@ export default {
                     border-color: #409eff;
                 }
             }
+            .abs-txt{
+                position: absolute;
+                right: 0;
+                top: 0;
+                background-color: #409EFF;
+                z-index: 1;
+                color: #fff;
+                padding: 2px 8px 4px 12px;
+                font-size: 12px;
+                border-radius: 0 0 0 15px;
+            }
             .txt{
                 width: 100%;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                font-size: 12px;
             }
         }
     }

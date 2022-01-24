@@ -7,7 +7,8 @@ const activity = {
     title: "", // 标题
     description: "", // 描述
     coverImage: "", // 封面图
-    author: "", // 作者
+    author: "", // 作者昵称
+    authorCode: "", // 作者用户名
     pages: [] // 多页页面
 };
 
