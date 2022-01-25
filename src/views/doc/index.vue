@@ -19,7 +19,7 @@
 <script>
 import Header from "@/components/Header.vue";
 import MenuList from "./components/MenuList.vue";
-import { draggerMenuList, deployerMenuList } from "./menuList";
+import { draggerMenuList } from "./menuList";
 export default {
     name: "Doc",
     components: { Header, MenuList },
@@ -32,8 +32,7 @@ export default {
         menuListData() {
             const { name } = this.$route;
             const menuMap = {
-                draggerDoc: draggerMenuList,
-                deployerDoc: deployerMenuList
+                draggerDoc: draggerMenuList
             };
             return menuMap[name];
         }
