@@ -5,6 +5,8 @@ import App from "./App.vue";
 import ElementUI from "element-ui";
 import NjElement from "@/plugins/index.js";
 import NjDirective from "./directives/index.js";
+import { handlerInterval } from "./utils";
+import { reportOnlineTime } from "./api/user";
 import "element-ui/lib/theme-chalk/index.css";
 import "@/style/index.scss";
 import "./permission.js";
@@ -26,3 +28,8 @@ new Vue({
     store,
     render: h => h(App)
 });
+
+const INTERVAL_TIME = 5000;
+handlerInterval(() => {
+    reportOnlineTime(INTERVAL_TIME);
+}, INTERVAL_TIME);

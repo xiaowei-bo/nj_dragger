@@ -24,6 +24,11 @@ const deepClone = (target) => {
     }
     return result;
 };
+/**
+ * @description 节流函数
+ * @param {*} delay
+ * @returns
+ */
 const throttle = (delay) => {
     let run = false;
     return function(callback = () => {}) {
@@ -107,6 +112,17 @@ const checkImg = (src) => {
     const status = ["http", "//"].some(i => src.startsWith(i));
     return status ? src : "";
 };
+/**
+ * @description setTimeout 实现 setInterval
+ * @param {Function} handler
+ * @param {Number} interval
+ */
+const handlerInterval = (handler = () => {}, interval) => {
+    handler();
+    setTimeout(() => {
+        handlerInterval(handler, interval);
+    }, interval);
+};
 
 export {
     deepClone,
@@ -114,5 +130,6 @@ export {
     getUrlParams,
     urlWithObj,
     checkImg,
-    throttle
+    throttle,
+    handlerInterval
 };

@@ -42,6 +42,14 @@
                 align="center"
             />
             <el-table-column
+                label="在线时长"
+                align="center"
+            >
+                <template slot-scope="scope">
+                    {{ handlerOnlineTime(scope.row.onlineTime) }}
+                </template>
+            </el-table-column>
+            <el-table-column
                 label="创建时间"
                 align="center"
             >
@@ -99,6 +107,13 @@ export default {
         handleSizeChange(i) {
             this.searchForm.pageSize = i;
             this.getActivityList();
+        },
+        handlerOnlineTime(_num) {
+            const num = (_num || 0) / 1000;
+            if (num < 60) return `${num}秒`;
+            if (num >= 60 && num < 60 * 60) return `${Math.floor(num / 60)}分钟`;
+            if (num >= 60 * 60 && num < 60 * 60 * 24) return `${Math.floor(num / 60 / 60)}小时`;
+            if (num >= 60 * 60 * 24) return `${Math.floor(num / 60 / 60 / 24)}天`;
         },
         async getUserList() {
             const res = await getUserList(this.searchForm);
