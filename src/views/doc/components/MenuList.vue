@@ -36,10 +36,10 @@ export default {
         defaultActive() {
             const data = this.menuList.length && this.menuList[0] || null;
             this.onMenuSelected(data);
-            return data.name || null;
+            return data.code || null;
         },
         defaultOpens() {
-            return this.menuList.map(item => item.name);
+            return this.menuList.map(item => item.code);
         }
     },
     methods: {
@@ -55,6 +55,9 @@ export default {
     height: 100%;
     .el-menu {
         height: 100%;
+        .el-menu-item {
+            cursor: pointer;
+        }
     }
 }
 </style>

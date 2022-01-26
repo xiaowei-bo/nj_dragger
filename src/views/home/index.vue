@@ -9,7 +9,7 @@
             </div>
             <div class="btn-group">
                 <el-button type="primary" @click="$router.push({ name: 'dragList' })">开始使用</el-button>
-                <el-button type="primary" plain @click="$router.push({ name: 'draggerDoc' })">使用文档</el-button>
+                <el-button type="primary" plain @click="$router.push({ name: 'draggerDoc' })">文档</el-button>
             </div>
         </div>
         <Footer />

@@ -9,6 +9,11 @@ import "element-ui/lib/theme-chalk/index.css";
 import "@/style/index.scss";
 import "./permission.js";
 
+// markdown 样式文件
+import "github-markdown-css/github-markdown.css";
+import "highlight.js/styles/color-brewer.css";
+import "vue-dotmd-loader/src/docs.css";
+
 Vue.use(ElementUI);
 Vue.use(NjElement);
 Vue.use(NjDirective);

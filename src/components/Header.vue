@@ -19,7 +19,7 @@
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item command="home">首页</el-dropdown-item>
                         <el-dropdown-item command="github">项目地址</el-dropdown-item>
-                        <el-dropdown-item command="doc">使用文档</el-dropdown-item>
+                        <el-dropdown-item command="doc">文档</el-dropdown-item>
                         <el-dropdown-item command="logout" divided>{{ hasLogin ? "退出登录" : "去登录" }}</el-dropdown-item>
                     </el-dropdown-menu>
                 </el-dropdown>
