@@ -1,4 +1,5 @@
-import { getUserInfo } from "@/api/user";
+import { getUserInfo, reportOnlineTime } from "@/api/user";
+import { handlerInterval } from "@/utils";
 
 const state = {
     userInfo: {}
@@ -20,6 +21,10 @@ const actions = {
     setUserInfo: async (context) => {
         const userInfo = await getUserInfo();
         if (!userInfo.id) return;
+        const INTERVAL_TIME = 5000;
+        handlerInterval(() => {
+            reportOnlineTime(INTERVAL_TIME);
+        }, INTERVAL_TIME);
         context.commit("SET_USERINFO", userInfo);
     }
 };
