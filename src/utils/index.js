@@ -24,20 +24,30 @@ const deepClone = (target) => {
     }
     return result;
 };
+const debounce = (fn, t) => {
+    let timer = null;
+    return function(...args) {
+        timer && clearTimeout(timer);
+        timer = setTimeout(() => {
+            fn.apply(this, args);
+        }, t);
+    };
+};
 /**
- * @description 节流函数
- * @param {*} delay
+ * @description 节流
+ * @param {Function} fn
+ * @param {Number} t
  * @returns
  */
-const throttle = (delay) => {
-    let run = false;
-    return function(callback = () => {}) {
-        if (run) return false;
-        run = true;
-        callback();
-        setTimeout(() => {
-            run = false;
-        }, delay);
+const throttle = (fn, t) => {
+    let timer = null;
+    return function() {
+        if (timer) return;
+        fn.apply(this);
+        timer = setTimeout(() => {
+            clearTimeout(timer);
+            timer = null;
+        }, t);
     };
 };
 /**
@@ -131,5 +141,6 @@ export {
     urlWithObj,
     checkImg,
     throttle,
-    handlerInterval
+    handlerInterval,
+    debounce
 };

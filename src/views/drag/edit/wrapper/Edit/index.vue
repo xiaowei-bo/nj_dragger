@@ -115,7 +115,9 @@
                             'animated',
                             {'move': !componentResizing}
                         ]"
-                        @click.native="setEditingComponent(item)"
+                        @click.native="(e) => {
+                            setEditingComponent(item, e)
+                        }"
                         @updateEditingComponent="updateEditingComponent"
                     >
                         <component :is="item.name" class="nj-element" :item="item" />
@@ -135,6 +137,7 @@ import commonStyleConfigMap from "@/config/style.js";
 import NjElementBox from "./components/NjElementBox.vue";
 import Draggable from "vuedraggable";
 import { mapGetters } from "vuex";
+import ContextMenu from "@/utils/contextMenu";
 export default {
     components: { NjElementBox, Draggable },
     props: {
@@ -161,6 +164,17 @@ export default {
         mobileViewScale: {
             type: Number,
             default: 1
+        }
+    },
+    watch: {
+        editingComponent: {
+            deep: true,
+            handler: function(val) {
+                if (!this.menuInstance) return;
+                if (!Object.keys(val).length) {
+                    this.menuInstance.hideMenu();
+                }
+            }
         }
     },
     data() {
@@ -195,7 +209,8 @@ export default {
                 }
             },
             scaleArr: [0.5, 0.7, 0.8, 0.9, 1, 1.2],
-            componentResizing: false
+            componentResizing: false,
+            menuInstance: null
         };
     },
     computed: {
@@ -244,8 +259,10 @@ export default {
             });
         },
         // end
-        setEditingComponent(item) {
+        setEditingComponent(item, e) {
             this.$emit("update:editingComponent", item);
+            if (!e) return;
+            this.menuInstance.showMenu(e);
         },
         deleteElement() {
             if (!Object.keys(this.editingComponent).length) return;
@@ -318,6 +335,21 @@ export default {
                     break;
             }
         };
+        this.menuInstance = new ContextMenu([
+            {
+                name: "复制",
+                onClick: () => {
+                    this.copyElement();
+                    setTimeout(this.pasteElement, 0);
+                }
+            }, {
+                name: "删除",
+                onClick: () => {
+                    this.deleteElement();
+                    this.menuInstance.hideMenu();
+                }
+            }
+        ]);
     }
 };
 </script>

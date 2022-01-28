@@ -211,12 +211,26 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .app{
     height: 100%;
 }
 .app-container{
     width: 100%;
     height: calc(100% - 60px);
+}
+.custom-context-menu{
+    position: fixed;
+    z-index: 10000;
+    border-radius: 5px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 0;
+    >li{
+        cursor: pointer;
+        &:hover{
+            background-color: #eee;
+        }
+    }
 }
 </style>
