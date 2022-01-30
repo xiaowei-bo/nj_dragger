@@ -8,9 +8,19 @@
         <div class="header-middle fl">
             <slot name="middle"></slot>
         </div>
-        <div class="header-right fl clearfix">
+        <div class="header-right fl">
             <slot name="right"></slot>
-            <div class="avatar-box fr">
+            <div
+                class="wechat-box"
+                @mouseover="showQrCode=true"
+                @mouseout="showQrCode=false"
+            >
+                <i class="iconfont icon-weChat"></i>
+                <div v-show="showQrCode" class="wechat-img">
+                    <img src="../assets/wechat.jpeg" alt="wechat-code" />
+                </div>
+            </div>
+            <div class="avatar-box">
                 <el-dropdown @command="handleCommand">
                     <div class="el-dropdown-link">
                         <span class="name">{{ hasLogin ? userInfo.userName : "未登录" }}</span>
@@ -34,7 +44,8 @@ import { mapGetters } from "vuex";
 export default {
     data() {
         return {
-            github: "https://github.com/killWeb/nj_dragger"
+            github: "https://github.com/killWeb/nj_dragger",
+            showQrCode: false
         };
     },
     computed: {
@@ -109,6 +120,9 @@ export default {
         width: 380px;
         height: 60px;
         line-height: 60px;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-around;
         .avatar-box{
             padding-right: 60px;
             cursor: pointer;
@@ -120,6 +134,47 @@ export default {
         }
         .el-avatar{
             vertical-align: middle;
+        }
+        .wechat-box{
+            cursor: pointer;
+            position: relative;
+            .iconfont{
+                font-size: 24px;
+                color: #75c82a;
+            }
+            .wechat-img{
+                width: 200px;
+                height: 200px;
+                position: absolute;
+                left: calc(50% - 100px);
+                bottom: -210px;
+                padding: 15px;
+                border-radius: 5px;
+                box-sizing: border-box;
+                background-color: #fff;
+                border: 1px solid #eee;
+                &::after{
+                    content: "";
+                    display: block;
+                    width: 30px;
+                    height: 30px;
+                    background-color: #fff;
+                    border: 1px solid #eee;
+                    border-right: none;
+                    border-bottom: none;
+                    transform: rotate(45deg);
+                    position: absolute;
+                    top: -16px;
+                    left: 42%;
+                    border-top-left-radius: 5px;
+                }
+                img{
+                    width: 100%;
+                    border-radius: 5px;
+                    position: relative;
+                    z-index: 1;
+                }
+            }
         }
     }
 }
