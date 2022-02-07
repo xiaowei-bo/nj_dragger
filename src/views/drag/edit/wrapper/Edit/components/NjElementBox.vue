@@ -14,7 +14,17 @@
 </template>
 
 <script>
-import { throttle } from "@/utils";
+const throttle = (delay) => {
+    let run = false;
+    return function(callback = () => {}) {
+        if (run) return false;
+        run = true;
+        callback();
+        setTimeout(() => {
+            run = false;
+        }, delay);
+    };
+};
 const refreshRate = 60; // 刷新率为 60Hz 比较流畅
 const _throttleHandler = throttle(1000 / refreshRate);
 export default {
