@@ -295,12 +295,13 @@ export default {
         handlerCommandMobileType(viewType) {
             if (this.curViewType === viewType) return;
             this.$emit("update:curViewType", viewType);
-            this.$emit("setEditInfoToLocal");
+            this.$emit("setEditInfoToLocal", this.viewTypeMap);
+            this.$message.success("切换成功，您的作品将以当前尺寸作为适配基准");
         },
         handlerCommandScale(i) {
             if (this.mobileViewScale === i) return;
             this.$emit("update:mobileViewScale", i);
-            this.$emit("setEditInfoToLocal");
+            this.$emit("setEditInfoToLocal", this.viewTypeMap);
         },
         updateEditingComponent(styleInfo) {
             const component = this.editingComponent;

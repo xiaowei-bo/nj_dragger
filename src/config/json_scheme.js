@@ -9,6 +9,7 @@ const activity = {
     coverImage: "", // 封面图
     author: "", // 作者昵称
     authorCode: "", // 作者用户名
+    designWidth: 375,
     pages: [] // 多页页面
 };
 

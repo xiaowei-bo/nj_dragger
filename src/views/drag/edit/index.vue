@@ -100,6 +100,7 @@ export default {
             }
             if (activityData) {
                 this.activityData = setConfigMap(JSON.parse(activityData));
+                console.log(this.activityData);
             } else {
                 this.activityData = deepClone(activityConfig);
                 this.activityData.author = this.userInfo.userName;
@@ -148,7 +149,7 @@ export default {
         },
         async saveActivity() {
             if (!await this.validAllForm()) return false;
-            const { title, author, authorId, description, coverImage } = this.activityData;
+            const { title, author, authorId, description, coverImage, designWidth } = this.activityData;
             if (this.userInfo.id !== this.activityData.authorId) return this.$message.warning("暂不支持修改他人的活动，可以尝试导入导出功能");
             const saveActivityData = removeConfigMap(deepClone(this.activityData));
             const jsonData = JSON.stringify(saveActivityData);
@@ -160,6 +161,7 @@ export default {
                 authorId,
                 description,
                 coverImage,
+                designWidth,
                 jsonData
             };
             if (!this.activityId || this.activityId === "-1") {
@@ -184,11 +186,15 @@ export default {
             const url = `${location.origin}/view?id=${this.activityId}`;
             window.open(url, "_blank");
         },
-        setEditInfoToLocal() {
+        setEditInfoToLocal(viewTypeMap) {
+            console.log(viewTypeMap);
+            console.log(this.editInfo.viewType);
+            this.activityData.designWidth = viewTypeMap[this.editInfo.viewType].width || 375;
             const key = "NJ_EDIT_INFO";
             const editInfo = {
                 ...this.getEditInfoFromLocal(),
-                ...this.editInfo
+                mobileViewScale: this.editInfo.mobileViewScale,
+                asideIsOpen: this.editInfo.asideIsOpen
             };
             localStorage.setItem(key, JSON.stringify(editInfo));
         },
@@ -200,7 +206,8 @@ export default {
             if (!setEdit) return editInfo;
             this.editInfo = {
                 ...this.editInfo,
-                ...editInfo
+                mobileViewScale: editInfo.mobileViewScale,
+                asideIsOpen: editInfo.asideIsOpen
             };
         }
     },
