@@ -10,6 +10,7 @@ const activity = {
     author: "", // 作者昵称
     authorCode: "", // 作者用户名
     designWidth: 375,
+    viewType: "IPHONE6/7/8",
     pages: [] // 多页页面
 };
 

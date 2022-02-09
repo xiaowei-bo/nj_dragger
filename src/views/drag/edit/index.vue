@@ -100,12 +100,12 @@ export default {
             }
             if (activityData) {
                 this.activityData = setConfigMap(JSON.parse(activityData));
-                console.log(this.activityData);
             } else {
                 this.activityData = deepClone(activityConfig);
                 this.activityData.author = this.userInfo.userName;
                 this.activityData.authorId = this.userInfo.id;
             }
+            this.editInfo.viewType = this.activityData.viewType || "IPHONE6/7/8";
             this.initSon = true;
             loading && loading.close();
         },
@@ -150,6 +150,7 @@ export default {
         async saveActivity() {
             if (!await this.validAllForm()) return false;
             const { title, author, authorId, description, coverImage, designWidth } = this.activityData;
+            !this.activityData.viewType && (this.activityData.viewType = this.editInfo.viewType);
             if (this.userInfo.id !== this.activityData.authorId) return this.$message.warning("暂不支持修改他人的活动，可以尝试导入导出功能");
             const saveActivityData = removeConfigMap(deepClone(this.activityData));
             const jsonData = JSON.stringify(saveActivityData);
@@ -187,9 +188,8 @@ export default {
             window.open(url, "_blank");
         },
         setEditInfoToLocal(viewTypeMap) {
-            console.log(viewTypeMap);
-            console.log(this.editInfo.viewType);
             this.activityData.designWidth = viewTypeMap[this.editInfo.viewType].width || 375;
+            this.activityData.viewType = this.editInfo.viewType;
             const key = "NJ_EDIT_INFO";
             const editInfo = {
                 ...this.getEditInfoFromLocal(),
