@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 const path = require("path");
 const { ENV, VUE_APP_BASE_URI } = require("./src/config/index.js");
 const port = 9797;
@@ -61,7 +62,13 @@ module.exports = {
         plugins: [
             new webpack.DefinePlugin({
                 "ENV": JSON.stringify(ENV) // 字符串
-            })
+            }),
+            new CopyWebpackPlugin([
+                {
+                    from: "src/static/",
+                    to: "static/"
+                }
+            ])
         ]
     },
     chainWebpack(config) {
