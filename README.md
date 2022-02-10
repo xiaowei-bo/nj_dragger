@@ -1,3 +1,7 @@
+---
+theme: mk-cute
+highlight: arduino-light
+---
 #### 1、前言
 ***
 以深度学习为目的，我们来一起实现一个 H5页面可视化编辑器/可视化配置平台 (nocode)      
@@ -5,13 +9,15 @@
 - 前端 Vue + VueRouter + Vuex + Scss + ElementUI   
 - 服务端 Egg + MySQL + Sequelize
 - 其他 VueCli + Eslint + husky
-平台地址：[可视化配置平台](http://ixuexi.plus:9797/#/drag/list)    
-h5页面：[可视化配置平台产出Demo页面](http://ixuexi.plus:9797/view?id=45)    
+平台地址：[可视化配置平台](https://ixuexi.plus/)    
+h5页面：[可视化配置平台产出Demo页面](https://ixuexi.plus/view?id=90)    
 前端代码地址：[git仓库](https://github.com/killWeb/nj_dragger)   
 服务端代码地址：[git仓库](https://github.com/killWeb/egg-project) 
 #### 2、思路及架构图
 ***
 ![思路.png](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bb5baabf1a87480eba8c6cf9a985f082~tplv-k3u1fbpfcp-watermark.image)
+
+![架构图.png](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/2ac3b73463c74332ae924af0039fe7c0~tplv-k3u1fbpfcp-watermark.image?)
 #### 3、效果图
 ***
 ![效果图.png](https://p1-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/17a5892b7c32403389cad99c87fd8095~tplv-k3u1fbpfcp-watermark.image)
@@ -26,6 +32,7 @@ h5页面：[可视化配置平台产出Demo页面](http://ixuexi.plus:9797/view?
 - 组件样式自定义配置及实时预览
 - 组件事件自定义配置，且支持执行js代码行为
 - 组件进场动画配置及预览
+- 真机预览，画布缩放
 #### 5、代码目录结构说明
 ***
 ```
@@ -830,7 +837,3 @@ export default {
 |----sh
     |----deploy.sh
 ```
-#### 10、完结
-到此为止，一个基础的可视化配置平台就已经完工啦，一些简单的页面就可以由此配置出来啦，当然组件库的完善扩充才是这个平台走向的根本   
-当下时代并不一定是一个前端的时代，但这个时代造就了当下的前端  
-致敬每一个前端coder；Respect；
