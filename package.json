@@ -6,6 +6,7 @@
     "lint": "vue-cli-service lint",
     "lint:fix": "vue-cli-service lint --fix",
     "build": "zx sh/build.mjs",
+    "deploy": "zx sh/deploy.mjs",
     "build:dev": "vue-cli-service build --mode development",
     "build:production": "vue-cli-service build --mode production",
     "server:production": "pm2 start processes.json",
